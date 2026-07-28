@@ -26,6 +26,21 @@ class DeliveryPipelineTest(unittest.TestCase):
             [command.name for command in commands], ["compile", "unit_tests"]
         )
 
+    def test_snapshot_monitor_is_read_only_and_actionable(self) -> None:
+        workflow = (
+            Path(__file__).resolve().parents[1]
+            / ".github"
+            / "workflows"
+            / "sydney-snapshot-monitor.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("schedule:", workflow)
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertIn("--fail-on-action-required", workflow)
+        self.assertIn("inside_airbnb_snapshot_discovery.py", workflow)
+        self.assertNotIn("inside_airbnb_phase0.py", workflow)
+        self.assertNotIn("run_inside_airbnb_pipeline.py refresh", workflow)
+        self.assertNotIn("data/raw", workflow)
+
     def test_release_gate_blocks_when_any_check_fails(self) -> None:
         result = finalize_gate(
             "production",

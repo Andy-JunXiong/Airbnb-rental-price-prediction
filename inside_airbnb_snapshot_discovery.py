@@ -25,6 +25,7 @@ DATE_PATH_PATTERN = re.compile(
     r"(?:data|visualisations)/[^\"'<>\s]+",
     re.IGNORECASE,
 )
+NO_ACTION_STATUS = "NO_NEWER_SNAPSHOT"
 
 
 def fetch_index(url: str) -> str:
@@ -83,6 +84,11 @@ def discovery_decision(
     }
 
 
+def requires_action(decision: dict[str, Any]) -> bool:
+    """Return whether discovery needs a maintainer to investigate or refresh."""
+    return decision.get("status") != NO_ACTION_STATUS
+
+
 def discover(
     index_url: str,
     registry_path: Path,
@@ -129,12 +135,27 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         help="Optional saved HTML for deterministic/offline testing.",
     )
+    parser.add_argument(
+        "--fail-on-action-required",
+        action="store_true",
+        help=(
+            "Exit non-zero when a newer snapshot is discovered or the "
+            "official Sydney index cannot be parsed."
+        ),
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    discover(args.index_url, args.registry, args.report, args.index_html)
+    report = discover(
+        args.index_url,
+        args.registry,
+        args.report,
+        args.index_html,
+    )
+    if args.fail_on_action_required and requires_action(report["decision"]):
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":
