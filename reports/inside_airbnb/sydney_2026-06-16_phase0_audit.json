@@ -1,0 +1,449 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-27T23:10:32+00:00",
+  "provider": "Inside Airbnb",
+  "city": "sydney",
+  "snapshot_date": "2026-06-16",
+  "source_manifest": "data\\raw\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\manifest.json",
+  "source_files": [
+    {
+      "name": "listings.csv.gz",
+      "kind": "listings",
+      "source_url": "https://data.insideairbnb.com/australia/nsw/sydney/2026-06-16/data/listings.csv.gz",
+      "bytes": 12633389,
+      "sha256": "56c7b83723a195d6e4d0bf6d6ecd6da9b43b00cda9c9f6c08ffe11b7ee79597d",
+      "columns": [
+        "id",
+        "listing_url",
+        "scrape_id",
+        "last_scraped",
+        "source",
+        "name",
+        "description",
+        "neighborhood_overview",
+        "picture_url",
+        "host_id",
+        "host_url",
+        "host_profile_id",
+        "host_profile_url",
+        "host_name",
+        "host_since",
+        "hosts_time_as_user_years",
+        "hosts_time_as_user_months",
+        "hosts_time_as_host_years",
+        "hosts_time_as_host_months",
+        "host_location",
+        "host_about",
+        "host_response_time",
+        "host_response_rate",
+        "host_acceptance_rate",
+        "host_is_superhost",
+        "host_thumbnail_url",
+        "host_picture_url",
+        "host_neighbourhood",
+        "host_listings_count",
+        "host_total_listings_count",
+        "host_verifications",
+        "host_has_profile_pic",
+        "host_identity_verified",
+        "neighbourhood",
+        "neighbourhood_cleansed",
+        "neighbourhood_group_cleansed",
+        "latitude",
+        "longitude",
+        "property_type",
+        "room_type",
+        "accommodates",
+        "bathrooms",
+        "bathrooms_text",
+        "bedrooms",
+        "beds",
+        "amenities",
+        "price",
+        "price_quote_checkin_date",
+        "price_quote_checkout_date",
+        "price_quote_total_price",
+        "price_quote_price_per_night",
+        "price_quote_raw",
+        "minimum_nights",
+        "maximum_nights",
+        "minimum_minimum_nights",
+        "maximum_minimum_nights",
+        "minimum_maximum_nights",
+        "maximum_maximum_nights",
+        "minimum_nights_avg_ntm",
+        "maximum_nights_avg_ntm",
+        "calendar_updated",
+        "has_availability",
+        "availability_30",
+        "availability_60",
+        "availability_90",
+        "availability_365",
+        "calendar_last_scraped",
+        "number_of_reviews",
+        "number_of_reviews_ltm",
+        "number_of_reviews_l30d",
+        "availability_eoy",
+        "number_of_reviews_ly",
+        "estimated_occupancy_l365d",
+        "estimated_revenue_l365d",
+        "first_review",
+        "last_review",
+        "review_scores_rating",
+        "review_scores_accuracy",
+        "review_scores_cleanliness",
+        "review_scores_checkin",
+        "review_scores_communication",
+        "review_scores_location",
+        "review_scores_value",
+        "license",
+        "instant_bookable",
+        "calculated_host_listings_count",
+        "calculated_host_listings_count_entire_homes",
+        "calculated_host_listings_count_private_rooms",
+        "calculated_host_listings_count_shared_rooms",
+        "reviews_per_month"
+      ],
+      "schema_fingerprint": "025e344066ac11cb1e78f2f2d6a6bedf12fbc2467afef6a1d91f6bfe44c68ac8",
+      "downloaded_at_utc": "2026-07-27T22:52:57+00:00"
+    },
+    {
+      "name": "calendar.csv.gz",
+      "kind": "calendar",
+      "source_url": "https://data.insideairbnb.com/australia/nsw/sydney/2026-06-16/data/calendar.csv.gz",
+      "bytes": 17897549,
+      "sha256": "7ce1b83795e82000f872886f187cac6a2b7f4b50a7bc829640689e8df0800b98",
+      "columns": [
+        "listing_id",
+        "date",
+        "available",
+        "minimum_nights",
+        "maximum_nights"
+      ],
+      "schema_fingerprint": "b746818851f1cbe5f3e12e4f9b7c32d9dcc9b9c15dae2c5caa8a8678c253d689",
+      "downloaded_at_utc": "2026-07-27T22:52:57+00:00"
+    },
+    {
+      "name": "reviews.csv",
+      "kind": "reviews",
+      "source_url": "https://data.insideairbnb.com/australia/nsw/sydney/2026-06-16/visualisations/reviews.csv",
+      "bytes": 19543841,
+      "sha256": "430e6d4a82b74cd1f6ae6745b07b0222c4495eb3d5c9af3f6a61bca5407a6ff5",
+      "columns": [
+        "listing_id",
+        "date"
+      ],
+      "schema_fingerprint": "9d7a3885628b8ad648bae7b22d1c82eb494f4b5e4a8ea14fec46a45f0897c214",
+      "downloaded_at_utc": "2026-07-27T22:52:57+00:00"
+    },
+    {
+      "name": "neighbourhoods.csv",
+      "kind": "neighbourhoods",
+      "source_url": "https://data.insideairbnb.com/australia/nsw/sydney/2026-06-16/visualisations/neighbourhoods.csv",
+      "bytes": 461,
+      "sha256": "c822c3135f6f4a61e197ac6b390ce3c6892fdc8f2afaf1e4592f7216e5d5d768",
+      "columns": [
+        "neighbourhood_group",
+        "neighbourhood"
+      ],
+      "schema_fingerprint": "1cdd89ba6d1dc0ab179d5a2355f51c6914b638f4de41346fb11b3e78682902e3",
+      "downloaded_at_utc": "2026-07-27T22:52:57+00:00"
+    },
+    {
+      "name": "neighbourhoods.geojson",
+      "kind": "neighbourhood_geojson",
+      "source_url": "https://data.insideairbnb.com/australia/nsw/sydney/2026-06-16/visualisations/neighbourhoods.geojson",
+      "bytes": 4268915,
+      "sha256": "e5103823d7664472f8b6ad9255ad8b45c93e06be5173114bda62448480d4aeb8",
+      "columns": [
+        "neighbourhood",
+        "neighbourhood_group"
+      ],
+      "schema_fingerprint": "e5eace397ff68eb4735629916141afabe8ece7111c52e4828fa8de17ac13a296",
+      "downloaded_at_utc": "2026-07-27T22:52:57+00:00"
+    }
+  ],
+  "decision": {
+    "status": "GO_QUOTE_LEVEL_MVP",
+    "blockers": [],
+    "capability_blockers": [
+      "calendar.daily_listed_price"
+    ],
+    "warnings": [
+      "listings.price_parse",
+      "listings.quote_contract"
+    ],
+    "scope": "Public quoted-price estimation only; the current calendar has availability but no daily price. Availability and reviews remain explicitly labelled proxies."
+  },
+  "checks": [
+    {
+      "name": "manifest.file_integrity",
+      "status": "pass",
+      "details": {
+        "mismatches": []
+      }
+    },
+    {
+      "name": "listings.required_columns",
+      "status": "pass",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "listings.quote_fields",
+      "status": "pass",
+      "details": {
+        "available": true,
+        "missing": [],
+        "impact": null
+      }
+    },
+    {
+      "name": "listings.primary_key",
+      "status": "pass",
+      "details": {
+        "duplicate_ids": 0,
+        "missing_ids": 0
+      }
+    },
+    {
+      "name": "listings.price_parse",
+      "status": "warn",
+      "details": {
+        "parse_errors": 0,
+        "missing": 2787
+      }
+    },
+    {
+      "name": "listings.coordinates",
+      "status": "pass",
+      "details": {
+        "invalid_or_missing": 0
+      }
+    },
+    {
+      "name": "listings.as_of_dates",
+      "status": "pass",
+      "details": {
+        "invalid_or_missing": 0,
+        "min": "2026-06-17",
+        "max": "2026-06-29"
+      }
+    },
+    {
+      "name": "listings.quote_contract",
+      "status": "warn",
+      "details": {
+        "complete": 17784,
+        "partial": 328,
+        "invalid": 0,
+        "price_mismatches": 0
+      }
+    },
+    {
+      "name": "calendar.required_columns",
+      "status": "pass",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "calendar.daily_listed_price",
+      "status": "capability_blocker",
+      "details": {
+        "column": "price",
+        "available": false,
+        "impact": "Date-level listed-price modelling is unavailable; use the listing quote fields for a quote-level MVP."
+      }
+    },
+    {
+      "name": "calendar.primary_key",
+      "status": "pass",
+      "details": {
+        "duplicate_listing_dates": 0,
+        "invalid_dates": 0
+      }
+    },
+    {
+      "name": "calendar.listing_foreign_key",
+      "status": "pass",
+      "details": {
+        "orphan_rows": 0,
+        "orphan_id_examples": [],
+        "listings_without_calendar": 0
+      }
+    },
+    {
+      "name": "calendar.date_horizon",
+      "status": "pass",
+      "details": {
+        "outside_horizon": 0,
+        "min": "2026-06-17",
+        "max": "2027-06-28"
+      }
+    },
+    {
+      "name": "calendar.availability_values",
+      "status": "pass",
+      "details": {
+        "invalid": []
+      }
+    },
+    {
+      "name": "calendar.price_parse",
+      "status": "pass",
+      "details": {
+        "parse_errors": 0,
+        "missing": 0
+      }
+    },
+    {
+      "name": "reviews.required_columns",
+      "status": "pass",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "reviews.listing_foreign_key",
+      "status": "pass",
+      "details": {
+        "orphan_rows": 0
+      }
+    },
+    {
+      "name": "reviews.as_of_date",
+      "status": "pass",
+      "details": {
+        "future_dates": 0,
+        "invalid_dates": 0
+      }
+    },
+    {
+      "name": "neighbourhoods.required_columns",
+      "status": "pass",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "neighbourhood_geojson.required_properties",
+      "status": "pass",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "neighbourhoods.unique",
+      "status": "pass",
+      "details": {
+        "duplicate_rows": 0
+      }
+    },
+    {
+      "name": "neighbourhoods.csv_geojson_alignment",
+      "status": "pass",
+      "details": {
+        "symmetric_difference": []
+      }
+    },
+    {
+      "name": "neighbourhoods.listing_coverage",
+      "status": "pass",
+      "details": {
+        "uncovered": []
+      }
+    }
+  ],
+  "datasets": {
+    "listings": {
+      "rows": 20573,
+      "unique_listing_ids": 20573,
+      "unique_host_ids": 9735,
+      "missing_host_ids": 0,
+      "scrape_id_counts": {
+        "20260616211453": 20573
+      },
+      "source_counts": {
+        "city scrape": 15720,
+        "previous scrape": 4853
+      },
+      "as_of_date_range": {
+        "min": "2026-06-17",
+        "max": "2026-06-29"
+      },
+      "neighbourhood_count": 38,
+      "room_type_counts": {
+        "Entire home/apt": 16192,
+        "Hotel room": 56,
+        "Private room": 4283,
+        "Shared room": 42
+      },
+      "price": {
+        "non_null": 17786,
+        "missing": 2787,
+        "min": 1.74,
+        "median": 291.0,
+        "max": 52850.0
+      },
+      "quote": {
+        "fields_available": true,
+        "complete": 17784,
+        "partial": 328,
+        "invalid": 0,
+        "checkin_lead_days": {
+          "min": 0,
+          "median": 3.0,
+          "max": 358
+        },
+        "stay_nights": {
+          "min": 1,
+          "median": 2.0,
+          "max": 365
+        }
+      }
+    },
+    "calendar": {
+      "rows": 7509145,
+      "unique_listing_ids": 20573,
+      "listings_without_calendar": 0,
+      "rows_per_listing": {
+        "min": 365,
+        "median": 365,
+        "max": 365
+      },
+      "date_range": {
+        "min": "2026-06-17",
+        "max": "2027-06-28"
+      },
+      "availability_counts": {
+        "f": 3863771,
+        "t": 3645374
+      },
+      "price": {
+        "non_null": 0,
+        "missing": 0,
+        "min": null,
+        "max": null
+      }
+    },
+    "reviews": {
+      "rows": 801398,
+      "unique_listing_ids": 17247,
+      "date_range": {
+        "min": "2009-12-05",
+        "max": "2026-06-28"
+      }
+    },
+    "neighbourhoods": {
+      "csv_rows": 38,
+      "csv_unique_neighbourhoods": 38,
+      "geojson_features": 38,
+      "geojson_unique_neighbourhoods": 38,
+      "geometry_type_counts": {
+        "MultiPolygon": 38
+      }
+    }
+  }
+}

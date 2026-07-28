@@ -1,0 +1,20 @@
+{
+  "status": "ok",
+  "currency": "AUD",
+  "target_definition": "Public quoted price per night in AUD",
+  "deployment_authority": "research_only",
+  "temporal_validation_status": "TEMPORAL_PRICE_VALIDATION_BLOCKED",
+  "snapshot_label": "2026-06-16",
+  "latest_training_as_of_date": "2026-06-29",
+  "comparable_count": 2319,
+  "comparable_level": "neighbourhood_room",
+  "evidence_level": "high",
+  "refusal_reasons": [],
+  "authority_warning": "Research use only: temporal price validation is blocked by incompatible historical source labels.",
+  "disclaimer": "This is a public quoted-price estimate, not a realised booking price, optimal price, occupancy estimate, or revenue guarantee.",
+  "estimated_price": 314.22,
+  "prediction_interval": [
+    203.27,
+    485.43
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-28T05:00:44+00:00",
+  "source_listings": "data\\raw\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\listings.csv.gz",
+  "source_listings_sha256": "56c7b83723a195d6e4d0bf6d6ecd6da9b43b00cda9c9f6c08ffe11b7ee79597d",
+  "base_silver": "data\\silver\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\listing_quotes.csv",
+  "base_silver_sha256": "b2c62b01406e57a589687bd71f88fc2164de645b176aa933e28f5891ee0837d4",
+  "output": "data\\silver\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\listing_quotes_premium.csv",
+  "output_sha256": "23d4fa34564689a6d0b6258cf6f8a034c0cb35616bebecc6a7e406e3793e2e0a",
+  "rows": 20573,
+  "raw_listing_ids": 20573,
+  "missing_join_ids": 0,
+  "premium_fields": [
+    "premium_amenities_count",
+    "premium_amenity_density",
+    "has_pool",
+    "has_hot_tub",
+    "has_waterfront",
+    "has_beach_access",
+    "has_water_view",
+    "has_on_premises_parking",
+    "has_gym",
+    "has_sauna",
+    "has_indoor_fireplace",
+    "has_private_outdoor_space",
+    "bathrooms_per_guest",
+    "bedrooms_per_guest",
+    "beds_per_guest",
+    "accommodates_per_bedroom",
+    "bedroom_bathroom_interaction",
+    "bathroom_privacy",
+    "property_group"
+  ],
+  "flag_counts": {
+    "has_beach_access": 2977,
+    "has_gym": 1782,
+    "has_hot_tub": 1513,
+    "has_indoor_fireplace": 1421,
+    "has_on_premises_parking": 10819,
+    "has_pool": 3800,
+    "has_private_outdoor_space": 5779,
+    "has_sauna": 609,
+    "has_water_view": 1649,
+    "has_waterfront": 1368
+  },
+  "category_counts": {
+    "bathroom_privacy": {
+      "exclusive_or_unspecified": 16698,
+      "missing": 25,
+      "private": 1369,
+      "shared": 2481
+    },
+    "property_group": {
+      "apartment": 11634,
+      "guest_space": 414,
+      "hospitality": 609,
+      "house": 7836,
+      "other": 35,
+      "unique_stay": 45
+    }
+  },
+  "privacy": {
+    "raw_amenity_strings_retained": false,
+    "free_text_retained": false,
+    "direct_identifiers_added": false
+  }
+}

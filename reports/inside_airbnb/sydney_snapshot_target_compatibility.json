@@ -1,0 +1,100 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-28T04:59:34+00:00",
+  "city": "sydney",
+  "snapshots": {
+    "older": {
+      "snapshot_label": "2025-09-12",
+      "as_of_date_range": {
+        "min": "2025-09-12",
+        "max": "2025-09-12"
+      },
+      "decision": "GO_AVAILABILITY_ONLY",
+      "target_capabilities": {
+        "quote_price_with_context": false,
+        "listing_price": false,
+        "calendar_daily_price": false,
+        "availability_proxy": true
+      }
+    },
+    "newer": {
+      "snapshot_label": "2026-06-16",
+      "as_of_date_range": {
+        "min": "2026-06-17",
+        "max": "2026-06-29"
+      },
+      "decision": "GO_QUOTE_LEVEL_MVP",
+      "target_capabilities": {
+        "quote_price_with_context": true,
+        "listing_price": true,
+        "calendar_daily_price": false,
+        "availability_proxy": true
+      }
+    }
+  },
+  "chronology": {
+    "valid": true,
+    "gap_days": 278
+  },
+  "population_overlap": {
+    "older_listings": 17730,
+    "newer_listings": 20573,
+    "listing_overlap": 13587,
+    "older_listing_retention_rate": 0.7663282571912013,
+    "newer_listing_seen_rate": 0.6604287172507656,
+    "older_hosts": 8911,
+    "newer_hosts": 9735,
+    "host_overlap": 7374,
+    "newer_host_seen_rate": 0.7574730354391371
+  },
+  "schema_drift": {
+    "calendar": {
+      "added_in_newer": [],
+      "removed_in_newer": [
+        "adjusted_price",
+        "price"
+      ]
+    },
+    "listings": {
+      "added_in_newer": [
+        "host_profile_id",
+        "host_profile_url",
+        "hosts_time_as_host_months",
+        "hosts_time_as_host_years",
+        "hosts_time_as_user_months",
+        "hosts_time_as_user_years",
+        "price_quote_checkin_date",
+        "price_quote_checkout_date",
+        "price_quote_price_per_night",
+        "price_quote_raw",
+        "price_quote_total_price"
+      ],
+      "removed_in_newer": []
+    },
+    "neighbourhood_geojson": {
+      "added_in_newer": [],
+      "removed_in_newer": []
+    },
+    "neighbourhoods": {
+      "added_in_newer": [],
+      "removed_in_newer": []
+    },
+    "reviews": {
+      "added_in_newer": [],
+      "removed_in_newer": []
+    }
+  },
+  "target_compatibility": {
+    "status": "TEMPORAL_PRICE_VALIDATION_BLOCKED",
+    "common_non_null_price_targets": [],
+    "blockers": [
+      "no_common_non_null_price_target",
+      "older_snapshot_has_no_non_null_price_labels"
+    ],
+    "interpretation": "The older free snapshot has no non-null price labels, while the newer snapshot introduces quote-context labels and removes calendar price. A price backtest across these snapshots would change the supervised target and is therefore invalid."
+  },
+  "authority": {
+    "current_quote_model": "research_only",
+    "next_evidence_required": "A later Sydney snapshot with the same non-null quote fields as 2026-06-16, or an approved archived dataset with compatible price labels."
+  }
+}

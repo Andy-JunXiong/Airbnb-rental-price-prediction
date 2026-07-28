@@ -1,0 +1,719 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-28T05:01:42+00:00",
+  "source": "data\\silver\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\listing_quotes_premium.csv",
+  "protocol": {
+    "development_rows": 14083,
+    "governed_test_rows_reserved_and_unused": 3701,
+    "governed_test_unique_hosts": 1662,
+    "fold_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "group": "host_id",
+    "upper_tail_definition": "validation target above fold-training p90",
+    "tail_expert_training_definition": "fold-training target above p75",
+    "hard_gate_probability": 0.25
+  },
+  "premium_feature_contract": {
+    "numeric": [
+      "premium_amenities_count",
+      "premium_amenity_density",
+      "has_pool",
+      "has_hot_tub",
+      "has_waterfront",
+      "has_beach_access",
+      "has_water_view",
+      "has_on_premises_parking",
+      "has_gym",
+      "has_sauna",
+      "has_indoor_fireplace",
+      "has_private_outdoor_space",
+      "bathrooms_per_guest",
+      "bedrooms_per_guest",
+      "beds_per_guest",
+      "accommodates_per_bedroom",
+      "bedroom_bathroom_interaction"
+    ],
+    "categorical": [
+      "bathroom_privacy",
+      "property_group"
+    ],
+    "raw_amenity_strings_retained": false
+  },
+  "promotion_thresholds": {
+    "maximum_overall_mae_degradation": 0.02,
+    "minimum_upper_tail_mae_improvement": 0.1,
+    "minimum_absolute_bias_improvement": 0.1,
+    "minimum_better_folds": 4
+  },
+  "candidates": [
+    {
+      "name": "incumbent_base_features",
+      "numeric_features": [
+        "quote_lead_days",
+        "stay_nights",
+        "checkin_month",
+        "checkin_day_of_week",
+        "checkin_is_weekend",
+        "latitude",
+        "longitude",
+        "distance_to_sydney_cbd_km",
+        "distance_to_sydney_airport_km",
+        "distance_to_nearest_reference_beach_km",
+        "distance_to_nearest_major_hub_km",
+        "accommodates",
+        "bathrooms",
+        "bedrooms",
+        "beds",
+        "amenities_count",
+        "minimum_nights",
+        "maximum_nights",
+        "calculated_host_listings_count"
+      ],
+      "categorical_features": [
+        "neighbourhood",
+        "property_type",
+        "room_type",
+        "host_is_superhost"
+      ],
+      "folds": [
+        {
+          "seed": 101,
+          "train_rows": 11033,
+          "validation_rows": 3050,
+          "upper_tail_rows": 286,
+          "upper_tail_threshold_aud": 751.2640000000004,
+          "overall_mae": 185.25455664157164,
+          "upper_tail_mae": 1313.8385063949684,
+          "upper_tail_median_bias": -434.61115076403007,
+          "upper_tail_severe_underprediction_rate": 0.5804195804195804
+        },
+        {
+          "seed": 102,
+          "train_rows": 11335,
+          "validation_rows": 2748,
+          "upper_tail_rows": 265,
+          "upper_tail_threshold_aud": 749.8960000000001,
+          "overall_mae": 121.12437924272145,
+          "upper_tail_mae": 645.646741082839,
+          "upper_tail_median_bias": -320.8293761507763,
+          "upper_tail_severe_underprediction_rate": 0.49056603773584906
+        },
+        {
+          "seed": 103,
+          "train_rows": 11503,
+          "validation_rows": 2580,
+          "upper_tail_rows": 286,
+          "upper_tail_threshold_aud": 740.0,
+          "overall_mae": 143.16923429234723,
+          "upper_tail_mae": 761.311358338087,
+          "upper_tail_median_bias": -345.9891458814791,
+          "upper_tail_severe_underprediction_rate": 0.5034965034965035
+        },
+        {
+          "seed": 104,
+          "train_rows": 11531,
+          "validation_rows": 2552,
+          "upper_tail_rows": 303,
+          "upper_tail_threshold_aud": 732.0,
+          "overall_mae": 115.89296034055674,
+          "upper_tail_mae": 454.9274805454308,
+          "upper_tail_median_bias": -243.8178435236715,
+          "upper_tail_severe_underprediction_rate": 0.4521452145214521
+        },
+        {
+          "seed": 105,
+          "train_rows": 11153,
+          "validation_rows": 2930,
+          "upper_tail_rows": 182,
+          "upper_tail_threshold_aud": 781.0,
+          "overall_mae": 107.7558918367159,
+          "upper_tail_mae": 608.0353782440537,
+          "upper_tail_median_bias": -350.61881889143365,
+          "upper_tail_severe_underprediction_rate": 0.5164835164835165
+        }
+      ],
+      "summary": {
+        "overall_mae": {
+          "mean": 134.63940447078258,
+          "standard_deviation": 31.190783703066103
+        },
+        "upper_tail_mae": {
+          "mean": 756.7518929210758,
+          "standard_deviation": 330.12316491170424
+        },
+        "upper_tail_median_bias": {
+          "mean": -339.1732670422781,
+          "standard_deviation": 68.40139186855261
+        },
+        "upper_tail_severe_underprediction_rate": {
+          "mean": 0.5086221705313804,
+          "standard_deviation": 0.046793727627383534
+        }
+      }
+    },
+    {
+      "name": "premium_log_absolute",
+      "numeric_features": [
+        "quote_lead_days",
+        "stay_nights",
+        "checkin_month",
+        "checkin_day_of_week",
+        "checkin_is_weekend",
+        "latitude",
+        "longitude",
+        "distance_to_sydney_cbd_km",
+        "distance_to_sydney_airport_km",
+        "distance_to_nearest_reference_beach_km",
+        "distance_to_nearest_major_hub_km",
+        "accommodates",
+        "bathrooms",
+        "bedrooms",
+        "beds",
+        "amenities_count",
+        "minimum_nights",
+        "maximum_nights",
+        "calculated_host_listings_count",
+        "premium_amenities_count",
+        "premium_amenity_density",
+        "has_pool",
+        "has_hot_tub",
+        "has_waterfront",
+        "has_beach_access",
+        "has_water_view",
+        "has_on_premises_parking",
+        "has_gym",
+        "has_sauna",
+        "has_indoor_fireplace",
+        "has_private_outdoor_space",
+        "bathrooms_per_guest",
+        "bedrooms_per_guest",
+        "beds_per_guest",
+        "accommodates_per_bedroom",
+        "bedroom_bathroom_interaction"
+      ],
+      "categorical_features": [
+        "neighbourhood",
+        "property_type",
+        "room_type",
+        "host_is_superhost",
+        "bathroom_privacy",
+        "property_group"
+      ],
+      "folds": [
+        {
+          "seed": 101,
+          "train_rows": 11033,
+          "validation_rows": 3050,
+          "upper_tail_rows": 286,
+          "upper_tail_threshold_aud": 751.2640000000004,
+          "overall_mae": 184.96700200504776,
+          "upper_tail_mae": 1311.7015845921655,
+          "upper_tail_median_bias": -412.9229094298265,
+          "upper_tail_severe_underprediction_rate": 0.5524475524475524
+        },
+        {
+          "seed": 102,
+          "train_rows": 11335,
+          "validation_rows": 2748,
+          "upper_tail_rows": 265,
+          "upper_tail_threshold_aud": 749.8960000000001,
+          "overall_mae": 119.38783163386333,
+          "upper_tail_mae": 638.2834115712789,
+          "upper_tail_median_bias": -349.0710574376741,
+          "upper_tail_severe_underprediction_rate": 0.4830188679245283
+        },
+        {
+          "seed": 103,
+          "train_rows": 11503,
+          "validation_rows": 2580,
+          "upper_tail_rows": 286,
+          "upper_tail_threshold_aud": 740.0,
+          "overall_mae": 141.20486441266127,
+          "upper_tail_mae": 746.1334705724961,
+          "upper_tail_median_bias": -309.2990072250465,
+          "upper_tail_severe_underprediction_rate": 0.479020979020979
+        },
+        {
+          "seed": 104,
+          "train_rows": 11531,
+          "validation_rows": 2552,
+          "upper_tail_rows": 303,
+          "upper_tail_threshold_aud": 732.0,
+          "overall_mae": 112.78047484711654,
+          "upper_tail_mae": 435.6377255789463,
+          "upper_tail_median_bias": -241.6691556386137,
+          "upper_tail_severe_underprediction_rate": 0.42244224422442245
+        },
+        {
+          "seed": 105,
+          "train_rows": 11153,
+          "validation_rows": 2930,
+          "upper_tail_rows": 182,
+          "upper_tail_threshold_aud": 781.0,
+          "overall_mae": 106.27566081833471,
+          "upper_tail_mae": 594.571373880227,
+          "upper_tail_median_bias": -356.7790068816756,
+          "upper_tail_severe_underprediction_rate": 0.4945054945054945
+        }
+      ],
+      "summary": {
+        "overall_mae": {
+          "mean": 132.92316674340472,
+          "standard_deviation": 31.922445905698655
+        },
+        "upper_tail_mae": {
+          "mean": 745.2655132390228,
+          "standard_deviation": 335.73569846142533
+        },
+        "upper_tail_median_bias": {
+          "mean": -333.9482273225673,
+          "standard_deviation": 63.46250078230825
+        },
+        "upper_tail_severe_underprediction_rate": {
+          "mean": 0.48628702762459536,
+          "standard_deviation": 0.04632599416167937
+        }
+      },
+      "decision": {
+        "qualifies": false,
+        "overall_mae_relative_change": -0.012746920072349899,
+        "upper_tail_mae_relative_improvement": 0.015178527849749268,
+        "upper_tail_absolute_bias_relative_improvement": 0.015405222720750289,
+        "upper_tail_better_fold_count": 5,
+        "checks": {
+          "overall_mae_degradation_within_limit": true,
+          "upper_tail_mae_improvement_passes": false,
+          "absolute_bias_improvement_passes": false,
+          "better_fold_count_passes": true
+        }
+      }
+    },
+    {
+      "name": "premium_tail_weighted",
+      "numeric_features": [
+        "quote_lead_days",
+        "stay_nights",
+        "checkin_month",
+        "checkin_day_of_week",
+        "checkin_is_weekend",
+        "latitude",
+        "longitude",
+        "distance_to_sydney_cbd_km",
+        "distance_to_sydney_airport_km",
+        "distance_to_nearest_reference_beach_km",
+        "distance_to_nearest_major_hub_km",
+        "accommodates",
+        "bathrooms",
+        "bedrooms",
+        "beds",
+        "amenities_count",
+        "minimum_nights",
+        "maximum_nights",
+        "calculated_host_listings_count",
+        "premium_amenities_count",
+        "premium_amenity_density",
+        "has_pool",
+        "has_hot_tub",
+        "has_waterfront",
+        "has_beach_access",
+        "has_water_view",
+        "has_on_premises_parking",
+        "has_gym",
+        "has_sauna",
+        "has_indoor_fireplace",
+        "has_private_outdoor_space",
+        "bathrooms_per_guest",
+        "bedrooms_per_guest",
+        "beds_per_guest",
+        "accommodates_per_bedroom",
+        "bedroom_bathroom_interaction"
+      ],
+      "categorical_features": [
+        "neighbourhood",
+        "property_type",
+        "room_type",
+        "host_is_superhost",
+        "bathroom_privacy",
+        "property_group"
+      ],
+      "folds": [
+        {
+          "seed": 101,
+          "train_rows": 11033,
+          "validation_rows": 3050,
+          "upper_tail_rows": 286,
+          "upper_tail_threshold_aud": 751.2640000000004,
+          "overall_mae": 181.48622126363875,
+          "upper_tail_mae": 1232.580105432946,
+          "upper_tail_median_bias": -330.1731407084414,
+          "upper_tail_severe_underprediction_rate": 0.46853146853146854
+        },
+        {
+          "seed": 102,
+          "train_rows": 11335,
+          "validation_rows": 2748,
+          "upper_tail_rows": 265,
+          "upper_tail_threshold_aud": 749.8960000000001,
+          "overall_mae": 119.478752047863,
+          "upper_tail_mae": 585.398085795657,
+          "upper_tail_median_bias": -216.8255204440568,
+          "upper_tail_severe_underprediction_rate": 0.35094339622641507
+        },
+        {
+          "seed": 103,
+          "train_rows": 11503,
+          "validation_rows": 2580,
+          "upper_tail_rows": 286,
+          "upper_tail_threshold_aud": 740.0,
+          "overall_mae": 141.76034737973868,
+          "upper_tail_mae": 725.0305509953139,
+          "upper_tail_median_bias": -261.6836680364117,
+          "upper_tail_severe_underprediction_rate": 0.4125874125874126
+        },
+        {
+          "seed": 104,
+          "train_rows": 11531,
+          "validation_rows": 2552,
+          "upper_tail_rows": 303,
+          "upper_tail_threshold_aud": 732.0,
+          "overall_mae": 117.19808224715216,
+          "upper_tail_mae": 440.5431683805645,
+          "upper_tail_median_bias": -164.67405867123534,
+          "upper_tail_severe_underprediction_rate": 0.32673267326732675
+        },
+        {
+          "seed": 105,
+          "train_rows": 11153,
+          "validation_rows": 2930,
+          "upper_tail_rows": 182,
+          "upper_tail_threshold_aud": 781.0,
+          "overall_mae": 107.12801988421698,
+          "upper_tail_mae": 567.8646864055452,
+          "upper_tail_median_bias": -270.76061326570823,
+          "upper_tail_severe_underprediction_rate": 0.4175824175824176
+        }
+      ],
+      "summary": {
+        "overall_mae": {
+          "mean": 133.4102845645219,
+          "standard_deviation": 29.701430005486323
+        },
+        "upper_tail_mae": {
+          "mean": 710.2833194020053,
+          "standard_deviation": 308.88936174967216
+        },
+        "upper_tail_median_bias": {
+          "mean": -248.8234002251707,
+          "standard_deviation": 61.9866600070244
+        },
+        "upper_tail_severe_underprediction_rate": {
+          "mean": 0.3952754736390081,
+          "standard_deviation": 0.05662859775864177
+        }
+      },
+      "decision": {
+        "qualifies": false,
+        "overall_mae_relative_change": -0.009128976105411968,
+        "upper_tail_mae_relative_improvement": 0.06140529538644557,
+        "upper_tail_absolute_bias_relative_improvement": 0.2663826297543823,
+        "upper_tail_better_fold_count": 5,
+        "checks": {
+          "overall_mae_degradation_within_limit": true,
+          "upper_tail_mae_improvement_passes": false,
+          "absolute_bias_improvement_passes": true,
+          "better_fold_count_passes": true
+        }
+      }
+    },
+    {
+      "name": "premium_two_stage_soft",
+      "numeric_features": [
+        "quote_lead_days",
+        "stay_nights",
+        "checkin_month",
+        "checkin_day_of_week",
+        "checkin_is_weekend",
+        "latitude",
+        "longitude",
+        "distance_to_sydney_cbd_km",
+        "distance_to_sydney_airport_km",
+        "distance_to_nearest_reference_beach_km",
+        "distance_to_nearest_major_hub_km",
+        "accommodates",
+        "bathrooms",
+        "bedrooms",
+        "beds",
+        "amenities_count",
+        "minimum_nights",
+        "maximum_nights",
+        "calculated_host_listings_count",
+        "premium_amenities_count",
+        "premium_amenity_density",
+        "has_pool",
+        "has_hot_tub",
+        "has_waterfront",
+        "has_beach_access",
+        "has_water_view",
+        "has_on_premises_parking",
+        "has_gym",
+        "has_sauna",
+        "has_indoor_fireplace",
+        "has_private_outdoor_space",
+        "bathrooms_per_guest",
+        "bedrooms_per_guest",
+        "beds_per_guest",
+        "accommodates_per_bedroom",
+        "bedroom_bathroom_interaction"
+      ],
+      "categorical_features": [
+        "neighbourhood",
+        "property_type",
+        "room_type",
+        "host_is_superhost",
+        "bathroom_privacy",
+        "property_group"
+      ],
+      "folds": [
+        {
+          "seed": 101,
+          "train_rows": 11033,
+          "validation_rows": 3050,
+          "upper_tail_rows": 286,
+          "upper_tail_threshold_aud": 751.2640000000004,
+          "overall_mae": 180.47882466115203,
+          "upper_tail_mae": 1246.6469259117057,
+          "upper_tail_median_bias": -358.96090238492707,
+          "upper_tail_severe_underprediction_rate": 0.4825174825174825
+        },
+        {
+          "seed": 102,
+          "train_rows": 11335,
+          "validation_rows": 2748,
+          "upper_tail_rows": 265,
+          "upper_tail_threshold_aud": 749.8960000000001,
+          "overall_mae": 117.47195746653865,
+          "upper_tail_mae": 589.7066606463889,
+          "upper_tail_median_bias": -249.7235615789864,
+          "upper_tail_severe_underprediction_rate": 0.36981132075471695
+        },
+        {
+          "seed": 103,
+          "train_rows": 11503,
+          "validation_rows": 2580,
+          "upper_tail_rows": 286,
+          "upper_tail_threshold_aud": 740.0,
+          "overall_mae": 138.93622318551402,
+          "upper_tail_mae": 710.3191816338257,
+          "upper_tail_median_bias": -264.9633643083324,
+          "upper_tail_severe_underprediction_rate": 0.42657342657342656
+        },
+        {
+          "seed": 104,
+          "train_rows": 11531,
+          "validation_rows": 2552,
+          "upper_tail_rows": 303,
+          "upper_tail_threshold_aud": 732.0,
+          "overall_mae": 113.1085816522648,
+          "upper_tail_mae": 420.0773119831961,
+          "upper_tail_median_bias": -186.35980149211537,
+          "upper_tail_severe_underprediction_rate": 0.3432343234323432
+        },
+        {
+          "seed": 105,
+          "train_rows": 11153,
+          "validation_rows": 2930,
+          "upper_tail_rows": 182,
+          "upper_tail_threshold_aud": 781.0,
+          "overall_mae": 106.78382470550682,
+          "upper_tail_mae": 561.8056637331372,
+          "upper_tail_median_bias": -317.6907591791631,
+          "upper_tail_severe_underprediction_rate": 0.43956043956043955
+        }
+      ],
+      "summary": {
+        "overall_mae": {
+          "mean": 131.35588233419526,
+          "standard_deviation": 30.00015999246834
+        },
+        "upper_tail_mae": {
+          "mean": 705.7111487816508,
+          "standard_deviation": 319.52514281541346
+        },
+        "upper_tail_median_bias": {
+          "mean": -275.53967778870486,
+          "standard_deviation": 66.0817580251581
+        },
+        "upper_tail_severe_underprediction_rate": {
+          "mean": 0.41233939856768176,
+          "standard_deviation": 0.05579584416600707
+        }
+      },
+      "decision": {
+        "qualifies": false,
+        "overall_mae_relative_change": -0.024387527184137725,
+        "upper_tail_mae_relative_improvement": 0.06744713110978395,
+        "upper_tail_absolute_bias_relative_improvement": 0.18761381110157271,
+        "upper_tail_better_fold_count": 5,
+        "checks": {
+          "overall_mae_degradation_within_limit": true,
+          "upper_tail_mae_improvement_passes": false,
+          "absolute_bias_improvement_passes": true,
+          "better_fold_count_passes": true
+        }
+      }
+    },
+    {
+      "name": "premium_two_stage_hard",
+      "numeric_features": [
+        "quote_lead_days",
+        "stay_nights",
+        "checkin_month",
+        "checkin_day_of_week",
+        "checkin_is_weekend",
+        "latitude",
+        "longitude",
+        "distance_to_sydney_cbd_km",
+        "distance_to_sydney_airport_km",
+        "distance_to_nearest_reference_beach_km",
+        "distance_to_nearest_major_hub_km",
+        "accommodates",
+        "bathrooms",
+        "bedrooms",
+        "beds",
+        "amenities_count",
+        "minimum_nights",
+        "maximum_nights",
+        "calculated_host_listings_count",
+        "premium_amenities_count",
+        "premium_amenity_density",
+        "has_pool",
+        "has_hot_tub",
+        "has_waterfront",
+        "has_beach_access",
+        "has_water_view",
+        "has_on_premises_parking",
+        "has_gym",
+        "has_sauna",
+        "has_indoor_fireplace",
+        "has_private_outdoor_space",
+        "bathrooms_per_guest",
+        "bedrooms_per_guest",
+        "beds_per_guest",
+        "accommodates_per_bedroom",
+        "bedroom_bathroom_interaction"
+      ],
+      "categorical_features": [
+        "neighbourhood",
+        "property_type",
+        "room_type",
+        "host_is_superhost",
+        "bathroom_privacy",
+        "property_group"
+      ],
+      "folds": [
+        {
+          "seed": 101,
+          "train_rows": 11033,
+          "validation_rows": 3050,
+          "upper_tail_rows": 286,
+          "upper_tail_threshold_aud": 751.2640000000004,
+          "overall_mae": 180.7687770228521,
+          "upper_tail_mae": 1240.4680034532273,
+          "upper_tail_median_bias": -356.22120927691867,
+          "upper_tail_severe_underprediction_rate": 0.46853146853146854
+        },
+        {
+          "seed": 102,
+          "train_rows": 11335,
+          "validation_rows": 2748,
+          "upper_tail_rows": 265,
+          "upper_tail_threshold_aud": 749.8960000000001,
+          "overall_mae": 118.28635710611582,
+          "upper_tail_mae": 586.769860275904,
+          "upper_tail_median_bias": -222.53502012547438,
+          "upper_tail_severe_underprediction_rate": 0.37358490566037733
+        },
+        {
+          "seed": 103,
+          "train_rows": 11503,
+          "validation_rows": 2580,
+          "upper_tail_rows": 286,
+          "upper_tail_threshold_aud": 740.0,
+          "overall_mae": 140.34516924810993,
+          "upper_tail_mae": 708.6459426644254,
+          "upper_tail_median_bias": -272.470965477437,
+          "upper_tail_severe_underprediction_rate": 0.40559440559440557
+        },
+        {
+          "seed": 104,
+          "train_rows": 11531,
+          "validation_rows": 2552,
+          "upper_tail_rows": 303,
+          "upper_tail_threshold_aud": 732.0,
+          "overall_mae": 115.10988184122994,
+          "upper_tail_mae": 424.1863359236698,
+          "upper_tail_median_bias": -191.32543299808958,
+          "upper_tail_severe_underprediction_rate": 0.3465346534653465
+        },
+        {
+          "seed": 105,
+          "train_rows": 11153,
+          "validation_rows": 2930,
+          "upper_tail_rows": 182,
+          "upper_tail_threshold_aud": 781.0,
+          "overall_mae": 107.09144428796267,
+          "upper_tail_mae": 563.4578907758566,
+          "upper_tail_median_bias": -330.50747893394,
+          "upper_tail_severe_underprediction_rate": 0.43956043956043955
+        }
+      ],
+      "summary": {
+        "overall_mae": {
+          "mean": 132.32032590125408,
+          "standard_deviation": 29.754405804716793
+        },
+        "upper_tail_mae": {
+          "mean": 704.7056066186167,
+          "standard_deviation": 316.0726541625973
+        },
+        "upper_tail_median_bias": {
+          "mean": -274.61202136237193,
+          "standard_deviation": 69.70942495225883
+        },
+        "upper_tail_severe_underprediction_rate": {
+          "mean": 0.4067611745624075,
+          "standard_deviation": 0.04904238221419966
+        }
+      },
+      "decision": {
+        "qualifies": false,
+        "overall_mae_relative_change": -0.01722436740301947,
+        "upper_tail_mae_relative_improvement": 0.0687758917940191,
+        "upper_tail_absolute_bias_relative_improvement": 0.19034886281842067,
+        "upper_tail_better_fold_count": 5,
+        "checks": {
+          "overall_mae_degradation_within_limit": true,
+          "upper_tail_mae_improvement_passes": false,
+          "absolute_bias_improvement_passes": true,
+          "better_fold_count_passes": true
+        }
+      }
+    }
+  ],
+  "decision": {
+    "status": "NO_CHALLENGER_PASSED_ALL_GATES",
+    "selected_challenger": null,
+    "primary_model_replaced": false,
+    "next_evidence": "Retain the incumbent; richer licensed market/context data is required for a material upper-tail improvement."
+  },
+  "governance": {
+    "governed_test_used": false,
+    "primary_artifact_written": false,
+    "deployment_authority_changed": false
+  }
+}

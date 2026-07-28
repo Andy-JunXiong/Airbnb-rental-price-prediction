@@ -1,0 +1,435 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-27T23:11:23+00:00",
+  "provider": "Inside Airbnb",
+  "city": "sydney",
+  "snapshot_date": "2025-09-12",
+  "source_manifest": "data\\raw\\inside_airbnb\\sydney\\snapshot_date=2025-09-12\\manifest.json",
+  "source_files": [
+    {
+      "name": "listings.csv.gz",
+      "kind": "listings",
+      "source_url": "https://data.insideairbnb.com/australia/nsw/sydney/2025-09-12/data/listings.csv.gz",
+      "bytes": 10561421,
+      "sha256": "6d886ebee5f16c3ca96494f5bd36da0bfec8a8d628d227a96abe960e7a48d2d4",
+      "columns": [
+        "id",
+        "listing_url",
+        "scrape_id",
+        "last_scraped",
+        "source",
+        "name",
+        "description",
+        "neighborhood_overview",
+        "picture_url",
+        "host_id",
+        "host_url",
+        "host_name",
+        "host_since",
+        "host_location",
+        "host_about",
+        "host_response_time",
+        "host_response_rate",
+        "host_acceptance_rate",
+        "host_is_superhost",
+        "host_thumbnail_url",
+        "host_picture_url",
+        "host_neighbourhood",
+        "host_listings_count",
+        "host_total_listings_count",
+        "host_verifications",
+        "host_has_profile_pic",
+        "host_identity_verified",
+        "neighbourhood",
+        "neighbourhood_cleansed",
+        "neighbourhood_group_cleansed",
+        "latitude",
+        "longitude",
+        "property_type",
+        "room_type",
+        "accommodates",
+        "bathrooms",
+        "bathrooms_text",
+        "bedrooms",
+        "beds",
+        "amenities",
+        "price",
+        "minimum_nights",
+        "maximum_nights",
+        "minimum_minimum_nights",
+        "maximum_minimum_nights",
+        "minimum_maximum_nights",
+        "maximum_maximum_nights",
+        "minimum_nights_avg_ntm",
+        "maximum_nights_avg_ntm",
+        "calendar_updated",
+        "has_availability",
+        "availability_30",
+        "availability_60",
+        "availability_90",
+        "availability_365",
+        "calendar_last_scraped",
+        "number_of_reviews",
+        "number_of_reviews_ltm",
+        "number_of_reviews_l30d",
+        "availability_eoy",
+        "number_of_reviews_ly",
+        "estimated_occupancy_l365d",
+        "estimated_revenue_l365d",
+        "first_review",
+        "last_review",
+        "review_scores_rating",
+        "review_scores_accuracy",
+        "review_scores_cleanliness",
+        "review_scores_checkin",
+        "review_scores_communication",
+        "review_scores_location",
+        "review_scores_value",
+        "license",
+        "instant_bookable",
+        "calculated_host_listings_count",
+        "calculated_host_listings_count_entire_homes",
+        "calculated_host_listings_count_private_rooms",
+        "calculated_host_listings_count_shared_rooms",
+        "reviews_per_month"
+      ],
+      "schema_fingerprint": "a2e16ef89d3ec0e1316692be69ea8b88ebad8d5584ec8aa5f5e935ccd6ed5c44",
+      "downloaded_at_utc": "2026-07-27T23:08:44+00:00"
+    },
+    {
+      "name": "calendar.csv.gz",
+      "kind": "calendar",
+      "source_url": "https://data.insideairbnb.com/australia/nsw/sydney/2025-09-12/data/calendar.csv.gz",
+      "bytes": 15905040,
+      "sha256": "603af35225fc91ac7af5d1a7a08f47973e42b031067321241e3c1181ace9787c",
+      "columns": [
+        "listing_id",
+        "date",
+        "available",
+        "price",
+        "adjusted_price",
+        "minimum_nights",
+        "maximum_nights"
+      ],
+      "schema_fingerprint": "ff6601c83e9fac15a7effd08fda342d5c33595e0bd52470964baed7acf34c5aa",
+      "downloaded_at_utc": "2026-07-27T23:08:44+00:00"
+    },
+    {
+      "name": "reviews.csv",
+      "kind": "reviews",
+      "source_url": "https://data.insideairbnb.com/australia/nsw/sydney/2025-09-12/visualisations/reviews.csv",
+      "bytes": 16366286,
+      "sha256": "55c195311a181673fc3666fa2f5fdac0ecfd5c2744fd8f558f36203e99b7226e",
+      "columns": [
+        "listing_id",
+        "date"
+      ],
+      "schema_fingerprint": "9d7a3885628b8ad648bae7b22d1c82eb494f4b5e4a8ea14fec46a45f0897c214",
+      "downloaded_at_utc": "2026-07-27T23:08:44+00:00"
+    },
+    {
+      "name": "neighbourhoods.csv",
+      "kind": "neighbourhoods",
+      "source_url": "https://data.insideairbnb.com/australia/nsw/sydney/2025-09-12/visualisations/neighbourhoods.csv",
+      "bytes": 461,
+      "sha256": "c822c3135f6f4a61e197ac6b390ce3c6892fdc8f2afaf1e4592f7216e5d5d768",
+      "columns": [
+        "neighbourhood_group",
+        "neighbourhood"
+      ],
+      "schema_fingerprint": "1cdd89ba6d1dc0ab179d5a2355f51c6914b638f4de41346fb11b3e78682902e3",
+      "downloaded_at_utc": "2026-07-27T23:08:44+00:00"
+    },
+    {
+      "name": "neighbourhoods.geojson",
+      "kind": "neighbourhood_geojson",
+      "source_url": "https://data.insideairbnb.com/australia/nsw/sydney/2025-09-12/visualisations/neighbourhoods.geojson",
+      "bytes": 4268915,
+      "sha256": "e5103823d7664472f8b6ad9255ad8b45c93e06be5173114bda62448480d4aeb8",
+      "columns": [
+        "neighbourhood",
+        "neighbourhood_group"
+      ],
+      "schema_fingerprint": "e5eace397ff68eb4735629916141afabe8ece7111c52e4828fa8de17ac13a296",
+      "downloaded_at_utc": "2026-07-27T23:08:44+00:00"
+    }
+  ],
+  "decision": {
+    "status": "GO_AVAILABILITY_ONLY",
+    "blockers": [],
+    "capability_blockers": [
+      "listings.quote_fields",
+      "calendar.daily_listed_price"
+    ],
+    "warnings": [
+      "listings.price_parse",
+      "calendar.price_parse"
+    ],
+    "scope": "Availability and review proxy analysis only."
+  },
+  "checks": [
+    {
+      "name": "manifest.file_integrity",
+      "status": "pass",
+      "details": {
+        "mismatches": []
+      }
+    },
+    {
+      "name": "listings.required_columns",
+      "status": "pass",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "listings.quote_fields",
+      "status": "capability_blocker",
+      "details": {
+        "available": false,
+        "missing": [
+          "price_quote_checkin_date",
+          "price_quote_checkout_date",
+          "price_quote_price_per_night"
+        ],
+        "impact": "Quote-level target construction is unavailable."
+      }
+    },
+    {
+      "name": "listings.primary_key",
+      "status": "pass",
+      "details": {
+        "duplicate_ids": 0,
+        "missing_ids": 0
+      }
+    },
+    {
+      "name": "listings.price_parse",
+      "status": "warn",
+      "details": {
+        "parse_errors": 0,
+        "missing": 17730
+      }
+    },
+    {
+      "name": "listings.coordinates",
+      "status": "pass",
+      "details": {
+        "invalid_or_missing": 0
+      }
+    },
+    {
+      "name": "listings.as_of_dates",
+      "status": "pass",
+      "details": {
+        "invalid_or_missing": 0,
+        "min": "2025-09-12",
+        "max": "2025-09-12"
+      }
+    },
+    {
+      "name": "calendar.required_columns",
+      "status": "pass",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "calendar.daily_listed_price",
+      "status": "capability_blocker",
+      "details": {
+        "column_present": true,
+        "non_null_rows": 0,
+        "available": false,
+        "impact": "Date-level listed-price modelling is unavailable."
+      }
+    },
+    {
+      "name": "calendar.primary_key",
+      "status": "pass",
+      "details": {
+        "duplicate_listing_dates": 0,
+        "invalid_dates": 0
+      }
+    },
+    {
+      "name": "calendar.listing_foreign_key",
+      "status": "pass",
+      "details": {
+        "orphan_rows": 0,
+        "orphan_id_examples": [],
+        "listings_without_calendar": 0
+      }
+    },
+    {
+      "name": "calendar.date_horizon",
+      "status": "pass",
+      "details": {
+        "outside_horizon": 0,
+        "min": "2025-09-12",
+        "max": "2026-09-11"
+      }
+    },
+    {
+      "name": "calendar.availability_values",
+      "status": "pass",
+      "details": {
+        "invalid": []
+      }
+    },
+    {
+      "name": "calendar.price_parse",
+      "status": "warn",
+      "details": {
+        "parse_errors": 0,
+        "missing": 6471450
+      }
+    },
+    {
+      "name": "reviews.required_columns",
+      "status": "pass",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "reviews.listing_foreign_key",
+      "status": "pass",
+      "details": {
+        "orphan_rows": 0
+      }
+    },
+    {
+      "name": "reviews.as_of_date",
+      "status": "pass",
+      "details": {
+        "future_dates": 0,
+        "invalid_dates": 0
+      }
+    },
+    {
+      "name": "neighbourhoods.required_columns",
+      "status": "pass",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "neighbourhood_geojson.required_properties",
+      "status": "pass",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "neighbourhoods.unique",
+      "status": "pass",
+      "details": {
+        "duplicate_rows": 0
+      }
+    },
+    {
+      "name": "neighbourhoods.csv_geojson_alignment",
+      "status": "pass",
+      "details": {
+        "symmetric_difference": []
+      }
+    },
+    {
+      "name": "neighbourhoods.listing_coverage",
+      "status": "pass",
+      "details": {
+        "uncovered": []
+      }
+    }
+  ],
+  "datasets": {
+    "listings": {
+      "rows": 17730,
+      "unique_listing_ids": 17730,
+      "unique_host_ids": 8911,
+      "missing_host_ids": 0,
+      "scrape_id_counts": {
+        "20250912034438": 17730
+      },
+      "source_counts": {
+        "previous scrape": 17730
+      },
+      "as_of_date_range": {
+        "min": "2025-09-12",
+        "max": "2025-09-12"
+      },
+      "neighbourhood_count": 38,
+      "room_type_counts": {
+        "Entire home/apt": 14089,
+        "Hotel room": 70,
+        "Private room": 3534,
+        "Shared room": 37
+      },
+      "price": {
+        "non_null": 0,
+        "missing": 17730,
+        "min": null,
+        "median": null,
+        "max": null
+      },
+      "quote": {
+        "fields_available": false,
+        "complete": 0,
+        "partial": 0,
+        "invalid": 0,
+        "checkin_lead_days": {
+          "min": null,
+          "median": null,
+          "max": null
+        },
+        "stay_nights": {
+          "min": null,
+          "median": null,
+          "max": null
+        }
+      }
+    },
+    "calendar": {
+      "rows": 6471450,
+      "unique_listing_ids": 17730,
+      "listings_without_calendar": 0,
+      "rows_per_listing": {
+        "min": 365,
+        "median": 365.0,
+        "max": 365
+      },
+      "date_range": {
+        "min": "2025-09-12",
+        "max": "2026-09-11"
+      },
+      "availability_counts": {
+        "f": 3421293,
+        "t": 3050157
+      },
+      "price": {
+        "non_null": 0,
+        "missing": 6471450,
+        "min": null,
+        "max": null
+      }
+    },
+    "reviews": {
+      "rows": 693896,
+      "unique_listing_ids": 15020,
+      "date_range": {
+        "min": "2009-12-05",
+        "max": "2025-09-12"
+      }
+    },
+    "neighbourhoods": {
+      "csv_rows": 38,
+      "csv_unique_neighbourhoods": 38,
+      "geojson_features": 38,
+      "geojson_unique_neighbourhoods": 38,
+      "geometry_type_counts": {
+        "MultiPolygon": 38
+      }
+    }
+  }
+}

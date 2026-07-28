@@ -1,0 +1,1204 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-28T04:59:37+00:00",
+  "snapshot_label": "2026-06-16",
+  "source": "data\\silver\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\listing_quotes.csv",
+  "json_path": "reports\\inside_airbnb\\sydney_2026-06-16_modern_eda.json",
+  "markdown_path": "docs\\inside_airbnb_modern_eda.md",
+  "rows": {
+    "all": 20573,
+    "eligible": 17784
+  },
+  "hosts": {
+    "unique_hosts": 8309,
+    "largest_host_rows": 197,
+    "hosts_with_multiple_listings": 1837
+  },
+  "numeric_features": {
+    "target_quoted_price_per_night": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 1.74,
+      "mean": 431.67828328834906,
+      "standard_deviation": 893.6690887839061,
+      "p01": 22.6749,
+      "p05": 59.0,
+      "p25": 169.8975,
+      "p50": 291.0,
+      "p75": 445.33,
+      "p95": 1147.526999999999,
+      "p99": 2888.8399999999965,
+      "max": 52850.0
+    },
+    "quote_lead_days": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 0.0,
+      "mean": 20.918522267206477,
+      "standard_deviation": 49.35988870825065,
+      "p01": 0.0,
+      "p05": 0.0,
+      "p25": 0.0,
+      "p50": 3.0,
+      "p75": 13.0,
+      "p95": 146.0,
+      "p99": 246.0,
+      "max": 358.0
+    },
+    "stay_nights": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 1.0,
+      "mean": 12.212156995051732,
+      "standard_deviation": 28.5118399730571,
+      "p01": 1.0,
+      "p05": 1.0,
+      "p25": 1.0,
+      "p50": 2.0,
+      "p75": 4.0,
+      "p95": 90.0,
+      "p99": 90.0,
+      "max": 365.0
+    },
+    "checkin_month": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 1.0,
+      "mean": 6.368870895186685,
+      "standard_deviation": 1.3598536388172302,
+      "p01": 1.0,
+      "p05": 6.0,
+      "p25": 6.0,
+      "p50": 6.0,
+      "p75": 6.0,
+      "p95": 9.0,
+      "p99": 12.0,
+      "max": 12.0
+    },
+    "checkin_day_of_week": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 0.0,
+      "mean": 2.689777327935223,
+      "standard_deviation": 1.7976765243195634,
+      "p01": 0.0,
+      "p05": 0.0,
+      "p25": 2.0,
+      "p50": 2.0,
+      "p75": 4.0,
+      "p95": 6.0,
+      "p99": 6.0,
+      "max": 6.0
+    },
+    "checkin_is_weekend": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 0.0,
+      "mean": 0.1902834008097166,
+      "standard_deviation": 0.39252468481103875,
+      "p01": 0.0,
+      "p05": 0.0,
+      "p25": 0.0,
+      "p50": 0.0,
+      "p75": 0.0,
+      "p95": 1.0,
+      "p99": 1.0,
+      "max": 1.0
+    },
+    "latitude": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": -34.11021,
+      "mean": -33.852497528180706,
+      "standard_deviation": 0.08971534470535918,
+      "p01": -34.061348325,
+      "p05": -33.9664385,
+      "p25": -33.896300511832074,
+      "p50": -33.875145,
+      "p75": -33.808624249999994,
+      "p95": -33.6657105,
+      "p99": -33.595863,
+      "max": -33.381266327267795
+    },
+    "longitude": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 150.63049,
+      "mean": 151.16581959129994,
+      "standard_deviation": 0.12143935814500689,
+      "p01": 150.7318777,
+      "p05": 150.906940155,
+      "p25": 151.1128975,
+      "p50": 151.2036545288086,
+      "p75": 151.24576999326098,
+      "p95": 151.294124,
+      "p99": 151.32897816,
+      "max": 151.34014
+    },
+    "distance_to_sydney_cbd_km": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 0.095726,
+      "mean": 11.391730760739991,
+      "standard_deviation": 10.719982812346117,
+      "p01": 0.5005285500000001,
+      "p05": 1.0929836,
+      "p25": 3.4746455000000003,
+      "p50": 7.27267,
+      "p75": 15.66456275,
+      "p95": 33.68045044999999,
+      "p99": 47.96324842999998,
+      "max": 58.04853
+    },
+    "distance_to_sydney_airport_km": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 1.387294,
+      "mean": 14.580384233243365,
+      "standard_deviation": 10.383478834108232,
+      "p01": 2.19038733,
+      "p05": 4.22890385,
+      "p25": 7.52193225,
+      "p50": 10.740583999999998,
+      "p75": 18.977708,
+      "p95": 37.9202512,
+      "p99": 47.56436425999998,
+      "max": 64.562389
+    },
+    "distance_to_nearest_reference_beach_km": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 0.011272,
+      "mean": 10.338168987404408,
+      "standard_deviation": 10.213498949869553,
+      "p01": 0.24600369000000002,
+      "p05": 0.5326328000000001,
+      "p25": 4.058874,
+      "p50": 6.917510500000001,
+      "p75": 13.992522,
+      "p95": 32.22259264999999,
+      "p99": 46.82466877999998,
+      "max": 59.720941
+    },
+    "distance_to_nearest_major_hub_km": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 0.018038,
+      "mean": 7.130123958052182,
+      "standard_deviation": 7.488737539552394,
+      "p01": 0.24778095,
+      "p05": 0.5497528500000001,
+      "p25": 1.7747887500000001,
+      "p50": 4.100085,
+      "p75": 9.7734185,
+      "p95": 23.147053549999995,
+      "p99": 32.214571029999995,
+      "max": 48.536511
+    },
+    "accommodates": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 1.0,
+      "mean": 4.03997975708502,
+      "standard_deviation": 2.542559182609346,
+      "p01": 1.0,
+      "p05": 1.0,
+      "p25": 2.0,
+      "p50": 4.0,
+      "p75": 5.0,
+      "p95": 9.0,
+      "p99": 12.0,
+      "max": 16.0
+    },
+    "bathrooms": {
+      "rows": 17784,
+      "non_missing": 14763,
+      "missing": 3021,
+      "missing_rate": 0.16987179487179488,
+      "min": 0.5,
+      "mean": 1.5053850843324528,
+      "standard_deviation": 0.8089044963217747,
+      "p01": 1.0,
+      "p05": 1.0,
+      "p25": 1.0,
+      "p50": 1.0,
+      "p75": 2.0,
+      "p95": 3.0,
+      "p99": 4.5,
+      "max": 21.0
+    },
+    "bedrooms": {
+      "rows": 17784,
+      "non_missing": 15058,
+      "missing": 2726,
+      "missing_rate": 0.1532838506522717,
+      "min": 0.0,
+      "mean": 2.0347323681763845,
+      "standard_deviation": 1.2040142648972048,
+      "p01": 1.0,
+      "p05": 1.0,
+      "p25": 1.0,
+      "p50": 2.0,
+      "p75": 3.0,
+      "p95": 4.0,
+      "p99": 6.0,
+      "max": 14.0
+    },
+    "beds": {
+      "rows": 17784,
+      "non_missing": 15438,
+      "missing": 2346,
+      "missing_rate": 0.13191632928475033,
+      "min": 1.0,
+      "mean": 2.362352636351859,
+      "standard_deviation": 1.7037904473096297,
+      "p01": 1.0,
+      "p05": 1.0,
+      "p25": 1.0,
+      "p50": 2.0,
+      "p75": 3.0,
+      "p95": 5.0,
+      "p99": 8.0,
+      "max": 50.0
+    },
+    "amenities_count": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 0.0,
+      "mean": 37.47492127755286,
+      "standard_deviation": 15.844986149644365,
+      "p01": 6.0,
+      "p05": 9.0,
+      "p25": 27.0,
+      "p50": 38.0,
+      "p75": 49.0,
+      "p95": 62.0,
+      "p99": 74.0,
+      "max": 113.0
+    },
+    "minimum_nights": {
+      "rows": 17784,
+      "non_missing": 17778,
+      "missing": 6,
+      "missing_rate": 0.00033738191632928474,
+      "min": 1.0,
+      "mean": 11.55714928563393,
+      "standard_deviation": 28.50300960905473,
+      "p01": 1.0,
+      "p05": 1.0,
+      "p25": 1.0,
+      "p50": 2.0,
+      "p75": 3.0,
+      "p95": 90.0,
+      "p99": 90.0,
+      "max": 365.0
+    },
+    "maximum_nights": {
+      "rows": 17784,
+      "non_missing": 17778,
+      "missing": 6,
+      "missing_rate": 0.00033738191632928474,
+      "min": 1.0,
+      "mean": 536.0769490381371,
+      "standard_deviation": 427.97462153183,
+      "p01": 7.0,
+      "p05": 28.0,
+      "p25": 180.0,
+      "p50": 365.0,
+      "p75": 1125.0,
+      "p95": 1125.0,
+      "p99": 1125.0,
+      "max": 9999.0
+    },
+    "calculated_host_listings_count": {
+      "rows": 17784,
+      "non_missing": 17784,
+      "missing": 0,
+      "missing_rate": 0.0,
+      "min": 1.0,
+      "mean": 19.834457939721098,
+      "standard_deviation": 37.18920590402943,
+      "p01": 1.0,
+      "p05": 1.0,
+      "p25": 1.0,
+      "p50": 3.0,
+      "p75": 21.0,
+      "p95": 101.0,
+      "p99": 197.0,
+      "max": 209.0
+    }
+  },
+  "categorical_features": {
+    "neighbourhood": {
+      "unique_values": 38,
+      "missing": 0,
+      "top_values": [
+        {
+          "value": "Sydney",
+          "rows": 4317,
+          "share": 0.24274628879892038
+        },
+        {
+          "value": "Waverley",
+          "rows": 1480,
+          "share": 0.0832208726945569
+        },
+        {
+          "value": "Randwick",
+          "rows": 910,
+          "share": 0.05116959064327485
+        },
+        {
+          "value": "Pittwater",
+          "rows": 796,
+          "share": 0.04475933423301844
+        },
+        {
+          "value": "Manly",
+          "rows": 745,
+          "share": 0.04189158794421952
+        },
+        {
+          "value": "Warringah",
+          "rows": 732,
+          "share": 0.04116059379217274
+        },
+        {
+          "value": "North Sydney",
+          "rows": 718,
+          "share": 0.04037336932073774
+        },
+        {
+          "value": "Auburn",
+          "rows": 621,
+          "share": 0.034919028340080975
+        },
+        {
+          "value": "Woollahra",
+          "rows": 515,
+          "share": 0.028958614484930274
+        },
+        {
+          "value": "Sutherland Shire",
+          "rows": 459,
+          "share": 0.025809716599190284
+        },
+        {
+          "value": "Parramatta",
+          "rows": 428,
+          "share": 0.024066576698155647
+        },
+        {
+          "value": "Marrickville",
+          "rows": 410,
+          "share": 0.02305443094916779
+        },
+        {
+          "value": "Ryde",
+          "rows": 386,
+          "share": 0.021704903283850652
+        },
+        {
+          "value": "Hornsby",
+          "rows": 378,
+          "share": 0.02125506072874494
+        },
+        {
+          "value": "Botany Bay",
+          "rows": 364,
+          "share": 0.02046783625730994
+        },
+        {
+          "value": "Blacktown",
+          "rows": 356,
+          "share": 0.02001799370220423
+        },
+        {
+          "value": "Leichhardt",
+          "rows": 342,
+          "share": 0.019230769230769232
+        },
+        {
+          "value": "Rockdale",
+          "rows": 340,
+          "share": 0.019118308591992803
+        },
+        {
+          "value": "The Hills Shire",
+          "rows": 327,
+          "share": 0.01838731443994602
+        },
+        {
+          "value": "Bankstown",
+          "rows": 260,
+          "share": 0.014619883040935672
+        }
+      ]
+    },
+    "property_type": {
+      "unique_values": 65,
+      "missing": 0,
+      "top_values": [
+        {
+          "value": "Entire rental unit",
+          "rows": 8210,
+          "share": 0.46165092217723797
+        },
+        {
+          "value": "Entire home",
+          "rows": 3608,
+          "share": 0.20287899235267656
+        },
+        {
+          "value": "Private room in home",
+          "rows": 2016,
+          "share": 0.11336032388663968
+        },
+        {
+          "value": "Private room in rental unit",
+          "rows": 925,
+          "share": 0.052013045434098064
+        },
+        {
+          "value": "Entire guesthouse",
+          "rows": 439,
+          "share": 0.024685110211426
+        },
+        {
+          "value": "Entire condo",
+          "rows": 367,
+          "share": 0.020636527215474584
+        },
+        {
+          "value": "Entire guest suite",
+          "rows": 316,
+          "share": 0.017768780926675665
+        },
+        {
+          "value": "Entire serviced apartment",
+          "rows": 209,
+          "share": 0.011752136752136752
+        },
+        {
+          "value": "Entire townhouse",
+          "rows": 206,
+          "share": 0.01158344579397211
+        },
+        {
+          "value": "Room in hotel",
+          "rows": 192,
+          "share": 0.010796221322537112
+        },
+        {
+          "value": "Room in aparthotel",
+          "rows": 124,
+          "share": 0.006972559604138551
+        },
+        {
+          "value": "Room in boutique hotel",
+          "rows": 113,
+          "share": 0.006354026090868196
+        },
+        {
+          "value": "Private room in townhouse",
+          "rows": 102,
+          "share": 0.005735492577597841
+        },
+        {
+          "value": "Private room in guesthouse",
+          "rows": 95,
+          "share": 0.005341880341880342
+        },
+        {
+          "value": "Private room in condo",
+          "rows": 83,
+          "share": 0.004667116509221772
+        },
+        {
+          "value": "Entire cabin",
+          "rows": 79,
+          "share": 0.004442195231668916
+        },
+        {
+          "value": "Entire villa",
+          "rows": 78,
+          "share": 0.0043859649122807015
+        },
+        {
+          "value": "Private room in bed and breakfast",
+          "rows": 74,
+          "share": 0.0041610436347278455
+        },
+        {
+          "value": "Private room in hostel",
+          "rows": 72,
+          "share": 0.004048582995951417
+        },
+        {
+          "value": "Entire cottage",
+          "rows": 70,
+          "share": 0.003936122357174989
+        }
+      ]
+    },
+    "room_type": {
+      "unique_values": 4,
+      "missing": 0,
+      "top_values": [
+        {
+          "value": "Entire home/apt",
+          "rows": 13830,
+          "share": 0.7776653171390013
+        },
+        {
+          "value": "Private room",
+          "rows": 3864,
+          "share": 0.21727395411605938
+        },
+        {
+          "value": "Hotel room",
+          "rows": 51,
+          "share": 0.0028677462887989206
+        },
+        {
+          "value": "Shared room",
+          "rows": 39,
+          "share": 0.0021929824561403508
+        }
+      ]
+    },
+    "host_is_superhost": {
+      "unique_values": 2,
+      "missing": 0,
+      "top_values": [
+        {
+          "value": "f",
+          "rows": 11665,
+          "share": 0.6559266756635178
+        },
+        {
+          "value": "t",
+          "rows": 6119,
+          "share": 0.34407332433648224
+        }
+      ]
+    }
+  },
+  "numeric_correlations_with_log_target": [
+    {
+      "feature": "accommodates",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.6200871617794504
+    },
+    {
+      "feature": "beds",
+      "rows": 15438,
+      "pearson_with_log1p_target": 0.5868954198544485
+    },
+    {
+      "feature": "bedrooms",
+      "rows": 15058,
+      "pearson_with_log1p_target": 0.5696714282009014
+    },
+    {
+      "feature": "bathrooms",
+      "rows": 14763,
+      "pearson_with_log1p_target": 0.5182698915717816
+    },
+    {
+      "feature": "minimum_nights",
+      "rows": 17778,
+      "pearson_with_log1p_target": -0.47272765026932945
+    },
+    {
+      "feature": "stay_nights",
+      "rows": 17784,
+      "pearson_with_log1p_target": -0.47019371067231897
+    },
+    {
+      "feature": "amenities_count",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.36436268805539296
+    },
+    {
+      "feature": "longitude",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.2712659515004441
+    },
+    {
+      "feature": "distance_to_nearest_reference_beach_km",
+      "rows": 17784,
+      "pearson_with_log1p_target": -0.23216406471568454
+    },
+    {
+      "feature": "checkin_day_of_week",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.16157237377513986
+    },
+    {
+      "feature": "latitude",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.14215124982131572
+    },
+    {
+      "feature": "quote_lead_days",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.11494673117207643
+    },
+    {
+      "feature": "checkin_month",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.0768014083691321
+    },
+    {
+      "feature": "distance_to_sydney_airport_km",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.06803148628415376
+    },
+    {
+      "feature": "maximum_nights",
+      "rows": 17778,
+      "pearson_with_log1p_target": -0.0633331209741855
+    },
+    {
+      "feature": "calculated_host_listings_count",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.0600715274547618
+    },
+    {
+      "feature": "checkin_is_weekend",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.051017950291531645
+    },
+    {
+      "feature": "distance_to_sydney_cbd_km",
+      "rows": 17784,
+      "pearson_with_log1p_target": -0.044509978910326056
+    },
+    {
+      "feature": "distance_to_nearest_major_hub_km",
+      "rows": 17784,
+      "pearson_with_log1p_target": 0.03864210960409689
+    }
+  ],
+  "segment_prices": {
+    "room_type": [
+      {
+        "room_type": "Entire home/apt",
+        "rows": 13830,
+        "median_price": 342.67,
+        "p25_price": 244.0,
+        "p75_price": 508.0
+      },
+      {
+        "room_type": "Private room",
+        "rows": 3864,
+        "median_price": 111.61,
+        "p25_price": 79.57,
+        "p75_price": 160.0
+      },
+      {
+        "room_type": "Hotel room",
+        "rows": 51,
+        "median_price": 189.0,
+        "p25_price": 158.375,
+        "p75_price": 234.75
+      },
+      {
+        "room_type": "Shared room",
+        "rows": 39,
+        "median_price": 58.0,
+        "p25_price": 51.760000000000005,
+        "p75_price": 73.535
+      }
+    ],
+    "neighbourhood": [
+      {
+        "neighbourhood": "Sydney",
+        "rows": 4317,
+        "median_price": 298.0,
+        "p25_price": 198.0,
+        "p75_price": 421.5
+      },
+      {
+        "neighbourhood": "Waverley",
+        "rows": 1480,
+        "median_price": 345.61,
+        "p25_price": 228.5,
+        "p75_price": 545.9749999999999
+      },
+      {
+        "neighbourhood": "Randwick",
+        "rows": 910,
+        "median_price": 280.875,
+        "p25_price": 146.21,
+        "p75_price": 456.265
+      },
+      {
+        "neighbourhood": "Pittwater",
+        "rows": 796,
+        "median_price": 623.895,
+        "p25_price": 324.265,
+        "p75_price": 1367.0
+      },
+      {
+        "neighbourhood": "Manly",
+        "rows": 745,
+        "median_price": 390.0,
+        "p25_price": 251.5,
+        "p75_price": 663.25
+      },
+      {
+        "neighbourhood": "Warringah",
+        "rows": 732,
+        "median_price": 328.75,
+        "p25_price": 215.7575,
+        "p75_price": 665.855
+      },
+      {
+        "neighbourhood": "North Sydney",
+        "rows": 718,
+        "median_price": 321.5,
+        "p25_price": 228.39999999999998,
+        "p75_price": 455.375
+      },
+      {
+        "neighbourhood": "Auburn",
+        "rows": 621,
+        "median_price": 298.44,
+        "p25_price": 194.0,
+        "p75_price": 373.5
+      },
+      {
+        "neighbourhood": "Woollahra",
+        "rows": 515,
+        "median_price": 387.49,
+        "p25_price": 238.505,
+        "p75_price": 690.47
+      },
+      {
+        "neighbourhood": "Sutherland Shire",
+        "rows": 459,
+        "median_price": 319.67,
+        "p25_price": 199.5,
+        "p75_price": 560.5
+      },
+      {
+        "neighbourhood": "Parramatta",
+        "rows": 428,
+        "median_price": 223.865,
+        "p25_price": 100.8325,
+        "p75_price": 291.57
+      },
+      {
+        "neighbourhood": "Marrickville",
+        "rows": 410,
+        "median_price": 225.33499999999998,
+        "p25_price": 157.25,
+        "p75_price": 317.7
+      },
+      {
+        "neighbourhood": "Ryde",
+        "rows": 386,
+        "median_price": 285.295,
+        "p25_price": 143.14499999999998,
+        "p75_price": 382.15250000000003
+      },
+      {
+        "neighbourhood": "Hornsby",
+        "rows": 378,
+        "median_price": 262.0,
+        "p25_price": 131.125,
+        "p75_price": 443.625
+      },
+      {
+        "neighbourhood": "Botany Bay",
+        "rows": 364,
+        "median_price": 244.75,
+        "p25_price": 149.4275,
+        "p75_price": 366.0875
+      },
+      {
+        "neighbourhood": "Blacktown",
+        "rows": 356,
+        "median_price": 159.1,
+        "p25_price": 86.0,
+        "p75_price": 358.5
+      },
+      {
+        "neighbourhood": "Leichhardt",
+        "rows": 342,
+        "median_price": 252.25,
+        "p25_price": 156.9325,
+        "p75_price": 429.125
+      },
+      {
+        "neighbourhood": "Rockdale",
+        "rows": 340,
+        "median_price": 189.0,
+        "p25_price": 103.2475,
+        "p75_price": 299.0
+      },
+      {
+        "neighbourhood": "The Hills Shire",
+        "rows": 327,
+        "median_price": 227.67,
+        "p25_price": 124.255,
+        "p75_price": 392.0
+      },
+      {
+        "neighbourhood": "Bankstown",
+        "rows": 260,
+        "median_price": 148.75,
+        "p25_price": 98.5325,
+        "p75_price": 259.8125
+      },
+      {
+        "neighbourhood": "Fairfield",
+        "rows": 258,
+        "median_price": 191.375,
+        "p25_price": 79.0,
+        "p75_price": 332.5
+      },
+      {
+        "neighbourhood": "Willoughby",
+        "rows": 257,
+        "median_price": 282.0,
+        "p25_price": 199.0,
+        "p75_price": 411.0
+      },
+      {
+        "neighbourhood": "Mosman",
+        "rows": 230,
+        "median_price": 399.635,
+        "p25_price": 253.625,
+        "p75_price": 870.1425
+      },
+      {
+        "neighbourhood": "Liverpool",
+        "rows": 222,
+        "median_price": 219.695,
+        "p25_price": 99.0,
+        "p75_price": 353.03499999999997
+      },
+      {
+        "neighbourhood": "Penrith",
+        "rows": 218,
+        "median_price": 235.47,
+        "p25_price": 122.5,
+        "p75_price": 359.2975
+      },
+      {
+        "neighbourhood": "Canada Bay",
+        "rows": 214,
+        "median_price": 274.8,
+        "p25_price": 136.10000000000002,
+        "p75_price": 412.135
+      },
+      {
+        "neighbourhood": "Ku-Ring-Gai",
+        "rows": 214,
+        "median_price": 218.5,
+        "p25_price": 109.5,
+        "p75_price": 377.3275
+      },
+      {
+        "neighbourhood": "Burwood",
+        "rows": 203,
+        "median_price": 177.0,
+        "p25_price": 105.5,
+        "p75_price": 323.5
+      },
+      {
+        "neighbourhood": "Canterbury",
+        "rows": 165,
+        "median_price": 147.0,
+        "p25_price": 89.0,
+        "p75_price": 306.98
+      },
+      {
+        "neighbourhood": "Campbelltown",
+        "rows": 131,
+        "median_price": 250.0,
+        "p25_price": 113.75,
+        "p75_price": 391.25
+      },
+      {
+        "neighbourhood": "Strathfield",
+        "rows": 129,
+        "median_price": 233.94,
+        "p25_price": 158.0,
+        "p75_price": 326.0
+      },
+      {
+        "neighbourhood": "Hurstville",
+        "rows": 118,
+        "median_price": 115.0,
+        "p25_price": 92.0,
+        "p75_price": 227.7
+      },
+      {
+        "neighbourhood": "Camden",
+        "rows": 115,
+        "median_price": 321.5,
+        "p25_price": 122.935,
+        "p75_price": 477.87
+      },
+      {
+        "neighbourhood": "Lane Cove",
+        "rows": 109,
+        "median_price": 262.5,
+        "p25_price": 145.0,
+        "p75_price": 387.46
+      },
+      {
+        "neighbourhood": "City Of Kogarah",
+        "rows": 105,
+        "median_price": 141.0,
+        "p25_price": 101.0,
+        "p75_price": 332.6
+      },
+      {
+        "neighbourhood": "Holroyd",
+        "rows": 102,
+        "median_price": 113.5,
+        "p25_price": 82.0025,
+        "p75_price": 286.5
+      },
+      {
+        "neighbourhood": "Ashfield",
+        "rows": 95,
+        "median_price": 177.0,
+        "p25_price": 129.915,
+        "p75_price": 269.5
+      }
+    ],
+    "property_type": [
+      {
+        "property_type": "Entire rental unit",
+        "rows": 8210,
+        "median_price": 317.5,
+        "p25_price": 238.6175,
+        "p75_price": 421.28
+      },
+      {
+        "property_type": "Entire home",
+        "rows": 3608,
+        "median_price": 548.0,
+        "p25_price": 348.425,
+        "p75_price": 970.0
+      },
+      {
+        "property_type": "Private room in home",
+        "rows": 2016,
+        "median_price": 101.0,
+        "p25_price": 77.67,
+        "p75_price": 126.0
+      },
+      {
+        "property_type": "Private room in rental unit",
+        "rows": 925,
+        "median_price": 114.33,
+        "p25_price": 56.98,
+        "p75_price": 164.33
+      },
+      {
+        "property_type": "Entire guesthouse",
+        "rows": 439,
+        "median_price": 220.0,
+        "p25_price": 171.5,
+        "p75_price": 284.895
+      },
+      {
+        "property_type": "Entire condo",
+        "rows": 367,
+        "median_price": 299.0,
+        "p25_price": 208.535,
+        "p75_price": 409.135
+      },
+      {
+        "property_type": "Entire guest suite",
+        "rows": 316,
+        "median_price": 199.5,
+        "p25_price": 149.75,
+        "p75_price": 260.3925
+      },
+      {
+        "property_type": "Entire serviced apartment",
+        "rows": 209,
+        "median_price": 333.29,
+        "p25_price": 228.0,
+        "p75_price": 459.0
+      },
+      {
+        "property_type": "Entire townhouse",
+        "rows": 206,
+        "median_price": 432.755,
+        "p25_price": 328.38,
+        "p75_price": 574.925
+      },
+      {
+        "property_type": "Room in hotel",
+        "rows": 192,
+        "median_price": 169.5,
+        "p25_price": 141.25,
+        "p75_price": 224.31
+      },
+      {
+        "property_type": "Room in aparthotel",
+        "rows": 124,
+        "median_price": 307.16499999999996,
+        "p25_price": 206.57,
+        "p75_price": 408.0
+      },
+      {
+        "property_type": "Room in boutique hotel",
+        "rows": 113,
+        "median_price": 190.0,
+        "p25_price": 163.0,
+        "p75_price": 241.0
+      },
+      {
+        "property_type": "Private room in townhouse",
+        "rows": 102,
+        "median_price": 112.0,
+        "p25_price": 78.2325,
+        "p75_price": 160.0
+      },
+      {
+        "property_type": "Private room in guesthouse",
+        "rows": 95,
+        "median_price": 138.5,
+        "p25_price": 95.0,
+        "p75_price": 168.0
+      },
+      {
+        "property_type": "Private room in condo",
+        "rows": 83,
+        "median_price": 147.67,
+        "p25_price": 105.92,
+        "p75_price": 191.0
+      },
+      {
+        "property_type": "Entire cabin",
+        "rows": 79,
+        "median_price": 257.5,
+        "p25_price": 199.5,
+        "p75_price": 408.33500000000004
+      },
+      {
+        "property_type": "Entire villa",
+        "rows": 78,
+        "median_price": 914.085,
+        "p25_price": 444.0625,
+        "p75_price": 2669.4
+      },
+      {
+        "property_type": "Private room in bed and breakfast",
+        "rows": 74,
+        "median_price": 99.33500000000001,
+        "p25_price": 57.2025,
+        "p75_price": 194.75
+      },
+      {
+        "property_type": "Private room in hostel",
+        "rows": 72,
+        "median_price": 181.0,
+        "p25_price": 146.125,
+        "p75_price": 256.25
+      },
+      {
+        "property_type": "Entire cottage",
+        "rows": 70,
+        "median_price": 380.75,
+        "p25_price": 299.25,
+        "p75_price": 557.375
+      },
+      {
+        "property_type": "Entire loft",
+        "rows": 59,
+        "median_price": 274.0,
+        "p25_price": 224.83499999999998,
+        "p75_price": 340.25
+      },
+      {
+        "property_type": "Tiny home",
+        "rows": 46,
+        "median_price": 201.20499999999998,
+        "p25_price": 151.7475,
+        "p75_price": 289.63750000000005
+      },
+      {
+        "property_type": "Private room in villa",
+        "rows": 43,
+        "median_price": 103.0,
+        "p25_price": 61.0,
+        "p75_price": 256.0
+      },
+      {
+        "property_type": "Private room in guest suite",
+        "rows": 40,
+        "median_price": 138.2,
+        "p25_price": 51.73,
+        "p75_price": 195.5
+      },
+      {
+        "property_type": "Entire bungalow",
+        "rows": 22,
+        "median_price": 191.25,
+        "p25_price": 162.83499999999998,
+        "p75_price": 316.25
+      },
+      {
+        "property_type": "Private room in serviced apartment",
+        "rows": 21,
+        "median_price": 199.0,
+        "p25_price": 114.0,
+        "p75_price": 249.0
+      },
+      {
+        "property_type": "Shared room in hostel",
+        "rows": 21,
+        "median_price": 57.0,
+        "p25_price": 52.0,
+        "p75_price": 58.0
+      }
+    ]
+  },
+  "governance": {
+    "descriptive_not_causal": true,
+    "model_test_split_used": false,
+    "excluded_primary_model_proxies": [
+      "availability_30/60/90/365",
+      "review counts and review velocity"
+    ]
+  }
+}

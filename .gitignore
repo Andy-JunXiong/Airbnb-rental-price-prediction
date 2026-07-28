@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+Thumbs.db
+
+# Reproducible local data and model outputs.
+data/raw/inside_airbnb/
+data/silver/inside_airbnb/
+data/processed/
+artifacts/
+predictions/*.csv
+
+# Machine-specific run state. Curated research evidence remains tracked.
+reports/inside_airbnb/pipeline_run.json
+reports/inside_airbnb/ci_pipeline_run.json
+reports/inside_airbnb/reproducibility_manifest.json
+reports/inside_airbnb/ci_reproducibility_manifest.json
+reports/ci_reproducibility_manifest.json

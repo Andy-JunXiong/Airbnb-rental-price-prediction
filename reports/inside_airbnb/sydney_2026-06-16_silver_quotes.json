@@ -1,0 +1,125 @@
+{
+  "report_version": 2,
+  "generated_at_utc": "2026-07-28T04:59:35+00:00",
+  "snapshot_label": "2026-06-16",
+  "source": "data\\raw\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\listings.csv.gz",
+  "source_sha256": "56c7b83723a195d6e4d0bf6d6ecd6da9b43b00cda9c9f6c08ffe11b7ee79597d",
+  "output": "data\\silver\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\listing_quotes.csv",
+  "output_sha256": "b2c62b01406e57a589687bd71f88fc2164de645b176aa933e28f5891ee0837d4",
+  "rows": 20573,
+  "unique_listing_ids": 20573,
+  "duplicate_listing_ids": 0,
+  "training_eligible": 17784,
+  "training_ineligible": 2789,
+  "eligibility_reason_counts": {
+    "missing_or_invalid_quote_dates": 2461,
+    "missing_or_invalid_quote_price": 2789
+  },
+  "target_quoted_price_per_night": {
+    "min": 1.74,
+    "p01": 22.6749,
+    "median": 291.0,
+    "p99": 2888.8399999999965,
+    "max": 52850.0
+  },
+  "missing_value_counts": {
+    "bathrooms": 5724,
+    "bedrooms": 3107,
+    "beds": 5044,
+    "checkin_day_of_week": 2461,
+    "checkin_is_weekend": 2461,
+    "checkin_month": 2461,
+    "eligibility_reason": 17784,
+    "host_total_listings_count": 20573,
+    "instant_bookable": 20573,
+    "maximum_nights": 8,
+    "minimum_nights": 8,
+    "quote_checkin_date": 2461,
+    "quote_checkout_date": 2461,
+    "quote_lead_days": 2461,
+    "stay_nights": 2461,
+    "target_quoted_price_per_night": 2789
+  },
+  "privacy": {
+    "direct_names_or_text_included": false,
+    "host_id_purpose": "group-disjoint evaluation only",
+    "proxy_features_excluded_from_primary_model": [
+      "proxy_available_days_30",
+      "proxy_available_days_60",
+      "proxy_available_days_90",
+      "proxy_available_days_365",
+      "proxy_review_count_ltm",
+      "proxy_review_count_l30d"
+    ]
+  },
+  "geographic_features": {
+    "version": 1,
+    "distance_method": "Haversine great-circle distance",
+    "units": "kilometres",
+    "interpretation": "Approximate straight-line distance to fixed reference points; not route distance or travel time.",
+    "cbd": {
+      "name": "Sydney CBD",
+      "latitude": -33.8688,
+      "longitude": 151.2093
+    },
+    "airport": {
+      "name": "Sydney Airport",
+      "latitude": -33.9399,
+      "longitude": 151.1753
+    },
+    "reference_beaches": [
+      {
+        "name": "Bondi Beach",
+        "latitude": -33.8915,
+        "longitude": 151.2767
+      },
+      {
+        "name": "Coogee Beach",
+        "latitude": -33.9205,
+        "longitude": 151.255
+      },
+      {
+        "name": "Manly Beach",
+        "latitude": -33.7969,
+        "longitude": 151.2871
+      },
+      {
+        "name": "Cronulla Beach",
+        "latitude": -34.055,
+        "longitude": 151.154
+      },
+      {
+        "name": "Palm Beach",
+        "latitude": -33.5988,
+        "longitude": 151.3233
+      }
+    ],
+    "major_hubs": [
+      {
+        "name": "Central",
+        "latitude": -33.883,
+        "longitude": 151.2065
+      },
+      {
+        "name": "Circular Quay",
+        "latitude": -33.8612,
+        "longitude": 151.2108
+      },
+      {
+        "name": "Chatswood",
+        "latitude": -33.7972,
+        "longitude": 151.1802
+      },
+      {
+        "name": "Parramatta",
+        "latitude": -33.8175,
+        "longitude": 151.0034
+      },
+      {
+        "name": "Bondi Junction",
+        "latitude": -33.891,
+        "longitude": 151.2477
+      }
+    ]
+  }
+}

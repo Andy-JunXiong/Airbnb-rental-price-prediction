@@ -1,0 +1,140 @@
+{
+  "samples": 383,
+  "features": 35,
+  "nested_model_selection": {
+    "protocol": "5-fold outer CV with independent 5-fold inner GridSearchCV",
+    "parameter_grid": {
+      "n_estimators": [
+        300
+      ],
+      "max_features": [
+        0.6,
+        0.8,
+        1.0
+      ],
+      "min_samples_leaf": [
+        2,
+        3,
+        5
+      ],
+      "max_depth": [
+        null,
+        12
+      ]
+    },
+    "folds": [
+      {
+        "fold": 1,
+        "rmse": 70.05201507945037,
+        "mae": 56.294351216244074,
+        "r2": 0.5323334352481401,
+        "best_inner_rmse": 66.97860927809376,
+        "best_parameters": {
+          "max_depth": null,
+          "max_features": 0.6,
+          "min_samples_leaf": 3,
+          "n_estimators": 300
+        }
+      },
+      {
+        "fold": 2,
+        "rmse": 76.17726414639407,
+        "mae": 57.93947606674232,
+        "r2": 0.46608125944528767,
+        "best_inner_rmse": 66.92397743535639,
+        "best_parameters": {
+          "max_depth": null,
+          "max_features": 0.6,
+          "min_samples_leaf": 5,
+          "n_estimators": 300
+        }
+      },
+      {
+        "fold": 3,
+        "rmse": 59.25967569820423,
+        "mae": 46.13151595183527,
+        "r2": 0.6342317534713289,
+        "best_inner_rmse": 70.16741926227704,
+        "best_parameters": {
+          "max_depth": null,
+          "max_features": 0.6,
+          "min_samples_leaf": 5,
+          "n_estimators": 300
+        }
+      },
+      {
+        "fold": 4,
+        "rmse": 71.31381015814203,
+        "mae": 53.919816095683366,
+        "r2": 0.5064729104707562,
+        "best_inner_rmse": 66.33444475600614,
+        "best_parameters": {
+          "max_depth": 12,
+          "max_features": 0.6,
+          "min_samples_leaf": 5,
+          "n_estimators": 300
+        }
+      },
+      {
+        "fold": 5,
+        "rmse": 66.72161163831348,
+        "mae": 51.87483723568456,
+        "r2": 0.5363604484305045,
+        "best_inner_rmse": 68.10756156382894,
+        "best_parameters": {
+          "max_depth": 12,
+          "max_features": 0.6,
+          "min_samples_leaf": 5,
+          "n_estimators": 300
+        }
+      }
+    ],
+    "aggregate_out_of_fold": {
+      "rmse": 68.93324734910072,
+      "mae": 53.23374695108415,
+      "r2": 0.5337882156025968
+    },
+    "absolute_error_quantiles": {
+      "p50": 43.02142151367141,
+      "p80": 86.66541940836942,
+      "p90": 111.03056481481477,
+      "p95": 140.2416698412698
+    }
+  },
+  "leave_one_area_out": {
+    "protocol": "Train on two areas and test on the entirely unseen third area",
+    "warning": "This is a geographic transfer stress test, not the primary CV score.",
+    "areas": [
+      {
+        "held_out_area": "Manly",
+        "train_rows": 246,
+        "test_rows": 137,
+        "rmse": 71.58168284750816,
+        "mae": 53.719165389071584,
+        "r2": 0.42078424246030977,
+        "actual_mean": 187.74452554744525,
+        "predicted_mean": 167.237589171129
+      },
+      {
+        "held_out_area": "Pittwater",
+        "train_rows": 310,
+        "test_rows": 73,
+        "rmse": 91.21541777254075,
+        "mae": 73.21053094451008,
+        "r2": 0.2758459594991538,
+        "actual_mean": 241.83561643835617,
+        "predicted_mean": 215.12698335584153
+      },
+      {
+        "held_out_area": "Warringah",
+        "train_rows": 210,
+        "test_rows": 173,
+        "rmse": 72.50595825644145,
+        "mae": 61.583062987773516,
+        "r2": 0.41433054609046926,
+        "actual_mean": 165.3815028901734,
+        "predicted_mean": 204.15423578025366
+      }
+    ]
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-28T05:53:37+00:00",
+  "artifact": "artifacts\\inside_airbnb_quote_mvp.joblib",
+  "silver": "data\\silver\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\listing_quotes.csv",
+  "model_report": "reports\\inside_airbnb\\sydney_2026-06-16_quote_mvp_evaluation.json",
+  "target": "production",
+  "passed": false,
+  "status": "PRODUCTION_RELEASE_BLOCKED",
+  "failed_checks": [
+    "artifact_is_temporally_validated",
+    "model_report_temporal_gate_passed",
+    "temporal_report_exists_and_passes",
+    "temporal_report_matches_training_silver",
+    "target_compatibility_ready"
+  ],
+  "checks": [
+    {
+      "name": "silver_exists",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "name": "primary_artifact_exists",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "name": "model_report_exists",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "name": "pipeline_compile_passed",
+      "passed": true,
+      "observed": "passed",
+      "expected": "passed"
+    },
+    {
+      "name": "pipeline_unit_tests_passed",
+      "passed": true,
+      "observed": "passed",
+      "expected": "passed"
+    },
+    {
+      "name": "artifact_version_supported",
+      "passed": true,
+      "observed": 2,
+      "expected": ">=2"
+    },
+    {
+      "name": "artifact_silver_hash_matches",
+      "passed": true,
+      "observed": "b2c62b01406e57a589687bd71f88fc2164de645b176aa933e28f5891ee0837d4",
+      "expected": "b2c62b01406e57a589687bd71f88fc2164de645b176aa933e28f5891ee0837d4"
+    },
+    {
+      "name": "artifact_snapshot_matches_silver",
+      "passed": true,
+      "observed": "2026-06-16",
+      "expected": "2026-06-16"
+    },
+    {
+      "name": "model_beats_market_baseline",
+      "passed": true,
+      "observed": 138.13521332661412,
+      "expected": "<222.8989246149689"
+    },
+    {
+      "name": "artifact_authority_matches_report",
+      "passed": true,
+      "observed": "research_only",
+      "expected": "research_only"
+    },
+    {
+      "name": "upper_tail_challenger_did_not_write_primary_artifact",
+      "passed": true,
+      "observed": false,
+      "expected": false
+    },
+    {
+      "name": "premium_challenger_did_not_write_primary_artifact",
+      "passed": true,
+      "observed": false,
+      "expected": false
+    },
+    {
+      "name": "interval_challenger_did_not_write_primary_artifact",
+      "passed": true,
+      "observed": false,
+      "expected": false
+    },
+    {
+      "name": "artifact_is_temporally_validated",
+      "passed": false,
+      "observed": "research_only",
+      "expected": "temporally_validated"
+    },
+    {
+      "name": "model_report_temporal_gate_passed",
+      "passed": false,
+      "observed": false,
+      "expected": true
+    },
+    {
+      "name": "temporal_report_exists_and_passes",
+      "passed": false,
+      "observed": false,
+      "expected": true
+    },
+    {
+      "name": "temporal_report_matches_training_silver",
+      "passed": false,
+      "observed": null,
+      "expected": "b2c62b01406e57a589687bd71f88fc2164de645b176aa933e28f5891ee0837d4"
+    },
+    {
+      "name": "target_compatibility_ready",
+      "passed": false,
+      "observed": "TEMPORAL_PRICE_VALIDATION_BLOCKED",
+      "expected": "TEMPORAL_PRICE_VALIDATION_READY"
+    }
+  ]
+}
