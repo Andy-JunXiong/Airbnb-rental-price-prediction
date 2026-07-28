@@ -6,6 +6,7 @@ from compare_inside_airbnb_snapshots import compatibility_decision
 from inside_airbnb_snapshot_discovery import (
     discover_sydney_dates,
     discovery_decision,
+    requires_action,
 )
 from inside_airbnb_temporal_validation import temporal_gate
 
@@ -59,6 +60,16 @@ class SnapshotCompatibilityTest(unittest.TestCase):
         )
         self.assertEqual(decision["status"], "NO_NEWER_SNAPSHOT")
         self.assertEqual(decision["newer_candidates"], [])
+        self.assertFalse(requires_action(decision))
+
+    def test_discovery_requires_action_for_new_snapshot_or_parse_failure(self) -> None:
+        newer = discovery_decision(
+            ["2026-06-16", "2026-09-15"],
+            ["2026-06-16"],
+        )
+        missing = discovery_decision([], ["2026-06-16"])
+        self.assertTrue(requires_action(newer))
+        self.assertTrue(requires_action(missing))
 
     def test_temporal_gate_requires_cold_start_and_overall_evidence(self) -> None:
         passed = temporal_gate(True, 3000, 0.20, 0.89, 500, 0.05)

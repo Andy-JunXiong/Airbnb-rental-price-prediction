@@ -100,6 +100,22 @@ Either of the following is required:
 Until then, availability can be compared across snapshots only as a proxy; it
 cannot supply a missing price label.
 
+## Automated discovery monitor
+
+The scheduled GitHub Actions workflow
+`.github/workflows/sydney-snapshot-monitor.yml` checks the official index every
+Monday at 02:17 UTC. It runs:
+
+```powershell
+python inside_airbnb_snapshot_discovery.py --fail-on-action-required
+```
+
+`NO_NEWER_SNAPSHOT` is the only passing discovery status. A newly published
+Sydney date or an index-parsing failure makes the workflow fail so a maintainer
+can review the candidate. The workflow always uploads the JSON discovery
+report, but it cannot mutate the registry, download data, run Phase 0, or
+upgrade deployment authority.
+
 ## Reproduction
 
 ```powershell

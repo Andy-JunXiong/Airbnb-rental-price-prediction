@@ -1,0 +1,38 @@
+name: Sydney snapshot monitor
+
+on:
+  schedule:
+    - cron: "17 2 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sydney-snapshot-monitor
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Check the official Sydney snapshot index
+        run: >-
+          python inside_airbnb_snapshot_discovery.py
+          --fail-on-action-required
+
+      - name: Upload discovery evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: sydney-snapshot-discovery-${{ github.run_id }}
+          path: reports/inside_airbnb/sydney_snapshot_discovery.json
+          if-no-files-found: error
+          retention-days: 30

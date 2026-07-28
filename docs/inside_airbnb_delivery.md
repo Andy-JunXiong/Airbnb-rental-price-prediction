@@ -103,3 +103,15 @@ software or test failure.
 offline `ci` mode. It uploads the CI run report and CI reproducibility
 Manifest. The workflow never invokes live discovery, Phase 0, or raw-data
 download.
+
+## Scheduled snapshot monitor
+
+`.github/workflows/sydney-snapshot-monitor.yml` runs every Monday at 02:17 UTC
+and can also be started manually. It performs only the read-only official-index
+discovery step and uploads the resulting JSON evidence.
+
+The monitor passes while Sydney's latest official snapshot matches the pinned
+registry. It fails with an actionable signal when a newer snapshot appears or
+when the official index no longer yields a Sydney date. The evidence upload
+still runs after failure. The monitor never changes the registry, downloads raw
+files, runs Phase 0, or changes model authority.

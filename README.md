@@ -210,6 +210,11 @@ strict forward-time evaluation, reports seen/new listing and host cohorts,
 measures categorical and target drift, and applies predeclared performance and
 coverage gates. Compatibility by itself never upgrades model authority.
 
+The read-only `sydney-snapshot-monitor.yml` workflow checks the official index
+weekly. It uploads discovery evidence and fails visibly when a new Sydney date
+appears or the index parser needs attention; it never downloads data or changes
+model authority.
+
 ### Delivery pipeline and release gates
 
 Run offline CI checks or rebuild the complete pinned-data research workflow:
