@@ -1,0 +1,71 @@
+{
+  "rows": 383,
+  "features": 35,
+  "id": {
+    "unique": 383,
+    "min": 570,
+    "max": 952
+  },
+  "target_price": {
+    "min": 39.0,
+    "q1": 100.0,
+    "median": 165.0,
+    "mean": 187.95300261096605,
+    "q3": 250.0,
+    "max": 435.0,
+    "std": 101.0892140590474
+  },
+  "area_counts": {
+    "Manly": 137,
+    "Pittwater": 73,
+    "Warringah": 173
+  },
+  "top_absolute_price_correlations": [
+    {
+      "feature": "bedrooms",
+      "correlation": 0.5918475062859598
+    },
+    {
+      "feature": "beds",
+      "correlation": 0.5546115074741435
+    },
+    {
+      "feature": "room_type_Private room",
+      "correlation": -0.5393206454423314
+    },
+    {
+      "feature": "cleaning_fee",
+      "correlation": 0.5381231833657687
+    },
+    {
+      "feature": "room_type_Entire home/apt",
+      "correlation": 0.53045828748709
+    },
+    {
+      "feature": "accommodates",
+      "correlation": 0.5066795136541452
+    },
+    {
+      "feature": "bathrooms",
+      "correlation": 0.49782550791794167
+    },
+    {
+      "feature": "security_deposit",
+      "correlation": 0.34772765531853356
+    },
+    {
+      "feature": "cancellation_policy_strict",
+      "correlation": 0.2714996692470367
+    },
+    {
+      "feature": "area_Pittwater",
+      "correlation": 0.258995443534681
+    }
+  ],
+  "quality_checks": {
+    "finite_features": true,
+    "finite_target": true,
+    "unique_ids": true,
+    "one_area_per_row": true
+  }
+}

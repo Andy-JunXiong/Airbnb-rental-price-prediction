@@ -1,0 +1,95 @@
+{
+  "dataset": "full",
+  "samples": 383,
+  "features": 35,
+  "validation": "RepeatedKFold(n_splits=5, n_repeats=5, random_state=42)",
+  "models": [
+    {
+      "model": "extra_trees",
+      "folds": 25,
+      "rmse_mean": 71.01710193663517,
+      "rmse_std": 5.799967808989317,
+      "mae_mean": 54.71475940066617,
+      "mae_std": 4.746069410549057,
+      "r2_mean": 0.4979012425365043,
+      "r2_std": 0.07968415889186531
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "folds": 25,
+      "rmse_mean": 73.02226022045103,
+      "rmse_std": 6.971077281673372,
+      "mae_mean": 55.59717847453349,
+      "mae_std": 5.208553594646918,
+      "r2_mean": 0.4680759156869121,
+      "r2_std": 0.09885601714554845
+    },
+    {
+      "model": "ridge",
+      "folds": 25,
+      "rmse_mean": 73.25196241656288,
+      "rmse_std": 6.648403575836352,
+      "mae_mean": 56.1925158966407,
+      "mae_std": 5.389019846565487,
+      "r2_mean": 0.46339191093104254,
+      "r2_std": 0.10511630835228973
+    },
+    {
+      "model": "median",
+      "folds": 25,
+      "rmse_mean": 103.68041683550102,
+      "rmse_std": 5.4766557892980705,
+      "mae_mean": 83.88226247436775,
+      "mae_std": 3.5061008555141435,
+      "r2_mean": -0.06214732610773487,
+      "r2_std": 0.04491728747165331
+    }
+  ],
+  "top_permutation_features": [
+    {
+      "feature": "room_type_Private room",
+      "importance": 28.8943678371712
+    },
+    {
+      "feature": "bedrooms",
+      "importance": 19.844214847750926
+    },
+    {
+      "feature": "cleaning_fee",
+      "importance": 19.465192218311586
+    },
+    {
+      "feature": "bathrooms",
+      "importance": 14.57995003183529
+    },
+    {
+      "feature": "accommodates",
+      "importance": 11.604087980156311
+    },
+    {
+      "feature": "dist_nearist_attraction",
+      "importance": 8.061771307992881
+    },
+    {
+      "feature": "maximum_nights",
+      "importance": 7.394122565386785
+    },
+    {
+      "feature": "host_identity_verified",
+      "importance": 5.450437867196999
+    },
+    {
+      "feature": "property_type_House",
+      "importance": 5.341805339303958
+    },
+    {
+      "feature": "beds",
+      "importance": 4.7822046578505475
+    }
+  ],
+  "limitations": [
+    "Only processed features are available; preprocessing cannot be cross-validated.",
+    "The dataset has no host identifier, so host-grouped validation is impossible.",
+    "Permutation importance is descriptive because it is computed on all training rows."
+  ]
+}

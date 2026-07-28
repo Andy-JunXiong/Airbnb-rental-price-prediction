@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-27T23:28:35+00:00",
+  "provider": "Inside Airbnb",
+  "official_index_url": "https://insideairbnb.com/get-the-data/",
+  "city": "sydney",
+  "official_snapshot_dates": [
+    "2026-06-16"
+  ],
+  "registered_snapshot_dates": [
+    "2025-09-12",
+    "2026-06-16"
+  ],
+  "decision": {
+    "status": "NO_NEWER_SNAPSHOT",
+    "latest_official_snapshot": "2026-06-16",
+    "latest_registered_snapshot": "2026-06-16",
+    "newer_candidates": [],
+    "next_action": "Keep research_only authority and check again after the next release."
+  },
+  "safety": {
+    "registry_mutated": false,
+    "files_downloaded": false,
+    "automatic_authority_change": false
+  }
+}

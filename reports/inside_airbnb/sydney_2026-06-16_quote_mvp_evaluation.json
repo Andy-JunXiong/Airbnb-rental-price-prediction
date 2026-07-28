@@ -1,0 +1,257 @@
+{
+  "report_version": 2,
+  "generated_at_utc": "2026-07-28T05:00:10+00:00",
+  "target": {
+    "name": "target_quoted_price_per_night",
+    "definition": "Public quoted price per night in AUD",
+    "not_claimed": [
+      "realised booking price",
+      "optimal price",
+      "verified occupancy",
+      "realised revenue"
+    ]
+  },
+  "temporal_validation": {
+    "status": "TEMPORAL_PRICE_VALIDATION_BLOCKED",
+    "deployment_authority": "research_only",
+    "compatibility_report": "reports\\inside_airbnb\\sydney_snapshot_target_compatibility.json",
+    "blockers": [
+      "no_common_non_null_price_target",
+      "older_snapshot_has_no_non_null_price_labels"
+    ],
+    "out_of_time_evaluation_report": null,
+    "out_of_time_evidence_gate_passed": false,
+    "out_of_time_evidence_matches_training_snapshot": false
+  },
+  "evaluation_protocol": {
+    "type": "single-snapshot host-disjoint train/calibration/test",
+    "random_seeds": {
+      "test": 42,
+      "calibration": 43
+    },
+    "temporal_backtest": false,
+    "limitation": "A later independent snapshot is required for temporal validation.",
+    "rows": {
+      "total_eligible": 17784,
+      "train": 11375,
+      "calibration": 2708,
+      "test": 3701
+    },
+    "unique_hosts": {
+      "train": 5317,
+      "calibration": 1330,
+      "test": 1662
+    },
+    "host_overlap": {
+      "train_calibration": 0,
+      "train_test": 0,
+      "calibration_test": 0
+    }
+  },
+  "features": {
+    "numeric": [
+      "quote_lead_days",
+      "stay_nights",
+      "checkin_month",
+      "checkin_day_of_week",
+      "checkin_is_weekend",
+      "latitude",
+      "longitude",
+      "distance_to_sydney_cbd_km",
+      "distance_to_sydney_airport_km",
+      "distance_to_nearest_reference_beach_km",
+      "distance_to_nearest_major_hub_km",
+      "accommodates",
+      "bathrooms",
+      "bedrooms",
+      "beds",
+      "amenities_count",
+      "minimum_nights",
+      "maximum_nights",
+      "calculated_host_listings_count"
+    ],
+    "categorical": [
+      "neighbourhood",
+      "property_type",
+      "room_type",
+      "host_is_superhost"
+    ],
+    "geographic_reference_manifest": {
+      "version": 1,
+      "distance_method": "Haversine great-circle distance",
+      "units": "kilometres",
+      "interpretation": "Approximate straight-line distance to fixed reference points; not route distance or travel time.",
+      "cbd": {
+        "name": "Sydney CBD",
+        "latitude": -33.8688,
+        "longitude": 151.2093
+      },
+      "airport": {
+        "name": "Sydney Airport",
+        "latitude": -33.9399,
+        "longitude": 151.1753
+      },
+      "reference_beaches": [
+        {
+          "name": "Bondi Beach",
+          "latitude": -33.8915,
+          "longitude": 151.2767
+        },
+        {
+          "name": "Coogee Beach",
+          "latitude": -33.9205,
+          "longitude": 151.255
+        },
+        {
+          "name": "Manly Beach",
+          "latitude": -33.7969,
+          "longitude": 151.2871
+        },
+        {
+          "name": "Cronulla Beach",
+          "latitude": -34.055,
+          "longitude": 151.154
+        },
+        {
+          "name": "Palm Beach",
+          "latitude": -33.5988,
+          "longitude": 151.3233
+        }
+      ],
+      "major_hubs": [
+        {
+          "name": "Central",
+          "latitude": -33.883,
+          "longitude": 151.2065
+        },
+        {
+          "name": "Circular Quay",
+          "latitude": -33.8612,
+          "longitude": 151.2108
+        },
+        {
+          "name": "Chatswood",
+          "latitude": -33.7972,
+          "longitude": 151.1802
+        },
+        {
+          "name": "Parramatta",
+          "latitude": -33.8175,
+          "longitude": 151.0034
+        },
+        {
+          "name": "Bondi Junction",
+          "latitude": -33.891,
+          "longitude": 151.2477
+        }
+      ]
+    },
+    "excluded_proxies": [
+      "availability_30/60/90/365",
+      "review counts and review velocity"
+    ],
+    "excluded_identifiers": [
+      "listing_id",
+      "host_id"
+    ]
+  },
+  "model": {
+    "algorithm": "HistGradientBoostingRegressor on log1p target",
+    "selection": "predeclared; no test-set tuning",
+    "test_metrics_all": {
+      "mae": 138.13521332661412,
+      "median_absolute_error": 50.36750611047111,
+      "rmse": 514.5167452225039,
+      "r2": 0.4503076142689083
+    },
+    "test_metrics_core_market_p01_p99": {
+      "mae": 101.41092365428663,
+      "median_absolute_error": 50.34056801766849,
+      "rmse": 200.65934509986153,
+      "r2": 0.6756870668457915
+    }
+  },
+  "market_median_baseline": {
+    "hierarchy": [
+      "neighbourhood + room_type",
+      "neighbourhood",
+      "room_type",
+      "global"
+    ],
+    "test_metrics_all": {
+      "mae": 222.8989246149689,
+      "median_absolute_error": 91.98,
+      "rmse": 674.4039334851603,
+      "r2": 0.05558933418538026
+    },
+    "test_metrics_core_market_p01_p99": {
+      "mae": 173.035144707828,
+      "median_absolute_error": 91.12,
+      "rmse": 318.92434420552246,
+      "r2": 0.18074173868592247
+    },
+    "fallback_counts": {
+      "neighbourhood": 10,
+      "neighbourhood_room": 3691
+    }
+  },
+  "comparison": {
+    "relative_mae_improvement_vs_market_median": 0.38027869104695733
+  },
+  "conformal_interval": {
+    "target_coverage": 0.9,
+    "method": "split conformal absolute residuals in log1p price space",
+    "global_log_residual_quantile": 0.5439257274868585,
+    "calibrated_segments": 13,
+    "calibrated_room_types": 2,
+    "test_coverage_all": 0.895433666576601,
+    "test_average_width_all": 454.1152328677305,
+    "test_coverage_accepted": 0.8960573476702509,
+    "test_average_width_accepted": 450.3259499387853,
+    "room_type_coverage": [
+      {
+        "room_type": "Entire home/apt",
+        "rows": 2921,
+        "coverage": 0.8996918863402944,
+        "average_interval_width": 535.481645281675
+      },
+      {
+        "room_type": "Private room",
+        "rows": 758,
+        "coverage": 0.8825857519788918,
+        "average_interval_width": 146.76838326568696
+      }
+    ]
+  },
+  "evidence_gate": {
+    "thresholds": {
+      "minimum_comparables": 20,
+      "maximum_relative_interval_width": 2.0,
+      "maximum_snapshot_age_days": 120,
+      "supported_prediction_price_range": [
+        17.648699999999998,
+        4525.153999999963
+      ]
+    },
+    "snapshot_age_days_at_evaluation": 29,
+    "accepted_rows": 3627,
+    "refused_rows": 74,
+    "refusal_rate": 0.019994596055120238,
+    "reason_counts": {
+      "insufficient_comparables": 26,
+      "prediction_interval_too_wide": 42,
+      "prediction_outside_supported_price_range": 2,
+      "unseen_category:property_type": 5
+    },
+    "accepted_test_metrics": {
+      "mae": 135.36284857365735,
+      "median_absolute_error": 50.26235227610874,
+      "rmse": 504.24885694001534,
+      "r2": 0.4561114581481377
+    }
+  },
+  "artifact": {
+    "path": "artifacts\\inside_airbnb_quote_mvp.joblib",
+    "bytes": 480891
+  }
+}

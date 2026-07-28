@@ -1,0 +1,610 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-28T05:00:02+00:00",
+  "source": "data\\silver\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\listing_quotes.csv",
+  "protocol": {
+    "governed_test_rows_reserved_and_unused": 3701,
+    "governed_test_unique_hosts": 1662,
+    "development_rows": 14083,
+    "fold_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "validation_fraction_per_fold": 0.2,
+    "group": "host_id",
+    "target_transform": "log1p",
+    "model_configuration_fixed": true
+  },
+  "variants": [
+    {
+      "name": "listing_and_quote_context",
+      "numeric": [
+        "quote_lead_days",
+        "stay_nights",
+        "checkin_month",
+        "checkin_day_of_week",
+        "checkin_is_weekend",
+        "accommodates",
+        "bathrooms",
+        "bedrooms",
+        "beds",
+        "amenities_count",
+        "minimum_nights",
+        "maximum_nights",
+        "calculated_host_listings_count"
+      ],
+      "categorical": [
+        "property_type",
+        "room_type",
+        "host_is_superhost"
+      ],
+      "question": "How much can quote context and listing structure explain?",
+      "folds": [
+        {
+          "seed": 101,
+          "train_rows": 11033,
+          "validation_rows": 3050,
+          "host_overlap": 0,
+          "mae": 205.63956862365174,
+          "median_absolute_error": 57.6671490272671,
+          "rmse": 1217.8405548029089,
+          "r2": 0.0810923057766697
+        },
+        {
+          "seed": 102,
+          "train_rows": 11335,
+          "validation_rows": 2748,
+          "host_overlap": 0,
+          "mae": 140.36464361096648,
+          "median_absolute_error": 59.16132097733312,
+          "rmse": 408.6997355402746,
+          "r2": 0.3776977231083476
+        },
+        {
+          "seed": 103,
+          "train_rows": 11503,
+          "validation_rows": 2580,
+          "host_overlap": 0,
+          "mae": 159.91139276196284,
+          "median_absolute_error": 60.07714120717631,
+          "rmse": 589.4621063087275,
+          "r2": 0.22499403700529153
+        },
+        {
+          "seed": 104,
+          "train_rows": 11531,
+          "validation_rows": 2552,
+          "host_overlap": 0,
+          "mae": 131.37508156028275,
+          "median_absolute_error": 62.00033231957045,
+          "rmse": 292.42173116587395,
+          "r2": 0.5329030644415098
+        },
+        {
+          "seed": 105,
+          "train_rows": 11153,
+          "validation_rows": 2930,
+          "host_overlap": 0,
+          "mae": 120.25382057139595,
+          "median_absolute_error": 59.349389800218944,
+          "rmse": 317.5635564032886,
+          "r2": 0.3665581738793591
+        }
+      ],
+      "summary": {
+        "mae": {
+          "mean": 151.50890142565194,
+          "standard_deviation": 33.56775333476603
+        },
+        "median_absolute_error": {
+          "mean": 59.651066666313184,
+          "standard_deviation": 1.5785576956414344
+        },
+        "rmse": {
+          "mean": 565.1975368442147,
+          "standard_deviation": 382.99884740916093
+        },
+        "r2": {
+          "mean": 0.31664906084223554,
+          "standard_deviation": 0.1709322095546352
+        }
+      }
+    },
+    {
+      "name": "plus_neighbourhood",
+      "numeric": [
+        "quote_lead_days",
+        "stay_nights",
+        "checkin_month",
+        "checkin_day_of_week",
+        "checkin_is_weekend",
+        "accommodates",
+        "bathrooms",
+        "bedrooms",
+        "beds",
+        "amenities_count",
+        "minimum_nights",
+        "maximum_nights",
+        "calculated_host_listings_count"
+      ],
+      "categorical": [
+        "property_type",
+        "room_type",
+        "host_is_superhost",
+        "neighbourhood"
+      ],
+      "question": "Does the governed neighbourhood category add signal?",
+      "folds": [
+        {
+          "seed": 101,
+          "train_rows": 11033,
+          "validation_rows": 3050,
+          "host_overlap": 0,
+          "mae": 192.2591690369864,
+          "median_absolute_error": 52.46086403795148,
+          "rmse": 1207.1499723097204,
+          "r2": 0.09715440997902447
+        },
+        {
+          "seed": 102,
+          "train_rows": 11335,
+          "validation_rows": 2748,
+          "host_overlap": 0,
+          "mae": 128.81570613808603,
+          "median_absolute_error": 52.79119465852337,
+          "rmse": 398.66475990051094,
+          "r2": 0.4078818519635159
+        },
+        {
+          "seed": 103,
+          "train_rows": 11503,
+          "validation_rows": 2580,
+          "host_overlap": 0,
+          "mae": 148.612491575503,
+          "median_absolute_error": 53.792252280143174,
+          "rmse": 583.4730402403786,
+          "r2": 0.24066249886485014
+        },
+        {
+          "seed": 104,
+          "train_rows": 11531,
+          "validation_rows": 2552,
+          "host_overlap": 0,
+          "mae": 119.02799539691614,
+          "median_absolute_error": 54.82091047103248,
+          "rmse": 274.3293449257996,
+          "r2": 0.5889144007792615
+        },
+        {
+          "seed": 105,
+          "train_rows": 11153,
+          "validation_rows": 2930,
+          "host_overlap": 0,
+          "mae": 112.03275907564631,
+          "median_absolute_error": 54.25070821106554,
+          "rmse": 306.609914215714,
+          "r2": 0.4095028447265613
+        }
+      ],
+      "summary": {
+        "mae": {
+          "mean": 140.14962424462757,
+          "standard_deviation": 32.21864287056404
+        },
+        "median_absolute_error": {
+          "mean": 53.62318593174321,
+          "standard_deviation": 0.9874352354362852
+        },
+        "rmse": {
+          "mean": 554.0454063184247,
+          "standard_deviation": 384.38915918353024
+        },
+        "r2": {
+          "mean": 0.34882320126264266,
+          "standard_deviation": 0.1869823825178365
+        }
+      }
+    },
+    {
+      "name": "plus_raw_coordinates",
+      "numeric": [
+        "quote_lead_days",
+        "stay_nights",
+        "checkin_month",
+        "checkin_day_of_week",
+        "checkin_is_weekend",
+        "accommodates",
+        "bathrooms",
+        "bedrooms",
+        "beds",
+        "amenities_count",
+        "minimum_nights",
+        "maximum_nights",
+        "calculated_host_listings_count",
+        "latitude",
+        "longitude"
+      ],
+      "categorical": [
+        "property_type",
+        "room_type",
+        "host_is_superhost",
+        "neighbourhood"
+      ],
+      "question": "Do approximate raw coordinates add signal beyond neighbourhood?",
+      "folds": [
+        {
+          "seed": 101,
+          "train_rows": 11033,
+          "validation_rows": 3050,
+          "host_overlap": 0,
+          "mae": 186.7214811137703,
+          "median_absolute_error": 51.172047947142914,
+          "rmse": 1198.6698020701615,
+          "r2": 0.10979474790676702
+        },
+        {
+          "seed": 102,
+          "train_rows": 11335,
+          "validation_rows": 2748,
+          "host_overlap": 0,
+          "mae": 122.31771818038112,
+          "median_absolute_error": 48.87576181294037,
+          "rmse": 387.3286487953759,
+          "r2": 0.4410770813809417
+        },
+        {
+          "seed": 103,
+          "train_rows": 11503,
+          "validation_rows": 2580,
+          "host_overlap": 0,
+          "mae": 144.94892604254613,
+          "median_absolute_error": 53.2081591244588,
+          "rmse": 575.2706980227521,
+          "r2": 0.26186165365730396
+        },
+        {
+          "seed": 104,
+          "train_rows": 11531,
+          "validation_rows": 2552,
+          "host_overlap": 0,
+          "mae": 116.36903698649706,
+          "median_absolute_error": 53.056256214025126,
+          "rmse": 266.1479907738472,
+          "r2": 0.6130684757561264
+        },
+        {
+          "seed": 105,
+          "train_rows": 11153,
+          "validation_rows": 2930,
+          "host_overlap": 0,
+          "mae": 108.24651106440541,
+          "median_absolute_error": 53.36888811556171,
+          "rmse": 302.0511921044563,
+          "r2": 0.4269315085492965
+        }
+      ],
+      "summary": {
+        "mae": {
+          "mean": 135.72073467752,
+          "standard_deviation": 31.603788027762523
+        },
+        "median_absolute_error": {
+          "mean": 51.93622264282578,
+          "standard_deviation": 1.928419782326784
+        },
+        "rmse": {
+          "mean": 545.8936663533186,
+          "standard_deviation": 384.00499781822293
+        },
+        "r2": {
+          "mean": 0.3705466934500871,
+          "standard_deviation": 0.19155587492147835
+        }
+      }
+    },
+    {
+      "name": "plus_engineered_geography",
+      "numeric": [
+        "quote_lead_days",
+        "stay_nights",
+        "checkin_month",
+        "checkin_day_of_week",
+        "checkin_is_weekend",
+        "accommodates",
+        "bathrooms",
+        "bedrooms",
+        "beds",
+        "amenities_count",
+        "minimum_nights",
+        "maximum_nights",
+        "calculated_host_listings_count",
+        "latitude",
+        "longitude",
+        "distance_to_sydney_cbd_km",
+        "distance_to_sydney_airport_km",
+        "distance_to_nearest_reference_beach_km",
+        "distance_to_nearest_major_hub_km"
+      ],
+      "categorical": [
+        "property_type",
+        "room_type",
+        "host_is_superhost",
+        "neighbourhood"
+      ],
+      "question": "Do transparent reference-distance features add incremental signal?",
+      "folds": [
+        {
+          "seed": 101,
+          "train_rows": 11033,
+          "validation_rows": 3050,
+          "host_overlap": 0,
+          "mae": 185.2492377270711,
+          "median_absolute_error": 50.39843087044892,
+          "rmse": 1197.0597200313825,
+          "r2": 0.11218463186134908
+        },
+        {
+          "seed": 102,
+          "train_rows": 11335,
+          "validation_rows": 2748,
+          "host_overlap": 0,
+          "mae": 121.85123406648992,
+          "median_absolute_error": 48.405623571937184,
+          "rmse": 391.55976014425806,
+          "r2": 0.42879922999682785
+        },
+        {
+          "seed": 103,
+          "train_rows": 11503,
+          "validation_rows": 2580,
+          "host_overlap": 0,
+          "mae": 143.02258490321395,
+          "median_absolute_error": 52.35095654099237,
+          "rmse": 574.2249558260144,
+          "r2": 0.26454282906290116
+        },
+        {
+          "seed": 104,
+          "train_rows": 11531,
+          "validation_rows": 2552,
+          "host_overlap": 0,
+          "mae": 116.53874584132208,
+          "median_absolute_error": 53.173571897673284,
+          "rmse": 268.23866026460774,
+          "r2": 0.6069656817234215
+        },
+        {
+          "seed": 105,
+          "train_rows": 11153,
+          "validation_rows": 2930,
+          "host_overlap": 0,
+          "mae": 107.877148267865,
+          "median_absolute_error": 51.21177278555047,
+          "rmse": 301.00230034707874,
+          "r2": 0.4309046308338378
+        }
+      ],
+      "summary": {
+        "mae": {
+          "mean": 134.9077901611924,
+          "standard_deviation": 30.978469475500372
+        },
+        "median_absolute_error": {
+          "mean": 51.10807113332044,
+          "standard_deviation": 1.845848294249551
+        },
+        "rmse": {
+          "mean": 546.4170793226683,
+          "standard_deviation": 382.65570679673584
+        },
+        "r2": {
+          "mean": 0.36867940069566746,
+          "standard_deviation": 0.18768372122921542
+        }
+      }
+    }
+  ],
+  "engineered_geography_decision": {
+    "adopt": true,
+    "mean_mae_delta_vs_raw_coordinates": -0.8129445163276046,
+    "better_fold_count": 4,
+    "rule": "Adopt only if mean development MAE improves and at least three of five host-disjoint folds improve.",
+    "reference_manifest": {
+      "version": 1,
+      "distance_method": "Haversine great-circle distance",
+      "units": "kilometres",
+      "interpretation": "Approximate straight-line distance to fixed reference points; not route distance or travel time.",
+      "cbd": {
+        "name": "Sydney CBD",
+        "latitude": -33.8688,
+        "longitude": 151.2093
+      },
+      "airport": {
+        "name": "Sydney Airport",
+        "latitude": -33.9399,
+        "longitude": 151.1753
+      },
+      "reference_beaches": [
+        {
+          "name": "Bondi Beach",
+          "latitude": -33.8915,
+          "longitude": 151.2767
+        },
+        {
+          "name": "Coogee Beach",
+          "latitude": -33.9205,
+          "longitude": 151.255
+        },
+        {
+          "name": "Manly Beach",
+          "latitude": -33.7969,
+          "longitude": 151.2871
+        },
+        {
+          "name": "Cronulla Beach",
+          "latitude": -34.055,
+          "longitude": 151.154
+        },
+        {
+          "name": "Palm Beach",
+          "latitude": -33.5988,
+          "longitude": 151.3233
+        }
+      ],
+      "major_hubs": [
+        {
+          "name": "Central",
+          "latitude": -33.883,
+          "longitude": 151.2065
+        },
+        {
+          "name": "Circular Quay",
+          "latitude": -33.8612,
+          "longitude": 151.2108
+        },
+        {
+          "name": "Chatswood",
+          "latitude": -33.7972,
+          "longitude": 151.1802
+        },
+        {
+          "name": "Parramatta",
+          "latitude": -33.8175,
+          "longitude": 151.0034
+        },
+        {
+          "name": "Bondi Junction",
+          "latitude": -33.891,
+          "longitude": 151.2477
+        }
+      ]
+    }
+  },
+  "permutation_importance_variant": "plus_engineered_geography",
+  "permutation_importance_fold_seed": 101,
+  "held_out_permutation_importance": [
+    {
+      "feature": "accommodates",
+      "mae_increase_mean": 38.36735736158198,
+      "mae_increase_standard_deviation": 1.3718618281864186
+    },
+    {
+      "feature": "bedrooms",
+      "mae_increase_mean": 37.25749220233284,
+      "mae_increase_standard_deviation": 1.278089566504078
+    },
+    {
+      "feature": "stay_nights",
+      "mae_increase_mean": 31.59340040569569,
+      "mae_increase_standard_deviation": 1.2024110360433817
+    },
+    {
+      "feature": "bathrooms",
+      "mae_increase_mean": 21.47509868298139,
+      "mae_increase_standard_deviation": 0.864215074875179
+    },
+    {
+      "feature": "longitude",
+      "mae_increase_mean": 20.699925396603412,
+      "mae_increase_standard_deviation": 0.7699260661808777
+    },
+    {
+      "feature": "room_type",
+      "mae_increase_mean": 15.91635080944405,
+      "mae_increase_standard_deviation": 1.0182100842712565
+    },
+    {
+      "feature": "distance_to_nearest_reference_beach_km",
+      "mae_increase_mean": 5.124778170622818,
+      "mae_increase_standard_deviation": 0.29816270945491435
+    },
+    {
+      "feature": "quote_lead_days",
+      "mae_increase_mean": 4.320050609320219,
+      "mae_increase_standard_deviation": 0.22200249670115407
+    },
+    {
+      "feature": "property_type",
+      "mae_increase_mean": 3.370358765053777,
+      "mae_increase_standard_deviation": 0.1995102863666968
+    },
+    {
+      "feature": "latitude",
+      "mae_increase_mean": 2.6592298340056573,
+      "mae_increase_standard_deviation": 0.34648937878527936
+    },
+    {
+      "feature": "checkin_month",
+      "mae_increase_mean": 2.515908172091957,
+      "mae_increase_standard_deviation": 0.12028390006127633
+    },
+    {
+      "feature": "calculated_host_listings_count",
+      "mae_increase_mean": 2.128618709059981,
+      "mae_increase_standard_deviation": 0.2128785759934869
+    },
+    {
+      "feature": "distance_to_sydney_airport_km",
+      "mae_increase_mean": 2.093069850853959,
+      "mae_increase_standard_deviation": 0.24290717066076598
+    },
+    {
+      "feature": "distance_to_sydney_cbd_km",
+      "mae_increase_mean": 1.702396139139995,
+      "mae_increase_standard_deviation": 0.2762278017511414
+    },
+    {
+      "feature": "amenities_count",
+      "mae_increase_mean": 1.631378908986204,
+      "mae_increase_standard_deviation": 0.22334240668448707
+    },
+    {
+      "feature": "distance_to_nearest_major_hub_km",
+      "mae_increase_mean": 0.8761067203133962,
+      "mae_increase_standard_deviation": 0.18437813769649428
+    },
+    {
+      "feature": "checkin_day_of_week",
+      "mae_increase_mean": 0.5699430306149225,
+      "mae_increase_standard_deviation": 0.23100747108179498
+    },
+    {
+      "feature": "minimum_nights",
+      "mae_increase_mean": 0.4730565678109656,
+      "mae_increase_standard_deviation": 0.1682792546150116
+    },
+    {
+      "feature": "maximum_nights",
+      "mae_increase_mean": 0.29192678114827686,
+      "mae_increase_standard_deviation": 0.21534935494799634
+    },
+    {
+      "feature": "neighbourhood",
+      "mae_increase_mean": 0.2766152759255306,
+      "mae_increase_standard_deviation": 0.10651412335790306
+    },
+    {
+      "feature": "beds",
+      "mae_increase_mean": 0.24455516041711006,
+      "mae_increase_standard_deviation": 0.06305368021921352
+    },
+    {
+      "feature": "host_is_superhost",
+      "mae_increase_mean": 0.06630634313527821,
+      "mae_increase_standard_deviation": 0.10207165667070178
+    },
+    {
+      "feature": "checkin_is_weekend",
+      "mae_increase_mean": 0.0,
+      "mae_increase_standard_deviation": 0.0
+    }
+  ],
+  "governance": {
+    "governed_test_used_for_selection": false,
+    "proxy_features_included": false,
+    "causal_claim": false
+  }
+}

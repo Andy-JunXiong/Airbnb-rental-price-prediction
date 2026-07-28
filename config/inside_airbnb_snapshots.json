@@ -1,0 +1,154 @@
+{
+  "registry_version": 1,
+  "provider": {
+    "name": "Inside Airbnb",
+    "homepage": "https://insideairbnb.com/",
+    "data_page": "https://insideairbnb.com/get-the-data/",
+    "license": "Creative Commons Attribution 4.0 International",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "policy_url": "https://insideairbnb.com/data-policies/",
+    "assumptions_url": "https://insideairbnb.com/data-assumptions/",
+    "attribution": "Inside Airbnb, Sydney data snapshot"
+  },
+  "snapshots": [
+    {
+      "city": "sydney",
+      "display_name": "Sydney, New South Wales, Australia",
+      "snapshot_date": "2025-09-12",
+      "calendar_horizon_days": 365,
+      "files": [
+        {
+          "name": "listings.csv.gz",
+          "kind": "listings",
+          "url": "https://data.insideairbnb.com/australia/nsw/sydney/2025-09-12/data/listings.csv.gz",
+          "required_columns": [
+            "id",
+            "scrape_id",
+            "last_scraped",
+            "source",
+            "host_id",
+            "neighbourhood_cleansed",
+            "latitude",
+            "longitude",
+            "room_type",
+            "accommodates",
+            "price",
+            "minimum_nights",
+            "maximum_nights",
+            "calendar_last_scraped",
+            "number_of_reviews"
+          ]
+        },
+        {
+          "name": "calendar.csv.gz",
+          "kind": "calendar",
+          "url": "https://data.insideairbnb.com/australia/nsw/sydney/2025-09-12/data/calendar.csv.gz",
+          "required_columns": [
+            "listing_id",
+            "date",
+            "available",
+            "minimum_nights",
+            "maximum_nights"
+          ]
+        },
+        {
+          "name": "reviews.csv",
+          "kind": "reviews",
+          "url": "https://data.insideairbnb.com/australia/nsw/sydney/2025-09-12/visualisations/reviews.csv",
+          "required_columns": [
+            "listing_id",
+            "date"
+          ]
+        },
+        {
+          "name": "neighbourhoods.csv",
+          "kind": "neighbourhoods",
+          "url": "https://data.insideairbnb.com/australia/nsw/sydney/2025-09-12/visualisations/neighbourhoods.csv",
+          "required_columns": [
+            "neighbourhood",
+            "neighbourhood_group"
+          ]
+        },
+        {
+          "name": "neighbourhoods.geojson",
+          "kind": "neighbourhood_geojson",
+          "url": "https://data.insideairbnb.com/australia/nsw/sydney/2025-09-12/visualisations/neighbourhoods.geojson",
+          "required_columns": [
+            "neighbourhood"
+          ]
+        }
+      ]
+    },
+    {
+      "city": "sydney",
+      "display_name": "Sydney, New South Wales, Australia",
+      "snapshot_date": "2026-06-16",
+      "calendar_horizon_days": 365,
+      "files": [
+        {
+          "name": "listings.csv.gz",
+          "kind": "listings",
+          "url": "https://data.insideairbnb.com/australia/nsw/sydney/2026-06-16/data/listings.csv.gz",
+          "required_columns": [
+            "id",
+            "scrape_id",
+            "last_scraped",
+            "source",
+            "host_id",
+            "neighbourhood_cleansed",
+            "latitude",
+            "longitude",
+            "room_type",
+            "accommodates",
+            "price",
+            "price_quote_checkin_date",
+            "price_quote_checkout_date",
+            "price_quote_price_per_night",
+            "minimum_nights",
+            "maximum_nights",
+            "calendar_last_scraped",
+            "number_of_reviews"
+          ]
+        },
+        {
+          "name": "calendar.csv.gz",
+          "kind": "calendar",
+          "url": "https://data.insideairbnb.com/australia/nsw/sydney/2026-06-16/data/calendar.csv.gz",
+          "required_columns": [
+            "listing_id",
+            "date",
+            "available",
+            "minimum_nights",
+            "maximum_nights"
+          ]
+        },
+        {
+          "name": "reviews.csv",
+          "kind": "reviews",
+          "url": "https://data.insideairbnb.com/australia/nsw/sydney/2026-06-16/visualisations/reviews.csv",
+          "required_columns": [
+            "listing_id",
+            "date"
+          ]
+        },
+        {
+          "name": "neighbourhoods.csv",
+          "kind": "neighbourhoods",
+          "url": "https://data.insideairbnb.com/australia/nsw/sydney/2026-06-16/visualisations/neighbourhoods.csv",
+          "required_columns": [
+            "neighbourhood",
+            "neighbourhood_group"
+          ]
+        },
+        {
+          "name": "neighbourhoods.geojson",
+          "kind": "neighbourhood_geojson",
+          "url": "https://data.insideairbnb.com/australia/nsw/sydney/2026-06-16/visualisations/neighbourhoods.geojson",
+          "required_columns": [
+            "neighbourhood"
+          ]
+        }
+      ]
+    }
+  ]
+}

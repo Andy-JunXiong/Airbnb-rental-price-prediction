@@ -1,0 +1,1950 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-28T05:01:54+00:00",
+  "report_path": "reports\\inside_airbnb\\sydney_2026-06-16_error_analysis.json",
+  "artifact": {
+    "path": "artifacts\\inside_airbnb_quote_mvp.joblib",
+    "artifact_version": 2,
+    "snapshot_label": "2026-06-16",
+    "training_silver_sha256_matches": true,
+    "deployment_authority": "research_only"
+  },
+  "protocol": {
+    "governed_host_disjoint_test": true,
+    "test_rows": 3701,
+    "test_unique_hosts": 1662,
+    "train_test_host_overlap": 0,
+    "model_tuning_from_this_report": false,
+    "price_band_definitions": [
+      {
+        "label": "up_to_p50",
+        "lower_exclusive": 0.0,
+        "upper_inclusive": 295.14
+      },
+      {
+        "label": "p50_to_p75",
+        "lower_exclusive": 295.14,
+        "upper_inclusive": 453.0
+      },
+      {
+        "label": "p75_to_p90",
+        "lower_exclusive": 453.0,
+        "upper_inclusive": 770.0
+      },
+      {
+        "label": "p90_to_p95",
+        "lower_exclusive": 770.0,
+        "upper_inclusive": 1183.3719999999998
+      },
+      {
+        "label": "p95_to_p99",
+        "lower_exclusive": 1183.3719999999998,
+        "upper_inclusive": 2987.7382000000034
+      },
+      {
+        "label": "above_p99",
+        "lower_exclusive": 2987.7382000000034,
+        "upper_inclusive": null
+      }
+    ]
+  },
+  "overall": {
+    "rows": 3701,
+    "model": {
+      "mae": 138.13521332661412,
+      "median_absolute_error": 50.36750611047111,
+      "rmse": 514.5167452225039,
+      "r2": 0.4503076142689083
+    },
+    "market_baseline": {
+      "mae": 222.8989246149689,
+      "median_absolute_error": 91.98,
+      "rmse": 674.4039334851603,
+      "r2": 0.05558933418538026
+    },
+    "relative_mae_improvement_vs_market": 0.38027869104695733,
+    "mean_error_predicted_minus_actual": -60.74792412591173,
+    "median_error_predicted_minus_actual": 4.657222748270954,
+    "underprediction_rate": 0.4679816265874088,
+    "severe_underprediction_rate": 0.126182112942448,
+    "median_absolute_percentage_error": 0.19428739338259696,
+    "interval_coverage": 0.895433666576601,
+    "average_interval_width": 454.1152328677305,
+    "absolute_error_quantiles": {
+      "p50": 50.36750611047111,
+      "p75": 107.11199145350363,
+      "p90": 245.72915531750436,
+      "p95": 427.040008020243,
+      "p99": 1725.7453401774944
+    }
+  },
+  "segments": {
+    "room_type": [
+      {
+        "room_type": "Entire home/apt",
+        "rows": 2921,
+        "model": {
+          "mae": 164.99625293596995,
+          "median_absolute_error": 62.53508484119345,
+          "rmse": 577.7178174405901,
+          "r2": 0.420156015980504
+        },
+        "market_baseline": {
+          "mae": 267.6119103046902,
+          "median_absolute_error": 117.55000000000001,
+          "rmse": 757.1066412363317,
+          "r2": 0.00415042244691366
+        },
+        "relative_mae_improvement_vs_market": 0.3834495155760703,
+        "mean_error_predicted_minus_actual": -75.60481005452647,
+        "median_error_predicted_minus_actual": 4.387954795487531,
+        "underprediction_rate": 0.48236905169462513,
+        "severe_underprediction_rate": 0.1283806915439918,
+        "median_absolute_percentage_error": 0.19386684205064345,
+        "interval_coverage": 0.8996918863402944,
+        "average_interval_width": 535.481645281675,
+        "absolute_error_quantiles": {
+          "p50": 62.53508484119345,
+          "p75": 127.33589908613675,
+          "p90": 297.01470736614164,
+          "p95": 515.7117224820174,
+          "p99": 2369.8605248169133
+        }
+      },
+      {
+        "room_type": "Private room",
+        "rows": 758,
+        "model": {
+          "mae": 36.486195578781235,
+          "median_absolute_error": 17.725131819129242,
+          "rmse": 76.990394135593,
+          "r2": 0.5342659710270837
+        },
+        "market_baseline": {
+          "mae": 53.9248944591029,
+          "median_absolute_error": 31.0,
+          "rmse": 105.83517453630097,
+          "r2": 0.11991433779552751
+        },
+        "relative_mae_improvement_vs_market": 0.3233886511089479,
+        "mean_error_predicted_minus_actual": -6.5318530164718,
+        "median_error_predicted_minus_actual": 5.012063184325882,
+        "underprediction_rate": 0.41424802110817943,
+        "severe_underprediction_rate": 0.11873350923482849,
+        "median_absolute_percentage_error": 0.20222182729245708,
+        "interval_coverage": 0.8825857519788918,
+        "average_interval_width": 146.76838326568696,
+        "absolute_error_quantiles": {
+          "p50": 17.725131819129242,
+          "p75": 40.89683069297261,
+          "p90": 77.12719777529244,
+          "p95": 108.89793886103426,
+          "p99": 372.26896742233674
+        }
+      }
+    ],
+    "property_type": [
+      {
+        "property_type": "Entire rental unit",
+        "rows": 1743,
+        "model": {
+          "mae": 85.28304256626504,
+          "median_absolute_error": 52.32071937104064,
+          "rmse": 158.1131606733412,
+          "r2": 0.48662076065181514
+        },
+        "market_baseline": {
+          "mae": 133.94995123350546,
+          "median_absolute_error": 91.0,
+          "rmse": 222.37969740378315,
+          "r2": -0.015529471460180577
+        },
+        "relative_mae_improvement_vs_market": 0.36332158555550986,
+        "mean_error_predicted_minus_actual": -18.66184851286018,
+        "median_error_predicted_minus_actual": 5.5918876824833035,
+        "underprediction_rate": 0.474469305794607,
+        "severe_underprediction_rate": 0.1038439472174412,
+        "median_absolute_percentage_error": 0.17507666991375326,
+        "interval_coverage": 0.9254159495123351,
+        "average_interval_width": 401.8275975942879,
+        "absolute_error_quantiles": {
+          "p50": 52.32071937104064,
+          "p75": 95.47407955155163,
+          "p90": 171.52624260684837,
+          "p95": 277.0748985621905,
+          "p99": 657.6146205707471
+        }
+      },
+      {
+        "property_type": "Entire home",
+        "rows": 738,
+        "model": {
+          "mae": 326.62078253933583,
+          "median_absolute_error": 116.41534886605876,
+          "rmse": 919.8074254391848,
+          "r2": 0.36322390012037387
+        },
+        "market_baseline": {
+          "mae": 540.6166937669377,
+          "median_absolute_error": 227.83999999999997,
+          "rmse": 1221.5618311642897,
+          "r2": -0.12311399983199567
+        },
+        "relative_mae_improvement_vs_market": 0.3958366689280529,
+        "mean_error_predicted_minus_actual": -181.64657313530213,
+        "median_error_predicted_minus_actual": -6.503604295115224,
+        "underprediction_rate": 0.5176151761517616,
+        "severe_underprediction_rate": 0.1951219512195122,
+        "median_absolute_percentage_error": 0.2384083232765143,
+        "interval_coverage": 0.8509485094850948,
+        "average_interval_width": 882.3479519016211,
+        "absolute_error_quantiles": {
+          "p50": 116.41534886605876,
+          "p75": 278.29437189064447,
+          "p90": 633.8878239193848,
+          "p95": 1060.7742959923935,
+          "p99": 3898.559809531487
+        }
+      },
+      {
+        "property_type": "Private room in home",
+        "rows": 430,
+        "model": {
+          "mae": 25.088769159632914,
+          "median_absolute_error": 14.582273404307829,
+          "rmse": 45.78742071742471,
+          "r2": 0.5181700339211386
+        },
+        "market_baseline": {
+          "mae": 38.075546511627905,
+          "median_absolute_error": 26.445,
+          "rmse": 60.83575074558602,
+          "r2": 0.1494121191950757
+        },
+        "relative_mae_improvement_vs_market": 0.34107921072200376,
+        "mean_error_predicted_minus_actual": 0.5978223020620603,
+        "median_error_predicted_minus_actual": 5.809111453565485,
+        "underprediction_rate": 0.3744186046511628,
+        "severe_underprediction_rate": 0.07674418604651163,
+        "median_absolute_percentage_error": 0.16808820553589537,
+        "interval_coverage": 0.9209302325581395,
+        "average_interval_width": 132.77984489771546,
+        "absolute_error_quantiles": {
+          "p50": 14.582273404307829,
+          "p75": 28.7041244099516,
+          "p90": 50.8716316963413,
+          "p95": 78.31341188713886,
+          "p99": 217.04593953007011
+        }
+      },
+      {
+        "property_type": "Private room in rental unit",
+        "rows": 179,
+        "model": {
+          "mae": 42.97611150424609,
+          "median_absolute_error": 22.291721710836782,
+          "rmse": 84.8036153944499,
+          "r2": 0.314484536290793
+        },
+        "market_baseline": {
+          "mae": 66.54567039106145,
+          "median_absolute_error": 49.43000000000001,
+          "rmse": 99.19596880113954,
+          "r2": 0.062056739518773885
+        },
+        "relative_mae_improvement_vs_market": 0.354186211489144,
+        "mean_error_predicted_minus_actual": -11.931414981234221,
+        "median_error_predicted_minus_actual": -0.4512820281733383,
+        "underprediction_rate": 0.5027932960893855,
+        "severe_underprediction_rate": 0.17318435754189945,
+        "median_absolute_percentage_error": 0.26417092352626625,
+        "interval_coverage": 0.8324022346368715,
+        "average_interval_width": 140.72463115794082,
+        "absolute_error_quantiles": {
+          "p50": 22.291721710836782,
+          "p75": 50.1497651015662,
+          "p90": 83.34947097006022,
+          "p95": 120.18998234544756,
+          "p99": 381.329028323827
+        }
+      },
+      {
+        "property_type": "Entire guesthouse",
+        "rows": 78,
+        "model": {
+          "mae": 52.08875685168588,
+          "median_absolute_error": 37.961084591472144,
+          "rmse": 75.15652584230698,
+          "r2": 0.5122122100603401
+        },
+        "market_baseline": {
+          "mae": 173.97769230769228,
+          "median_absolute_error": 130.08499999999998,
+          "rmse": 226.1620961038842,
+          "r2": -3.4170994109271
+        },
+        "relative_mae_improvement_vs_market": 0.7006009439442207,
+        "mean_error_predicted_minus_actual": 4.659383058104416,
+        "median_error_predicted_minus_actual": 8.91189369093209,
+        "underprediction_rate": 0.4230769230769231,
+        "severe_underprediction_rate": 0.0641025641025641,
+        "median_absolute_percentage_error": 0.18657792044039623,
+        "interval_coverage": 0.9615384615384616,
+        "average_interval_width": 323.8911029160857,
+        "absolute_error_quantiles": {
+          "p50": 37.961084591472144,
+          "p75": 64.96979092564737,
+          "p90": 96.520079492223,
+          "p95": 161.90108472303586,
+          "p99": 262.6316834303683
+        }
+      },
+      {
+        "property_type": "Entire guest suite",
+        "rows": 71,
+        "model": {
+          "mae": 70.46636667680826,
+          "median_absolute_error": 46.60389774686871,
+          "rmse": 120.94354695877004,
+          "r2": 0.3525928103988618
+        },
+        "market_baseline": {
+          "mae": 190.70190140845068,
+          "median_absolute_error": 188.71,
+          "rmse": 234.98160188019637,
+          "r2": -1.443879766876102
+        },
+        "relative_mae_improvement_vs_market": 0.6304894384567177,
+        "mean_error_predicted_minus_actual": 14.463148841958994,
+        "median_error_predicted_minus_actual": 29.227430942238072,
+        "underprediction_rate": 0.36619718309859156,
+        "severe_underprediction_rate": 0.09859154929577464,
+        "median_absolute_percentage_error": 0.2429370878579245,
+        "interval_coverage": 0.8169014084507042,
+        "average_interval_width": 300.8478956427755,
+        "absolute_error_quantiles": {
+          "p50": 46.60389774686871,
+          "p75": 92.68175936175875,
+          "p90": 107.46709887770254,
+          "p95": 131.72461145468026,
+          "p99": 476.51543664273606
+        }
+      },
+      {
+        "property_type": "Entire condo",
+        "rows": 65,
+        "model": {
+          "mae": 95.7618836419644,
+          "median_absolute_error": 51.725653872841974,
+          "rmse": 177.62042031782596,
+          "r2": 0.5555921840064669
+        },
+        "market_baseline": {
+          "mae": 157.47607692307696,
+          "median_absolute_error": 93.55000000000001,
+          "rmse": 265.512259694495,
+          "r2": 0.006963848324629818
+        },
+        "relative_mae_improvement_vs_market": 0.39189567385056434,
+        "mean_error_predicted_minus_actual": -50.18595666130664,
+        "median_error_predicted_minus_actual": -3.518219042415751,
+        "underprediction_rate": 0.5538461538461539,
+        "severe_underprediction_rate": 0.12307692307692308,
+        "median_absolute_percentage_error": 0.19428739338259696,
+        "interval_coverage": 0.9230769230769231,
+        "average_interval_width": 397.67502887197145,
+        "absolute_error_quantiles": {
+          "p50": 51.725653872841974,
+          "p75": 103.09310936350025,
+          "p90": 198.45949864200716,
+          "p95": 262.6325080195967,
+          "p99": 725.0044109125022
+        }
+      },
+      {
+        "property_type": "Entire townhouse",
+        "rows": 52,
+        "model": {
+          "mae": 166.94303292939625,
+          "median_absolute_error": 80.11108730558232,
+          "rmse": 398.6099819150854,
+          "r2": -0.1444721320153306
+        },
+        "market_baseline": {
+          "mae": 244.5239423076923,
+          "median_absolute_error": 198.31,
+          "rmse": 416.748662263669,
+          "r2": -0.25100000343197193
+        },
+        "relative_mae_improvement_vs_market": 0.317273264311572,
+        "mean_error_predicted_minus_actual": 11.130465756638928,
+        "median_error_predicted_minus_actual": 48.01561595075206,
+        "underprediction_rate": 0.28846153846153844,
+        "severe_underprediction_rate": 0.038461538461538464,
+        "median_absolute_percentage_error": 0.18737581560665312,
+        "interval_coverage": 0.9038461538461539,
+        "average_interval_width": 548.9415823253526,
+        "absolute_error_quantiles": {
+          "p50": 80.11108730558232,
+          "p75": 136.4338375139486,
+          "p90": 342.08330854216376,
+          "p95": 467.06296775203737,
+          "p99": 1606.5058972031786
+        }
+      },
+      {
+        "property_type": "Room in hotel",
+        "rows": 48,
+        "model": {
+          "mae": 54.67605539528222,
+          "median_absolute_error": 28.03238318628351,
+          "rmse": 97.88644364486456,
+          "r2": 0.42295216818964276
+        },
+        "market_baseline": {
+          "mae": 76.16979166666667,
+          "median_absolute_error": 36.0,
+          "rmse": 140.71425877243217,
+          "r2": -0.19245755018658106
+        },
+        "relative_mae_improvement_vs_market": 0.28218189653773873,
+        "mean_error_predicted_minus_actual": -14.547762043837425,
+        "median_error_predicted_minus_actual": 6.360677267853774,
+        "underprediction_rate": 0.3958333333333333,
+        "severe_underprediction_rate": 0.14583333333333334,
+        "median_absolute_percentage_error": 0.14896246940149271,
+        "interval_coverage": 0.8125,
+        "average_interval_width": 209.37435799975242,
+        "absolute_error_quantiles": {
+          "p50": 28.03238318628351,
+          "p75": 63.954565978045636,
+          "p90": 101.39766646375654,
+          "p95": 222.69725272456068,
+          "p99": 376.2646562619559
+        }
+      },
+      {
+        "property_type": "Entire serviced apartment",
+        "rows": 47,
+        "model": {
+          "mae": 77.11654792631403,
+          "median_absolute_error": 64.14307948505893,
+          "rmse": 108.01530110905226,
+          "r2": 0.5235041558840441
+        },
+        "market_baseline": {
+          "mae": 113.74340425531918,
+          "median_absolute_error": 111.56,
+          "rmse": 154.20030311185266,
+          "r2": 0.028911053593904223
+        },
+        "relative_mae_improvement_vs_market": 0.3220130131395492,
+        "mean_error_predicted_minus_actual": 21.89909525349206,
+        "median_error_predicted_minus_actual": 49.66899152375407,
+        "underprediction_rate": 0.2553191489361702,
+        "severe_underprediction_rate": 0.0425531914893617,
+        "median_absolute_percentage_error": 0.2181590351127696,
+        "interval_coverage": 0.8936170212765957,
+        "average_interval_width": 358.38781266960336,
+        "absolute_error_quantiles": {
+          "p50": 64.14307948505893,
+          "p75": 96.20541956033071,
+          "p90": 126.2889136397235,
+          "p95": 149.12298145236508,
+          "p99": 354.566618421761
+        }
+      },
+      {
+        "property_type": "Room in aparthotel",
+        "rows": 32,
+        "model": {
+          "mae": 103.55259430940635,
+          "median_absolute_error": 85.04540895990993,
+          "rmse": 139.68057504041923,
+          "r2": 0.7077843203627561
+        },
+        "market_baseline": {
+          "mae": 189.0853125,
+          "median_absolute_error": 92.44,
+          "rmse": 300.501032782127,
+          "r2": -0.352456871678396
+        },
+        "relative_mae_improvement_vs_market": 0.4523498787913188,
+        "mean_error_predicted_minus_actual": -89.88106183709186,
+        "median_error_predicted_minus_actual": -83.89309180156556,
+        "underprediction_rate": 0.875,
+        "severe_underprediction_rate": 0.15625,
+        "median_absolute_percentage_error": 0.18670158497460576,
+        "interval_coverage": 0.9375,
+        "average_interval_width": 351.66585229852046,
+        "absolute_error_quantiles": {
+          "p50": 85.04540895990993,
+          "p75": 129.15518091975343,
+          "p90": 202.16965921186494,
+          "p95": 333.0031703868069,
+          "p99": 334.24214600028876
+        }
+      }
+    ],
+    "neighbourhood": [
+      {
+        "neighbourhood": "Sydney",
+        "rows": 853,
+        "model": {
+          "mae": 83.6228253999135,
+          "median_absolute_error": 50.76872558343513,
+          "rmse": 157.7243535602479,
+          "r2": 0.517532993660752
+        },
+        "market_baseline": {
+          "mae": 135.87629542790154,
+          "median_absolute_error": 87.44,
+          "rmse": 225.32431922973234,
+          "r2": 0.015340121367434456
+        },
+        "relative_mae_improvement_vs_market": 0.38456649015511835,
+        "mean_error_predicted_minus_actual": -16.420479513169735,
+        "median_error_predicted_minus_actual": 3.3993105221328506,
+        "underprediction_rate": 0.48534583821805394,
+        "severe_underprediction_rate": 0.08206330597889801,
+        "median_absolute_percentage_error": 0.17147948392462756,
+        "interval_coverage": 0.8792497069167644,
+        "average_interval_width": 313.9356055927197,
+        "absolute_error_quantiles": {
+          "p50": 50.76872558343513,
+          "p75": 94.91374669232431,
+          "p90": 162.05669587802265,
+          "p95": 269.43222222639463,
+          "p99": 570.3411766353606
+        }
+      },
+      {
+        "neighbourhood": "Waverley",
+        "rows": 296,
+        "model": {
+          "mae": 225.97429481261275,
+          "median_absolute_error": 57.06296225185841,
+          "rmse": 774.4089206513322,
+          "r2": 0.3445232374698848
+        },
+        "market_baseline": {
+          "mae": 315.6507094594594,
+          "median_absolute_error": 112.16750000000002,
+          "rmse": 968.4989416728614,
+          "r2": -0.02521489382877795
+        },
+        "relative_mae_improvement_vs_market": 0.2841001523500907,
+        "mean_error_predicted_minus_actual": -135.90301672821568,
+        "median_error_predicted_minus_actual": -3.2780500969406887,
+        "underprediction_rate": 0.5168918918918919,
+        "severe_underprediction_rate": 0.19594594594594594,
+        "median_absolute_percentage_error": 0.21098310359467998,
+        "interval_coverage": 0.9256756756756757,
+        "average_interval_width": 620.6942302197662,
+        "absolute_error_quantiles": {
+          "p50": 57.06296225185841,
+          "p75": 146.96465216385792,
+          "p90": 352.0657888769933,
+          "p95": 673.6754737071592,
+          "p99": 4152.059148023727
+        }
+      },
+      {
+        "neighbourhood": "Randwick",
+        "rows": 196,
+        "model": {
+          "mae": 129.58156199571224,
+          "median_absolute_error": 54.595259187508574,
+          "rmse": 302.9731442879613,
+          "r2": 0.6118404871733945
+        },
+        "market_baseline": {
+          "mae": 205.36969387755104,
+          "median_absolute_error": 96.305,
+          "rmse": 474.68517622907996,
+          "r2": 0.04717464593131504
+        },
+        "relative_mae_improvement_vs_market": 0.3690326963579469,
+        "mean_error_predicted_minus_actual": -52.501461356942194,
+        "median_error_predicted_minus_actual": 0.04345033014529065,
+        "underprediction_rate": 0.5,
+        "severe_underprediction_rate": 0.1836734693877551,
+        "median_absolute_percentage_error": 0.22617746884862522,
+        "interval_coverage": 0.9540816326530612,
+        "average_interval_width": 653.834566102437,
+        "absolute_error_quantiles": {
+          "p50": 54.595259187508574,
+          "p75": 127.10331139320765,
+          "p90": 282.8976519874689,
+          "p95": 388.37802755501,
+          "p99": 1736.462371299864
+        }
+      },
+      {
+        "neighbourhood": "Manly",
+        "rows": 164,
+        "model": {
+          "mae": 193.38990183348395,
+          "median_absolute_error": 83.07828041795167,
+          "rmse": 439.66672057929185,
+          "r2": 0.4884242134887714
+        },
+        "market_baseline": {
+          "mae": 342.35847560975606,
+          "median_absolute_error": 151.985,
+          "rmse": 660.5171436324094,
+          "r2": -0.15459847823356987
+        },
+        "relative_mae_improvement_vs_market": 0.43512453871910806,
+        "mean_error_predicted_minus_actual": -105.84563746755217,
+        "median_error_predicted_minus_actual": -17.01168595593539,
+        "underprediction_rate": 0.5792682926829268,
+        "severe_underprediction_rate": 0.20121951219512196,
+        "median_absolute_percentage_error": 0.18785683510489984,
+        "interval_coverage": 0.8841463414634146,
+        "average_interval_width": 707.4488768410388,
+        "absolute_error_quantiles": {
+          "p50": 83.07828041795167,
+          "p75": 215.62846238342823,
+          "p90": 412.51270622732306,
+          "p95": 755.6142965854363,
+          "p99": 992.5538993543839
+        }
+      },
+      {
+        "neighbourhood": "Pittwater",
+        "rows": 163,
+        "model": {
+          "mae": 318.29529790898823,
+          "median_absolute_error": 157.4921562464403,
+          "rmse": 552.1369267417225,
+          "r2": 0.6321851886470178
+        },
+        "market_baseline": {
+          "mae": 626.5059509202454,
+          "median_absolute_error": 460.78,
+          "rmse": 931.7501159010366,
+          "r2": -0.04745298168726908
+        },
+        "relative_mae_improvement_vs_market": 0.4919516766896481,
+        "mean_error_predicted_minus_actual": -82.98531567760523,
+        "median_error_predicted_minus_actual": 29.288033709958157,
+        "underprediction_rate": 0.4601226993865031,
+        "severe_underprediction_rate": 0.17177914110429449,
+        "median_absolute_percentage_error": 0.269642908512177,
+        "interval_coverage": 0.8588957055214724,
+        "average_interval_width": 1172.7172785494156,
+        "absolute_error_quantiles": {
+          "p50": 157.4921562464403,
+          "p75": 412.9512368652109,
+          "p90": 778.1639130965559,
+          "p95": 1023.4142046160352,
+          "p99": 2277.142297364563
+        }
+      },
+      {
+        "neighbourhood": "Warringah",
+        "rows": 163,
+        "model": {
+          "mae": 119.53081729879395,
+          "median_absolute_error": 73.78876604310545,
+          "rmse": 182.8194438796473,
+          "r2": 0.8549516651322635
+        },
+        "market_baseline": {
+          "mae": 290.3740490797546,
+          "median_absolute_error": 161.25,
+          "rmse": 492.64899336961827,
+          "r2": -0.05327840466967482
+        },
+        "relative_mae_improvement_vs_market": 0.5883557167811391,
+        "mean_error_predicted_minus_actual": -21.736319567223855,
+        "median_error_predicted_minus_actual": 3.116321905276493,
+        "underprediction_rate": 0.49079754601226994,
+        "severe_underprediction_rate": 0.147239263803681,
+        "median_absolute_percentage_error": 0.23979783351139983,
+        "interval_coverage": 0.9447852760736196,
+        "average_interval_width": 639.4729928963188,
+        "absolute_error_quantiles": {
+          "p50": 73.78876604310545,
+          "p75": 141.48660695095037,
+          "p90": 294.77745931170756,
+          "p95": 387.4317630267599,
+          "p99": 645.7108146155302
+        }
+      },
+      {
+        "neighbourhood": "North Sydney",
+        "rows": 152,
+        "model": {
+          "mae": 112.31108628776079,
+          "median_absolute_error": 74.7077419721112,
+          "rmse": 250.00717037307697,
+          "r2": 0.5128697529001383
+        },
+        "market_baseline": {
+          "mae": 170.8178289473684,
+          "median_absolute_error": 96.83500000000001,
+          "rmse": 356.53253133018666,
+          "r2": 0.009308372725565728
+        },
+        "relative_mae_improvement_vs_market": 0.34250957888965117,
+        "mean_error_predicted_minus_actual": -47.328639959400356,
+        "median_error_predicted_minus_actual": -8.236027680229768,
+        "underprediction_rate": 0.5394736842105263,
+        "severe_underprediction_rate": 0.1118421052631579,
+        "median_absolute_percentage_error": 0.2085341782208921,
+        "interval_coverage": 0.9013157894736842,
+        "average_interval_width": 408.82818066938364,
+        "absolute_error_quantiles": {
+          "p50": 74.7077419721112,
+          "p75": 115.5139479718741,
+          "p90": 217.32404778516806,
+          "p95": 338.4514038002918,
+          "p99": 790.3753427687225
+        }
+      },
+      {
+        "neighbourhood": "Auburn",
+        "rows": 125,
+        "model": {
+          "mae": 74.15955871701529,
+          "median_absolute_error": 48.63474644469943,
+          "rmse": 141.71082737683645,
+          "r2": 0.4622609773775953
+        },
+        "market_baseline": {
+          "mae": 85.05303999999998,
+          "median_absolute_error": 44.5,
+          "rmse": 169.23148686931754,
+          "r2": 0.233119267439437
+        },
+        "relative_mae_improvement_vs_market": 0.1280786822315193,
+        "mean_error_predicted_minus_actual": -16.067989506128647,
+        "median_error_predicted_minus_actual": -5.753979098040446,
+        "underprediction_rate": 0.536,
+        "severe_underprediction_rate": 0.096,
+        "median_absolute_percentage_error": 0.16847534655563523,
+        "interval_coverage": 0.872,
+        "average_interval_width": 315.4756915794057,
+        "absolute_error_quantiles": {
+          "p50": 48.63474644469943,
+          "p75": 82.1964402984197,
+          "p90": 123.42021581383686,
+          "p95": 166.86232327556147,
+          "p99": 769.7624886404055
+        }
+      },
+      {
+        "neighbourhood": "Blacktown",
+        "rows": 117,
+        "model": {
+          "mae": 43.38349746108327,
+          "median_absolute_error": 15.305319886322934,
+          "rmse": 131.45506110147258,
+          "r2": 0.728907551455235
+        },
+        "market_baseline": {
+          "mae": 83.9340598290598,
+          "median_absolute_error": 42.0,
+          "rmse": 201.4767398395347,
+          "r2": 0.36318596413091264
+        },
+        "relative_mae_improvement_vs_market": 0.48312404345222726,
+        "mean_error_predicted_minus_actual": -11.352200214344485,
+        "median_error_predicted_minus_actual": 3.5519845691345893,
+        "underprediction_rate": 0.39316239316239315,
+        "severe_underprediction_rate": 0.017094017094017096,
+        "median_absolute_percentage_error": 0.15279804383977555,
+        "interval_coverage": 0.9401709401709402,
+        "average_interval_width": 213.69119244968903,
+        "absolute_error_quantiles": {
+          "p50": 15.305319886322934,
+          "p75": 41.734458632363285,
+          "p90": 71.0628310410882,
+          "p95": 96.2334352420376,
+          "p99": 442.99975845326367
+        }
+      },
+      {
+        "neighbourhood": "Sutherland Shire",
+        "rows": 101,
+        "model": {
+          "mae": 104.28737527372442,
+          "median_absolute_error": 52.471873537668415,
+          "rmse": 173.1178522884099,
+          "r2": 0.7615384068385935
+        },
+        "market_baseline": {
+          "mae": 217.14495049504959,
+          "median_absolute_error": 124.66999999999999,
+          "rmse": 348.0061908064337,
+          "r2": 0.03637364431215662
+        },
+        "relative_mae_improvement_vs_market": 0.5197338227945487,
+        "mean_error_predicted_minus_actual": -24.568960652367167,
+        "median_error_predicted_minus_actual": 4.2329372360253075,
+        "underprediction_rate": 0.4752475247524752,
+        "severe_underprediction_rate": 0.12871287128712872,
+        "median_absolute_percentage_error": 0.20094684073203628,
+        "interval_coverage": 0.9504950495049505,
+        "average_interval_width": 592.2980983052721,
+        "absolute_error_quantiles": {
+          "p50": 52.471873537668415,
+          "p75": 131.12155277444072,
+          "p90": 272.18881074395995,
+          "p95": 361.4525461460239,
+          "p99": 548.4079509586477
+        }
+      },
+      {
+        "neighbourhood": "Woollahra",
+        "rows": 101,
+        "model": {
+          "mae": 498.424848914215,
+          "median_absolute_error": 65.04976999044402,
+          "rmse": 1525.997999322574,
+          "r2": 0.376483726808329
+        },
+        "market_baseline": {
+          "mae": 707.8099999999998,
+          "median_absolute_error": 159.63000000000005,
+          "rmse": 1985.4459874272804,
+          "r2": -0.05549460540484996
+        },
+        "relative_mae_improvement_vs_market": 0.295821125847028,
+        "mean_error_predicted_minus_actual": -388.4856215773335,
+        "median_error_predicted_minus_actual": 1.6391414041587211,
+        "underprediction_rate": 0.49504950495049505,
+        "severe_underprediction_rate": 0.2376237623762376,
+        "median_absolute_percentage_error": 0.25429278931676313,
+        "interval_coverage": 0.8415841584158416,
+        "average_interval_width": 802.5765200788496,
+        "absolute_error_quantiles": {
+          "p50": 65.04976999044402,
+          "p75": 220.52391804349054,
+          "p90": 1170.8637828319254,
+          "p95": 2415.61980462836,
+          "p99": 5176.051656969338
+        }
+      },
+      {
+        "neighbourhood": "Leichhardt",
+        "rows": 96,
+        "model": {
+          "mae": 104.93199648272919,
+          "median_absolute_error": 73.30918488559867,
+          "rmse": 157.92898576279725,
+          "r2": 0.5712417579942193
+        },
+        "market_baseline": {
+          "mae": 163.96427083333333,
+          "median_absolute_error": 145.61500000000004,
+          "rmse": 228.9546436569552,
+          "r2": 0.09886947434869597
+        },
+        "relative_mae_improvement_vs_market": 0.36003132908516,
+        "mean_error_predicted_minus_actual": -11.060367134701679,
+        "median_error_predicted_minus_actual": 37.17529940432301,
+        "underprediction_rate": 0.2708333333333333,
+        "severe_underprediction_rate": 0.15625,
+        "median_absolute_percentage_error": 0.3054795008923709,
+        "interval_coverage": 0.75,
+        "average_interval_width": 324.56876783561967,
+        "absolute_error_quantiles": {
+          "p50": 73.30918488559867,
+          "p75": 108.46350929913193,
+          "p90": 206.37693895942493,
+          "p95": 355.7870137003489,
+          "p99": 619.8137324419265
+        }
+      },
+      {
+        "neighbourhood": "Hornsby",
+        "rows": 92,
+        "model": {
+          "mae": 71.19813405029173,
+          "median_absolute_error": 40.13255958648779,
+          "rmse": 125.38577597763509,
+          "r2": 0.6736734675377603
+        },
+        "market_baseline": {
+          "mae": 149.18625000000003,
+          "median_absolute_error": 130.75,
+          "rmse": 201.31324603347045,
+          "r2": 0.15879751820147492
+        },
+        "relative_mae_improvement_vs_market": 0.522756728248805,
+        "mean_error_predicted_minus_actual": -9.320231067428919,
+        "median_error_predicted_minus_actual": 5.866965782970553,
+        "underprediction_rate": 0.42391304347826086,
+        "severe_underprediction_rate": 0.10869565217391304,
+        "median_absolute_percentage_error": 0.17827231638262175,
+        "interval_coverage": 0.8804347826086957,
+        "average_interval_width": 320.80586634666537,
+        "absolute_error_quantiles": {
+          "p50": 40.13255958648779,
+          "p75": 94.51747434419647,
+          "p90": 152.5645372466529,
+          "p95": 195.6042845600769,
+          "p99": 549.5688867108644
+        }
+      },
+      {
+        "neighbourhood": "Fairfield",
+        "rows": 77,
+        "model": {
+          "mae": 39.31267841705199,
+          "median_absolute_error": 29.12394591038162,
+          "rmse": 52.7793234316509,
+          "r2": 0.9062737292418961
+        },
+        "market_baseline": {
+          "mae": 69.49545454545454,
+          "median_absolute_error": 30.61,
+          "rmse": 108.72991808611367,
+          "r2": 0.6022301866744473
+        },
+        "relative_mae_improvement_vs_market": 0.434312953643048,
+        "mean_error_predicted_minus_actual": 24.665022621751408,
+        "median_error_predicted_minus_actual": 21.47707068929718,
+        "underprediction_rate": 0.16883116883116883,
+        "severe_underprediction_rate": 0.012987012987012988,
+        "median_absolute_percentage_error": 0.1979244654338611,
+        "interval_coverage": 0.948051948051948,
+        "average_interval_width": 270.81217356108687,
+        "absolute_error_quantiles": {
+          "p50": 29.12394591038162,
+          "p75": 49.36462494806938,
+          "p90": 99.27151026510279,
+          "p95": 123.33431193933782,
+          "p99": 138.80859290990657
+        }
+      },
+      {
+        "neighbourhood": "Liverpool",
+        "rows": 74,
+        "model": {
+          "mae": 77.5396242359677,
+          "median_absolute_error": 41.734549839707846,
+          "rmse": 149.29572247217266,
+          "r2": 0.5255634668441773
+        },
+        "market_baseline": {
+          "mae": 92.31243243243243,
+          "median_absolute_error": 56.625,
+          "rmse": 171.9333311474522,
+          "r2": 0.3707785063575795
+        },
+        "relative_mae_improvement_vs_market": 0.1600305376773341,
+        "mean_error_predicted_minus_actual": -8.567672530836868,
+        "median_error_predicted_minus_actual": 8.101700529807424,
+        "underprediction_rate": 0.44594594594594594,
+        "severe_underprediction_rate": 0.12162162162162163,
+        "median_absolute_percentage_error": 0.25401446318102655,
+        "interval_coverage": 0.8648648648648649,
+        "average_interval_width": 246.32814916639984,
+        "absolute_error_quantiles": {
+          "p50": 41.734549839707846,
+          "p75": 77.91609040262323,
+          "p90": 184.27562425894902,
+          "p95": 213.88149616841886,
+          "p99": 699.6181269509153
+        }
+      },
+      {
+        "neighbourhood": "Ryde",
+        "rows": 74,
+        "model": {
+          "mae": 75.14562452490202,
+          "median_absolute_error": 25.20430540843593,
+          "rmse": 217.29028628570566,
+          "r2": 0.4952132069901771
+        },
+        "market_baseline": {
+          "mae": 118.92202702702703,
+          "median_absolute_error": 61.83500000000001,
+          "rmse": 282.9841976702606,
+          "r2": 0.1438463187581147
+        },
+        "relative_mae_improvement_vs_market": 0.3681101272531798,
+        "mean_error_predicted_minus_actual": -19.03412519157222,
+        "median_error_predicted_minus_actual": 5.582121735421598,
+        "underprediction_rate": 0.4189189189189189,
+        "severe_underprediction_rate": 0.10810810810810811,
+        "median_absolute_percentage_error": 0.12974617024434087,
+        "interval_coverage": 0.972972972972973,
+        "average_interval_width": 301.9377203154481,
+        "absolute_error_quantiles": {
+          "p50": 25.20430540843593,
+          "p75": 58.851526420636965,
+          "p90": 98.04254751848956,
+          "p95": 152.37619494381448,
+          "p99": 973.0118467891313
+        }
+      },
+      {
+        "neighbourhood": "Marrickville",
+        "rows": 72,
+        "model": {
+          "mae": 62.95644871622695,
+          "median_absolute_error": 33.6692669165611,
+          "rmse": 107.88230547766754,
+          "r2": 0.7253323648607558
+        },
+        "market_baseline": {
+          "mae": 115.27590277777774,
+          "median_absolute_error": 56.59500000000003,
+          "rmse": 191.82284328670872,
+          "r2": 0.1316242268428519
+        },
+        "relative_mae_improvement_vs_market": 0.4538628872194498,
+        "mean_error_predicted_minus_actual": -11.91567132018064,
+        "median_error_predicted_minus_actual": 0.36254456255527856,
+        "underprediction_rate": 0.4722222222222222,
+        "severe_underprediction_rate": 0.125,
+        "median_absolute_percentage_error": 0.18405984772989067,
+        "interval_coverage": 0.9305555555555556,
+        "average_interval_width": 309.4589068495984,
+        "absolute_error_quantiles": {
+          "p50": 33.6692669165611,
+          "p75": 75.64450461834073,
+          "p90": 154.31540514047,
+          "p95": 181.9162210088466,
+          "p99": 470.1757293910973
+        }
+      },
+      {
+        "neighbourhood": "Mosman",
+        "rows": 69,
+        "model": {
+          "mae": 770.3334747193726,
+          "median_absolute_error": 108.36979617235579,
+          "rmse": 2167.4754692397782,
+          "r2": 0.2183247837020268
+        },
+        "market_baseline": {
+          "mae": 1106.8733333333334,
+          "median_absolute_error": 233.92,
+          "rmse": 2637.7798614876046,
+          "r2": -0.15769739758496337
+        },
+        "relative_mae_improvement_vs_market": 0.3040455022983306,
+        "mean_error_predicted_minus_actual": -647.2027836051504,
+        "median_error_predicted_minus_actual": -18.354552499137355,
+        "underprediction_rate": 0.5362318840579711,
+        "severe_underprediction_rate": 0.30434782608695654,
+        "median_absolute_percentage_error": 0.2869735768121878,
+        "interval_coverage": 0.7536231884057971,
+        "average_interval_width": 801.80307362362,
+        "absolute_error_quantiles": {
+          "p50": 108.36979617235579,
+          "p75": 656.0544896895267,
+          "p90": 1597.524639210638,
+          "p95": 3130.0540697768506,
+          "p99": 10317.049351599351
+        }
+      },
+      {
+        "neighbourhood": "Rockdale",
+        "rows": 67,
+        "model": {
+          "mae": 39.199551703148,
+          "median_absolute_error": 30.263164022495033,
+          "rmse": 56.384525765665984,
+          "r2": 0.822220138648803
+        },
+        "market_baseline": {
+          "mae": 62.3755223880597,
+          "median_absolute_error": 38.44999999999999,
+          "rmse": 103.98122653460956,
+          "r2": 0.3953938354141663
+        },
+        "relative_mae_improvement_vs_market": 0.3715555364927602,
+        "mean_error_predicted_minus_actual": 11.958280191442308,
+        "median_error_predicted_minus_actual": 17.633970727502145,
+        "underprediction_rate": 0.31343283582089554,
+        "severe_underprediction_rate": 0.13432835820895522,
+        "median_absolute_percentage_error": 0.21722915771302936,
+        "interval_coverage": 0.9104477611940298,
+        "average_interval_width": 219.76259416178348,
+        "absolute_error_quantiles": {
+          "p50": 30.263164022495033,
+          "p75": 47.612148455794724,
+          "p90": 77.28236486525464,
+          "p95": 105.76126842618727,
+          "p99": 192.33521867184814
+        }
+      },
+      {
+        "neighbourhood": "The Hills Shire",
+        "rows": 66,
+        "model": {
+          "mae": 278.8049302721578,
+          "median_absolute_error": 54.649230885162325,
+          "rmse": 927.5427314787382,
+          "r2": 0.3262101557628023
+        },
+        "market_baseline": {
+          "mae": 347.61863636363637,
+          "median_absolute_error": 92.99000000000001,
+          "rmse": 1136.142815505937,
+          "r2": -0.010933203198319141
+        },
+        "relative_mae_improvement_vs_market": 0.1979574708977745,
+        "mean_error_predicted_minus_actual": -184.01668698941367,
+        "median_error_predicted_minus_actual": 9.307885002210035,
+        "underprediction_rate": 0.3939393939393939,
+        "severe_underprediction_rate": 0.15151515151515152,
+        "median_absolute_percentage_error": 0.2676103361924189,
+        "interval_coverage": 0.8939393939393939,
+        "average_interval_width": 630.024741079736,
+        "absolute_error_quantiles": {
+          "p50": 54.649230885162325,
+          "p75": 132.65320513645077,
+          "p90": 200.5999686407905,
+          "p95": 1148.0744582618818,
+          "p99": 4677.315923845845
+        }
+      },
+      {
+        "neighbourhood": "Botany Bay",
+        "rows": 65,
+        "model": {
+          "mae": 67.30501876716545,
+          "median_absolute_error": 48.59162033524308,
+          "rmse": 97.42398362094035,
+          "r2": 0.6938807825210416
+        },
+        "market_baseline": {
+          "mae": 114.66307692307693,
+          "median_absolute_error": 90.97000000000003,
+          "rmse": 148.42231907634377,
+          "r2": 0.28951117203994103
+        },
+        "relative_mae_improvement_vs_market": 0.4130192510679108,
+        "mean_error_predicted_minus_actual": -26.15813666759899,
+        "median_error_predicted_minus_actual": -4.824108662403262,
+        "underprediction_rate": 0.5230769230769231,
+        "severe_underprediction_rate": 0.12307692307692308,
+        "median_absolute_percentage_error": 0.1830172388741166,
+        "interval_coverage": 0.8615384615384616,
+        "average_interval_width": 302.4496694975629,
+        "absolute_error_quantiles": {
+          "p50": 48.59162033524308,
+          "p75": 88.11111718389355,
+          "p90": 142.7451525702153,
+          "p95": 191.39281408392654,
+          "p99": 303.8288073138592
+        }
+      },
+      {
+        "neighbourhood": "Parramatta",
+        "rows": 64,
+        "model": {
+          "mae": 40.55360195320349,
+          "median_absolute_error": 15.412820263205333,
+          "rmse": 69.16459078629829,
+          "r2": 0.8259245601281711
+        },
+        "market_baseline": {
+          "mae": 74.495,
+          "median_absolute_error": 27.639999999999986,
+          "rmse": 134.23442744877337,
+          "r2": 0.34431128789313425
+        },
+        "relative_mae_improvement_vs_market": 0.4556198140384793,
+        "mean_error_predicted_minus_actual": 5.350469145679938,
+        "median_error_predicted_minus_actual": -0.7606019180607078,
+        "underprediction_rate": 0.5625,
+        "severe_underprediction_rate": 0.03125,
+        "median_absolute_percentage_error": 0.13066440877174695,
+        "interval_coverage": 0.953125,
+        "average_interval_width": 257.09530933186164,
+        "absolute_error_quantiles": {
+          "p50": 15.412820263205333,
+          "p75": 55.413923343672565,
+          "p90": 114.12997627332965,
+          "p95": 127.70173169512226,
+          "p99": 224.15657650829874
+        }
+      },
+      {
+        "neighbourhood": "Bankstown",
+        "rows": 58,
+        "model": {
+          "mae": 23.00784220091676,
+          "median_absolute_error": 13.745507925077192,
+          "rmse": 34.20571775630466,
+          "r2": 0.9425135843535772
+        },
+        "market_baseline": {
+          "mae": 57.56120689655172,
+          "median_absolute_error": 46.230000000000004,
+          "rmse": 97.82797728490134,
+          "r2": 0.5297877242651153
+        },
+        "relative_mae_improvement_vs_market": 0.600289093273076,
+        "mean_error_predicted_minus_actual": -1.9827272867446901,
+        "median_error_predicted_minus_actual": -2.3156195266602833,
+        "underprediction_rate": 0.5172413793103449,
+        "severe_underprediction_rate": 0.017241379310344827,
+        "median_absolute_percentage_error": 0.1040482209966458,
+        "interval_coverage": 0.9827586206896551,
+        "average_interval_width": 225.27347660686206,
+        "absolute_error_quantiles": {
+          "p50": 13.745507925077192,
+          "p75": 29.315994176250285,
+          "p90": 59.27650586176694,
+          "p95": 70.8081972557674,
+          "p99": 105.41672939730933
+        }
+      },
+      {
+        "neighbourhood": "Willoughby",
+        "rows": 40,
+        "model": {
+          "mae": 97.07482376709046,
+          "median_absolute_error": 60.328505538763324,
+          "rmse": 154.40314341700213,
+          "r2": 0.5969496400073718
+        },
+        "market_baseline": {
+          "mae": 153.6905,
+          "median_absolute_error": 110.25,
+          "rmse": 216.33536503540054,
+          "r2": 0.20877121321359116
+        },
+        "relative_mae_improvement_vs_market": 0.3683745985139584,
+        "mean_error_predicted_minus_actual": 9.75170681213478,
+        "median_error_predicted_minus_actual": 21.499075526408944,
+        "underprediction_rate": 0.275,
+        "severe_underprediction_rate": 0.125,
+        "median_absolute_percentage_error": 0.27365702850348783,
+        "interval_coverage": 0.9,
+        "average_interval_width": 373.6126089556753,
+        "absolute_error_quantiles": {
+          "p50": 60.328505538763324,
+          "p75": 114.79156258826646,
+          "p90": 227.19905625014115,
+          "p95": 288.56512710661104,
+          "p99": 524.6688547366184
+        }
+      },
+      {
+        "neighbourhood": "Ku-Ring-Gai",
+        "rows": 39,
+        "model": {
+          "mae": 47.536169757022435,
+          "median_absolute_error": 16.188300497292396,
+          "rmse": 85.27803607561974,
+          "r2": 0.699530589123644
+        },
+        "market_baseline": {
+          "mae": 74.71743589743589,
+          "median_absolute_error": 61.0,
+          "rmse": 104.12137399725823,
+          "r2": 0.5520746248051229
+        },
+        "relative_mae_improvement_vs_market": 0.3637874588968095,
+        "mean_error_predicted_minus_actual": 5.596991667760862,
+        "median_error_predicted_minus_actual": 5.618425655895578,
+        "underprediction_rate": 0.3333333333333333,
+        "severe_underprediction_rate": 0.07692307692307693,
+        "median_absolute_percentage_error": 0.12730445496840037,
+        "interval_coverage": 0.9487179487179487,
+        "average_interval_width": 275.1788092789232,
+        "absolute_error_quantiles": {
+          "p50": 16.188300497292396,
+          "p75": 44.403064201808945,
+          "p90": 129.33022153543,
+          "p95": 155.0122685917749,
+          "p99": 312.54942421181454
+        }
+      },
+      {
+        "neighbourhood": "Canada Bay",
+        "rows": 38,
+        "model": {
+          "mae": 207.57578963444357,
+          "median_absolute_error": 57.40449368774142,
+          "rmse": 715.2147497552694,
+          "r2": -0.06311807700531613
+        },
+        "market_baseline": {
+          "mae": 247.4739473684211,
+          "median_absolute_error": 96.10000000000002,
+          "rmse": 701.6351292160335,
+          "r2": -0.02313096398431358
+        },
+        "relative_mae_improvement_vs_market": 0.16122164841287345,
+        "mean_error_predicted_minus_actual": -167.9793885864837,
+        "median_error_predicted_minus_actual": -5.300222477703237,
+        "underprediction_rate": 0.5,
+        "severe_underprediction_rate": 0.18421052631578946,
+        "median_absolute_percentage_error": 0.18964673018293216,
+        "interval_coverage": 0.8421052631578947,
+        "average_interval_width": 332.0563516680478,
+        "absolute_error_quantiles": {
+          "p50": 57.40449368774142,
+          "p75": 117.55962682582968,
+          "p90": 241.58068548933608,
+          "p95": 494.37614485772906,
+          "p99": 2967.838688413437
+        }
+      },
+      {
+        "neighbourhood": "Canterbury",
+        "rows": 37,
+        "model": {
+          "mae": 43.41964138136084,
+          "median_absolute_error": 30.229204959506603,
+          "rmse": 65.17412682106067,
+          "r2": 0.8508283947748552
+        },
+        "market_baseline": {
+          "mae": 82.32243243243242,
+          "median_absolute_error": 67.25,
+          "rmse": 118.6698104439828,
+          "r2": 0.5054431543475173
+        },
+        "relative_mae_improvement_vs_market": 0.4725661025990908,
+        "mean_error_predicted_minus_actual": 11.936065935309264,
+        "median_error_predicted_minus_actual": 14.780198823675732,
+        "underprediction_rate": 0.24324324324324326,
+        "severe_underprediction_rate": 0.02702702702702703,
+        "median_absolute_percentage_error": 0.17045952078093995,
+        "interval_coverage": 0.8918918918918919,
+        "average_interval_width": 259.1137587396539,
+        "absolute_error_quantiles": {
+          "p50": 30.229204959506603,
+          "p75": 55.04969637988103,
+          "p90": 99.93318052288238,
+          "p95": 116.7336863765464,
+          "p99": 214.7823526894154
+        }
+      },
+      {
+        "neighbourhood": "Penrith",
+        "rows": 35,
+        "model": {
+          "mae": 67.9618721849943,
+          "median_absolute_error": 38.83644787395377,
+          "rmse": 98.86927040605943,
+          "r2": 0.7969118692120645
+        },
+        "market_baseline": {
+          "mae": 117.43285714285713,
+          "median_absolute_error": 58.78,
+          "rmse": 205.34485149899146,
+          "r2": 0.12394873576575083
+        },
+        "relative_mae_improvement_vs_market": 0.4212703851502254,
+        "mean_error_predicted_minus_actual": -35.81134520718923,
+        "median_error_predicted_minus_actual": -7.967195448033351,
+        "underprediction_rate": 0.5714285714285714,
+        "severe_underprediction_rate": 0.2,
+        "median_absolute_percentage_error": 0.14606912305371478,
+        "interval_coverage": 0.8857142857142857,
+        "average_interval_width": 287.77711936627173,
+        "absolute_error_quantiles": {
+          "p50": 38.83644787395377,
+          "p75": 106.48920733566146,
+          "p90": 153.69730981889768,
+          "p95": 201.55839477966714,
+          "p99": 281.54450167321335
+        }
+      },
+      {
+        "neighbourhood": "City Of Kogarah",
+        "rows": 30,
+        "model": {
+          "mae": 108.2566505167761,
+          "median_absolute_error": 21.3031412130072,
+          "rmse": 374.1757562392884,
+          "r2": 0.11138127918800256
+        },
+        "market_baseline": {
+          "mae": 161.47283333333337,
+          "median_absolute_error": 76.44,
+          "rmse": 375.13355655575083,
+          "r2": 0.10682615444480359
+        },
+        "relative_mae_improvement_vs_market": 0.3295674059716377,
+        "mean_error_predicted_minus_actual": -65.45599601148415,
+        "median_error_predicted_minus_actual": 8.61263482342639,
+        "underprediction_rate": 0.4,
+        "severe_underprediction_rate": 0.13333333333333333,
+        "median_absolute_percentage_error": 0.16202146914421348,
+        "interval_coverage": 0.8666666666666667,
+        "average_interval_width": 252.75198762547214,
+        "absolute_error_quantiles": {
+          "p50": 21.3031412130072,
+          "p75": 78.25700067324487,
+          "p90": 129.74448900876848,
+          "p95": 141.84472653423956,
+          "p99": 1477.9644213164665
+        }
+      }
+    ],
+    "capacity_band": [
+      {
+        "capacity_band": "1-2",
+        "rows": 1420,
+        "model": {
+          "mae": 48.41105339880994,
+          "median_absolute_error": 29.71598449618294,
+          "rmse": 79.87603561259137,
+          "r2": 0.5695581497398574
+        },
+        "market_baseline": {
+          "mae": 92.26961971830985,
+          "median_absolute_error": 62.69,
+          "rmse": 133.56546376439752,
+          "r2": -0.20356580006429215
+        },
+        "relative_mae_improvement_vs_market": 0.47533051998475595,
+        "mean_error_predicted_minus_actual": -3.820072441377529,
+        "median_error_predicted_minus_actual": 5.616842645409406,
+        "underprediction_rate": 0.4352112676056338,
+        "severe_underprediction_rate": 0.11338028169014085,
+        "median_absolute_percentage_error": 0.19845789274589964,
+        "interval_coverage": 0.8964788732394366,
+        "average_interval_width": 225.8878617649302,
+        "absolute_error_quantiles": {
+          "p50": 29.71598449618294,
+          "p75": 63.25526594608104,
+          "p90": 107.39439185797437,
+          "p95": 142.9968337278706,
+          "p99": 338.14254250319493
+        }
+      },
+      {
+        "capacity_band": "3-4",
+        "rows": 1110,
+        "model": {
+          "mae": 91.12946905602304,
+          "median_absolute_error": 48.699910116528,
+          "rmse": 217.39721736466853,
+          "r2": 0.2955630645783476
+        },
+        "market_baseline": {
+          "mae": 136.2721981981982,
+          "median_absolute_error": 85.19500000000001,
+          "rmse": 259.9933059495159,
+          "r2": -0.007531167901780655
+        },
+        "relative_mae_improvement_vs_market": 0.3312688115335035,
+        "mean_error_predicted_minus_actual": -31.147738918356836,
+        "median_error_predicted_minus_actual": 3.2260807250530945,
+        "underprediction_rate": 0.48558558558558557,
+        "severe_underprediction_rate": 0.1063063063063063,
+        "median_absolute_percentage_error": 0.17110572438074484,
+        "interval_coverage": 0.9144144144144144,
+        "average_interval_width": 392.36528241797384,
+        "absolute_error_quantiles": {
+          "p50": 48.699910116528,
+          "p75": 95.04430508234785,
+          "p90": 183.8751981327767,
+          "p95": 294.74323169601735,
+          "p99": 744.5455490668356
+        }
+      },
+      {
+        "capacity_band": "5-6",
+        "rows": 688,
+        "model": {
+          "mae": 149.0530292393667,
+          "median_absolute_error": 75.85918635751355,
+          "rmse": 347.3949603572986,
+          "r2": 0.43888167524756594
+        },
+        "market_baseline": {
+          "mae": 231.74175872093025,
+          "median_absolute_error": 128.615,
+          "rmse": 475.97882909974345,
+          "r2": -0.05337424784642941
+        },
+        "relative_mae_improvement_vs_market": 0.356814110404416,
+        "mean_error_predicted_minus_actual": -59.64906887320285,
+        "median_error_predicted_minus_actual": 0.42184466429907275,
+        "underprediction_rate": 0.4956395348837209,
+        "severe_underprediction_rate": 0.13662790697674418,
+        "median_absolute_percentage_error": 0.20102765275906753,
+        "interval_coverage": 0.9113372093023255,
+        "average_interval_width": 553.6029058046604,
+        "absolute_error_quantiles": {
+          "p50": 75.85918635751355,
+          "p75": 145.56208523666945,
+          "p90": 336.7528543773705,
+          "p95": 490.0481757093827,
+          "p99": 1097.25775616286
+        }
+      },
+      {
+        "capacity_band": "7+",
+        "rows": 483,
+        "model": {
+          "mae": 494.394480179335,
+          "median_absolute_error": 156.80089705491343,
+          "rmse": 1314.9925001364013,
+          "r2": 0.2921158725448112
+        },
+        "market_baseline": {
+          "mae": 793.4277225672877,
+          "median_absolute_error": 291.24999999999994,
+          "rmse": 1718.8856613903477,
+          "r2": -0.20951038122615073
+        },
+        "relative_mae_improvement_vs_market": 0.37688781710370944,
+        "mean_error_predicted_minus_actual": -297.7039642631544,
+        "median_error_predicted_minus_actual": 4.818696699407553,
+        "underprediction_rate": 0.484472049689441,
+        "severe_underprediction_rate": 0.19461697722567287,
+        "median_absolute_percentage_error": 0.24518015965017467,
+        "interval_coverage": 0.8260869565217391,
+        "average_interval_width": 1125.2907877012678,
+        "absolute_error_quantiles": {
+          "p50": 156.80089705491343,
+          "p75": 388.7852275029969,
+          "p90": 962.5553041306111,
+          "p95": 2376.929501032589,
+          "p99": 5320.079585626463
+        }
+      }
+    ],
+    "price_band": [
+      {
+        "price_band": "up_to_p50",
+        "rows": 1848,
+        "model": {
+          "mae": 44.67138934022548,
+          "median_absolute_error": 31.27988751823923,
+          "rmse": 64.88835628939124,
+          "r2": 0.2984935726241952
+        },
+        "market_baseline": {
+          "mae": 99.6220183982684,
+          "median_absolute_error": 78.905,
+          "rmse": 136.17293271754554,
+          "r2": -2.089439465912656
+        },
+        "relative_mae_improvement_vs_market": 0.5515912038477435,
+        "mean_error_predicted_minus_actual": 26.94270804324192,
+        "median_error_predicted_minus_actual": 17.61402232878808,
+        "underprediction_rate": 0.30303030303030304,
+        "severe_underprediction_rate": 0.054653679653679656,
+        "median_absolute_percentage_error": 0.20710760910839476,
+        "interval_coverage": 0.8998917748917749,
+        "average_interval_width": 237.4496057574972,
+        "absolute_error_quantiles": {
+          "p50": 31.27988751823923,
+          "p75": 63.356085894729176,
+          "p90": 101.99436782064309,
+          "p95": 126.64784031338975,
+          "p99": 196.76167076896533
+        }
+      },
+      {
+        "price_band": "p50_to_p75",
+        "rows": 970,
+        "model": {
+          "mae": 66.39564434009858,
+          "median_absolute_error": 50.41348301960693,
+          "rmse": 92.73690817679471,
+          "r2": -3.4707739636340564
+        },
+        "market_baseline": {
+          "mae": 64.94189175257732,
+          "median_absolute_error": 45.44,
+          "rmse": 99.90458596160535,
+          "r2": -4.188577840857552
+        },
+        "relative_mae_improvement_vs_market": -0.022385436399973146,
+        "mean_error_predicted_minus_actual": 5.093440345584799,
+        "median_error_predicted_minus_actual": -3.0929591178405644,
+        "underprediction_rate": 0.5144329896907216,
+        "severe_underprediction_rate": 0.060824742268041236,
+        "median_absolute_percentage_error": 0.1403174711447845,
+        "interval_coverage": 0.9670103092783505,
+        "average_interval_width": 433.70843194943404,
+        "absolute_error_quantiles": {
+          "p50": 50.41348301960693,
+          "p75": 87.39101794826591,
+          "p90": 135.25056930718546,
+          "p95": 175.34451892350154,
+          "p99": 319.46734590045264
+        }
+      },
+      {
+        "price_band": "p75_to_p90",
+        "rows": 532,
+        "model": {
+          "mae": 146.25054434349738,
+          "median_absolute_error": 118.26845600665078,
+          "rmse": 207.1817038460889,
+          "r2": -4.626999841963946
+        },
+        "market_baseline": {
+          "mae": 225.04877819548872,
+          "median_absolute_error": 211.6,
+          "rmse": 245.48725410728628,
+          "r2": -6.900089264994017
+        },
+        "relative_mae_improvement_vs_market": 0.35013846546433247,
+        "mean_error_predicted_minus_actual": -60.85391336254788,
+        "median_error_predicted_minus_actual": -79.63453141324638,
+        "underprediction_rate": 0.7293233082706767,
+        "severe_underprediction_rate": 0.2274436090225564,
+        "median_absolute_percentage_error": 0.20943101370556594,
+        "interval_coverage": 0.8984962406015038,
+        "average_interval_width": 620.1902797388692,
+        "absolute_error_quantiles": {
+          "p50": 118.26845600665078,
+          "p75": 189.1154224391072,
+          "p90": 291.147239103127,
+          "p95": 362.86031778255824,
+          "p99": 681.7837122914324
+        }
+      },
+      {
+        "price_band": "p90_to_p95",
+        "rows": 172,
+        "model": {
+          "mae": 321.4392613697785,
+          "median_absolute_error": 313.8156754804549,
+          "rmse": 368.4398514702959,
+          "r2": -8.244492107437646
+        },
+        "market_baseline": {
+          "mae": 533.7084302325582,
+          "median_absolute_error": 530.1675,
+          "rmse": 560.794837740968,
+          "r2": -20.416962352838432
+        },
+        "relative_mae_improvement_vs_market": 0.39772496898781506,
+        "mean_error_predicted_minus_actual": -178.26317565129,
+        "median_error_predicted_minus_actual": -257.22763550078906,
+        "underprediction_rate": 0.75,
+        "severe_underprediction_rate": 0.45348837209302323,
+        "median_absolute_percentage_error": 0.3185638691251567,
+        "interval_coverage": 0.7616279069767442,
+        "average_interval_width": 999.5968488914737,
+        "absolute_error_quantiles": {
+          "p50": 313.8156754804549,
+          "p75": 415.76711075658056,
+          "p90": 567.4800194644937,
+          "p95": 657.5712283983439,
+          "p99": 761.5739651188417
+        }
+      },
+      {
+        "price_band": "p95_to_p99",
+        "rows": 142,
+        "model": {
+          "mae": 621.5170020791873,
+          "median_absolute_error": 586.2689534608961,
+          "rmse": 768.1076714403262,
+          "r2": -1.8079417178559574
+        },
+        "market_baseline": {
+          "mae": 1211.3439436619717,
+          "median_absolute_error": 1107.3899999999999,
+          "rmse": 1297.9558154014746,
+          "r2": -7.017956600965032
+        },
+        "relative_mae_improvement_vs_market": 0.48691946219642557,
+        "mean_error_predicted_minus_actual": -518.2367288637388,
+        "median_error_predicted_minus_actual": -534.6377341475486,
+        "underprediction_rate": 0.8380281690140845,
+        "severe_underprediction_rate": 0.5211267605633803,
+        "median_absolute_percentage_error": 0.351397235967671,
+        "interval_coverage": 0.676056338028169,
+        "average_interval_width": 1567.963182387068,
+        "absolute_error_quantiles": {
+          "p50": 586.2689534608961,
+          "p75": 823.724399358241,
+          "p90": 1170.7952210829721,
+          "p95": 1563.336429770998,
+          "p99": 1970.2958199277302
+        }
+      },
+      {
+        "price_band": "above_p99",
+        "rows": 37,
+        "model": {
+          "mae": 3863.072031610253,
+          "median_absolute_error": 3234.681805862022,
+          "rmse": 4746.749764908408,
+          "r2": -1.8833047657311237
+        },
+        "market_baseline": {
+          "mae": 5251.869054054055,
+          "median_absolute_error": 4505.59,
+          "rmse": 5959.238671767662,
+          "r2": -3.5444301640464344
+        },
+        "relative_mae_improvement_vs_market": 0.2644386233072116,
+        "mean_error_predicted_minus_actual": -3863.072031610253,
+        "median_error_predicted_minus_actual": -3234.681805862022,
+        "underprediction_rate": 1.0,
+        "severe_underprediction_rate": 0.918918918918919,
+        "median_absolute_percentage_error": 0.6754323045681213,
+        "interval_coverage": 0.21621621621621623,
+        "average_interval_width": 2612.263991440249,
+        "absolute_error_quantiles": {
+          "p50": 3234.681805862022,
+          "p75": 4388.057942479443,
+          "p90": 6850.413879002603,
+          "p95": 9292.337506125834,
+          "p99": 13151.797795473902
+        }
+      }
+    ]
+  },
+  "diagnostic_thresholds": {
+    "minimum_rows": 100,
+    "conditional_coverage_floor": 0.8,
+    "maximum_absolute_median_bias_aud": 50.0,
+    "model_must_outperform_market_baseline": true
+  },
+  "diagnostic_flags": [
+    {
+      "dimension": "price_band",
+      "segment": "p75_to_p90",
+      "rows": 532,
+      "flag": "absolute_median_bias_above_limit",
+      "observed": -79.63453141324638,
+      "threshold": 50.0
+    },
+    {
+      "dimension": "price_band",
+      "segment": "p90_to_p95",
+      "rows": 172,
+      "flag": "absolute_median_bias_above_limit",
+      "observed": -257.22763550078906,
+      "threshold": 50.0
+    },
+    {
+      "dimension": "price_band",
+      "segment": "p95_to_p99",
+      "rows": 142,
+      "flag": "absolute_median_bias_above_limit",
+      "observed": -534.6377341475486,
+      "threshold": 50.0
+    },
+    {
+      "dimension": "price_band",
+      "segment": "p90_to_p95",
+      "rows": 172,
+      "flag": "conditional_coverage_below_floor",
+      "observed": 0.7616279069767442,
+      "threshold": 0.8
+    },
+    {
+      "dimension": "price_band",
+      "segment": "p95_to_p99",
+      "rows": 142,
+      "flag": "conditional_coverage_below_floor",
+      "observed": 0.676056338028169,
+      "threshold": 0.8
+    },
+    {
+      "dimension": "price_band",
+      "segment": "p50_to_p75",
+      "rows": 970,
+      "flag": "model_mae_worse_than_market_baseline",
+      "observed": -0.022385436399973146,
+      "threshold": 0.0
+    }
+  ],
+  "upper_tail_challenger": {
+    "report": "reports\\inside_airbnb\\sydney_2026-06-16_upper_tail_challenger.json",
+    "status": "NO_CHALLENGER_PASSED_ALL_GATES",
+    "selected_challenger": null,
+    "governed_test_used": false,
+    "primary_artifact_written": false
+  },
+  "premium_challenger": {
+    "report": "reports\\inside_airbnb\\sydney_2026-06-16_premium_challenger.json",
+    "status": "NO_CHALLENGER_PASSED_ALL_GATES",
+    "selected_challenger": null,
+    "governed_test_used": false,
+    "primary_artifact_written": false
+  },
+  "interval_challenger": {
+    "report": "reports\\inside_airbnb\\sydney_2026-06-16_interval_challenger.json",
+    "status": "INTERVAL_CHALLENGER_REJECTED",
+    "qualifies": false,
+    "upper_tail_coverage_absolute_improvement": 0.04343406102026792,
+    "governed_test_used": false,
+    "primary_artifact_written": false
+  },
+  "largest_absolute_errors_anonymised": [
+    {
+      "actual": 14985.0,
+      "predicted": 1116.749486911458,
+      "absolute_error": 13868.250513088542,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Mosman"
+    },
+    {
+      "actual": 14690.0,
+      "predicted": 2811.8959247299044,
+      "absolute_error": 11878.104075270096,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire villa",
+      "neighbourhood": "Woollahra"
+    },
+    {
+      "actual": 12078.0,
+      "predicted": 3432.104136160215,
+      "absolute_error": 8645.895863839785,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Mosman"
+    },
+    {
+      "actual": 8295.0,
+      "predicted": 1315.309690407894,
+      "absolute_error": 6979.690309592106,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Waverley"
+    },
+    {
+      "actual": 8820.25,
+      "predicted": 2056.0204080570657,
+      "absolute_error": 6764.229591942934,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Waverley"
+    },
+    {
+      "actual": 6554.29,
+      "predicted": 1378.2383430306618,
+      "absolute_error": 5176.051656969338,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire villa",
+      "neighbourhood": "Woollahra"
+    },
+    {
+      "actual": 6260.0,
+      "predicted": 1256.92895234546,
+      "absolute_error": 5003.07104765454,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire villa",
+      "neighbourhood": "The Hills Shire"
+    },
+    {
+      "actual": 5724.0,
+      "predicted": 1222.0906812819096,
+      "absolute_error": 4501.909318718091,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire villa",
+      "neighbourhood": "The Hills Shire"
+    },
+    {
+      "actual": 4993.0,
+      "predicted": 528.6793171676925,
+      "absolute_error": 4464.320682832307,
+      "room_type": "Entire home/apt",
+      "property_type": "Boat",
+      "neighbourhood": "Manly"
+    },
+    {
+      "actual": 6624.29,
+      "predicted": 2236.2320575205563,
+      "absolute_error": 4388.057942479443,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire villa",
+      "neighbourhood": "Woollahra"
+    },
+    {
+      "actual": 4466.33,
+      "predicted": 174.99521698387557,
+      "absolute_error": 4291.334783016125,
+      "room_type": "Entire home/apt",
+      "property_type": "Boat",
+      "neighbourhood": "Canada Bay"
+    },
+    {
+      "actual": 5958.0,
+      "predicted": 1800.5135401732928,
+      "absolute_error": 4157.486459826707,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Waverley"
+    },
+    {
+      "actual": 5250.67,
+      "predicted": 1098.8964999659042,
+      "absolute_error": 4151.773500034096,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Waverley"
+    },
+    {
+      "actual": 6342.0,
+      "predicted": 2308.770845312119,
+      "absolute_error": 4033.229154687881,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Mosman"
+    },
+    {
+      "actual": 5529.0,
+      "predicted": 1496.9360246400424,
+      "absolute_error": 4032.0639753599576,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Waverley"
+    },
+    {
+      "actual": 5379.83,
+      "predicted": 1708.5880944467146,
+      "absolute_error": 3671.2419055532855,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Woollahra"
+    },
+    {
+      "actual": 6055.5,
+      "predicted": 2505.1395404564973,
+      "absolute_error": 3550.3604595435027,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Pittwater"
+    },
+    {
+      "actual": 4613.67,
+      "predicted": 1335.1327905947032,
+      "absolute_error": 3278.537209405297,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Mosman"
+    },
+    {
+      "actual": 4328.86,
+      "predicted": 1094.178194137978,
+      "absolute_error": 3234.681805862022,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire home",
+      "neighbourhood": "Waverley"
+    },
+    {
+      "actual": 4251.0,
+      "predicted": 1273.9296209679158,
+      "absolute_error": 2977.070379032084,
+      "room_type": "Entire home/apt",
+      "property_type": "Entire villa",
+      "neighbourhood": "The Hills Shire"
+    }
+  ],
+  "governance": {
+    "listing_or_host_ids_emitted": false,
+    "slice_findings_change_model_or_gate": false,
+    "next_required_evidence": "Validate any candidate mitigation on development folds and a future compatible temporal snapshot."
+  }
+}

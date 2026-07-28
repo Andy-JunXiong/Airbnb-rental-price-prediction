@@ -1,0 +1,19 @@
+{
+  "as_of_date": "2026-07-28",
+  "quote_checkin_date": "2026-08-15",
+  "quote_checkout_date": "2026-08-17",
+  "neighbourhood": "Sydney",
+  "property_type": "Entire rental unit",
+  "room_type": "Entire home/apt",
+  "latitude": -33.8688,
+  "longitude": 151.2093,
+  "accommodates": 2,
+  "bathrooms": 1,
+  "bedrooms": 1,
+  "beds": 1,
+  "amenities_count": 30,
+  "minimum_nights": 1,
+  "maximum_nights": 365,
+  "calculated_host_listings_count": 1,
+  "host_is_superhost": "t"
+}

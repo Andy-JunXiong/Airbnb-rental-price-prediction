@@ -1,0 +1,317 @@
+{
+  "report_version": 1,
+  "generated_at_utc": "2026-07-28T05:01:51+00:00",
+  "source": "data\\silver\\inside_airbnb\\sydney\\snapshot_date=2026-06-16\\listing_quotes.csv",
+  "protocol": {
+    "development_rows": 14083,
+    "governed_test_rows_reserved_and_unused": 3701,
+    "governed_test_unique_hosts": 1662,
+    "fold_seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "nested_group": "host_id",
+    "alpha": 0.1,
+    "minimum_band_calibration_rows": 80,
+    "price_band_probabilities": [
+      0.5,
+      0.75,
+      0.9,
+      0.95
+    ],
+    "upper_tail_definition": "validation target above fit-split p90"
+  },
+  "methods": {
+    "incumbent_hierarchical_symmetric": {
+      "folds": [
+        {
+          "seed": 101,
+          "rows": 3050,
+          "coverage": 0.9045901639344263,
+          "average_width": 502.57421072658127,
+          "lower_miss_rate": 0.02983606557377049,
+          "upper_miss_rate": 0.06557377049180328,
+          "upper_tail_rows": 288,
+          "upper_tail_coverage": 0.6805555555555556,
+          "upper_tail_average_width": 1519.273777576716,
+          "upper_tail_upper_miss_rate": 0.3194444444444444
+        },
+        {
+          "seed": 102,
+          "rows": 2748,
+          "coverage": 0.8846433770014556,
+          "average_width": 423.03793169671076,
+          "lower_miss_rate": 0.04985443959243086,
+          "upper_miss_rate": 0.06550218340611354,
+          "upper_tail_rows": 261,
+          "upper_tail_coverage": 0.7126436781609196,
+          "upper_tail_average_width": 1295.338984342821,
+          "upper_tail_upper_miss_rate": 0.28735632183908044
+        },
+        {
+          "seed": 103,
+          "rows": 2580,
+          "coverage": 0.8941860465116279,
+          "average_width": 459.147288073738,
+          "lower_miss_rate": 0.04263565891472868,
+          "upper_miss_rate": 0.0631782945736434,
+          "upper_tail_rows": 264,
+          "upper_tail_coverage": 0.6666666666666666,
+          "upper_tail_average_width": 1275.660032389003,
+          "upper_tail_upper_miss_rate": 0.32196969696969696
+        },
+        {
+          "seed": 104,
+          "rows": 2552,
+          "coverage": 0.9306426332288401,
+          "average_width": 564.2827843900908,
+          "lower_miss_rate": 0.030564263322884012,
+          "upper_miss_rate": 0.03879310344827586,
+          "upper_tail_rows": 287,
+          "upper_tail_coverage": 0.8432055749128919,
+          "upper_tail_average_width": 1579.0997477676906,
+          "upper_tail_upper_miss_rate": 0.15331010452961671
+        },
+        {
+          "seed": 105,
+          "rows": 2930,
+          "coverage": 0.8870307167235495,
+          "average_width": 428.45040410577616,
+          "lower_miss_rate": 0.04505119453924915,
+          "upper_miss_rate": 0.06791808873720137,
+          "upper_tail_rows": 185,
+          "upper_tail_coverage": 0.7027027027027027,
+          "upper_tail_average_width": 1302.1944052953772,
+          "upper_tail_upper_miss_rate": 0.2972972972972973
+        }
+      ],
+      "summary": {
+        "coverage": {
+          "mean": 0.9002185874799798,
+          "standard_deviation": 0.018692457753725834
+        },
+        "average_width": {
+          "mean": 475.4985237985794,
+          "standard_deviation": 58.84033470214307
+        },
+        "lower_miss_rate": {
+          "mean": 0.039588324388612636,
+          "standard_deviation": 0.008959109184016394
+        },
+        "upper_miss_rate": {
+          "mean": 0.060193088131407495,
+          "standard_deviation": 0.012079783437627632
+        },
+        "upper_tail_coverage": {
+          "mean": 0.7211548355997472,
+          "standard_deviation": 0.0705807446653663
+        },
+        "upper_tail_average_width": {
+          "mean": 1394.3133894743216,
+          "standard_deviation": 143.2842943861412
+        },
+        "upper_tail_upper_miss_rate": {
+          "mean": 0.27587557301602716,
+          "standard_deviation": 0.07006408985817253
+        }
+      }
+    },
+    "predicted_band_asymmetric": {
+      "folds": [
+        {
+          "seed": 101,
+          "rows": 3050,
+          "coverage": 0.8855737704918033,
+          "average_width": 699.8172795179298,
+          "lower_miss_rate": 0.06655737704918033,
+          "upper_miss_rate": 0.04786885245901639,
+          "upper_tail_rows": 288,
+          "upper_tail_coverage": 0.7777777777777778,
+          "upper_tail_average_width": 3223.8291370457905,
+          "upper_tail_upper_miss_rate": 0.2222222222222222
+        },
+        {
+          "seed": 102,
+          "rows": 2748,
+          "coverage": 0.8740902474526928,
+          "average_width": 428.15956441709096,
+          "lower_miss_rate": 0.06877729257641921,
+          "upper_miss_rate": 0.057132459970887915,
+          "upper_tail_rows": 261,
+          "upper_tail_coverage": 0.7509578544061303,
+          "upper_tail_average_width": 1233.1171406150295,
+          "upper_tail_upper_miss_rate": 0.22988505747126436
+        },
+        {
+          "seed": 103,
+          "rows": 2580,
+          "coverage": 0.8883720930232558,
+          "average_width": 467.9691878153757,
+          "lower_miss_rate": 0.060077519379844964,
+          "upper_miss_rate": 0.05155038759689923,
+          "upper_tail_rows": 264,
+          "upper_tail_coverage": 0.678030303030303,
+          "upper_tail_average_width": 1228.9215492996914,
+          "upper_tail_upper_miss_rate": 0.30303030303030304
+        },
+        {
+          "seed": 104,
+          "rows": 2552,
+          "coverage": 0.9177115987460815,
+          "average_width": 541.5898914137123,
+          "lower_miss_rate": 0.03487460815047022,
+          "upper_miss_rate": 0.04741379310344827,
+          "upper_tail_rows": 287,
+          "upper_tail_coverage": 0.8432055749128919,
+          "upper_tail_average_width": 1543.9567933777278,
+          "upper_tail_upper_miss_rate": 0.14982578397212543
+        },
+        {
+          "seed": 105,
+          "rows": 2930,
+          "coverage": 0.8709897610921502,
+          "average_width": 551.4958030626073,
+          "lower_miss_rate": 0.07235494880546076,
+          "upper_miss_rate": 0.05665529010238908,
+          "upper_tail_rows": 185,
+          "upper_tail_coverage": 0.772972972972973,
+          "upper_tail_average_width": 2331.1504163496948,
+          "upper_tail_upper_miss_rate": 0.21621621621621623
+        }
+      ],
+      "summary": {
+        "coverage": {
+          "mean": 0.8873474941611967,
+          "standard_deviation": 0.018503410274687465
+        },
+        "average_width": {
+          "mean": 537.8063452453432,
+          "standard_deviation": 104.10199854555155
+        },
+        "lower_miss_rate": {
+          "mean": 0.060528349192275094,
+          "standard_deviation": 0.01502148776939652
+        },
+        "upper_miss_rate": {
+          "mean": 0.052124156646528176,
+          "standard_deviation": 0.004643237608128581
+        },
+        "upper_tail_coverage": {
+          "mean": 0.7645888966200152,
+          "standard_deviation": 0.059378061740758194
+        },
+        "upper_tail_average_width": {
+          "mean": 1912.1950073375867,
+          "standard_deviation": 860.1622629928277
+        },
+        "upper_tail_upper_miss_rate": {
+          "mean": 0.22423591658242625,
+          "standard_deviation": 0.05441899145174861
+        }
+      },
+      "calibration_inventory": [
+        {
+          "seed": 101,
+          "fit_rows": 8499,
+          "calibration_rows": 2534,
+          "validation_rows": 3050,
+          "calibrated_bands": {
+            "above_p95": 100,
+            "p50_p75": 648,
+            "p75_p90": 296,
+            "p90_p95": 83,
+            "up_to_p50": 1407
+          },
+          "global_lower_log_adjustment": 0.4534939177504871,
+          "global_upper_log_adjustment": 0.7597572267876185
+        },
+        {
+          "seed": 102,
+          "fit_rows": 9056,
+          "calibration_rows": 2279,
+          "validation_rows": 2748,
+          "calibrated_bands": {
+            "p50_p75": 659,
+            "p75_p90": 334,
+            "up_to_p50": 1138
+          },
+          "global_lower_log_adjustment": 0.4858299900908021,
+          "global_upper_log_adjustment": 0.6438376077355619
+        },
+        {
+          "seed": 103,
+          "fit_rows": 9091,
+          "calibration_rows": 2412,
+          "validation_rows": 2580,
+          "calibrated_bands": {
+            "p50_p75": 823,
+            "p75_p90": 350,
+            "up_to_p50": 1110
+          },
+          "global_lower_log_adjustment": 0.531189485402705,
+          "global_upper_log_adjustment": 0.6616545053148242
+        },
+        {
+          "seed": 104,
+          "fit_rows": 9320,
+          "calibration_rows": 2211,
+          "validation_rows": 2552,
+          "calibrated_bands": {
+            "p50_p75": 519,
+            "p75_p90": 272,
+            "up_to_p50": 1284
+          },
+          "global_lower_log_adjustment": 0.6303659299172564,
+          "global_upper_log_adjustment": 0.708204038226155
+        },
+        {
+          "seed": 105,
+          "fit_rows": 9146,
+          "calibration_rows": 2007,
+          "validation_rows": 2930,
+          "calibrated_bands": {
+            "p50_p75": 562,
+            "p75_p90": 245,
+            "p90_p95": 82,
+            "up_to_p50": 1043
+          },
+          "global_lower_log_adjustment": 0.4808160148081546,
+          "global_upper_log_adjustment": 0.7209410645562446
+        }
+      ]
+    }
+  },
+  "qualification_thresholds": {
+    "minimum_overall_coverage": 0.88,
+    "minimum_upper_tail_coverage_absolute_improvement": 0.1,
+    "maximum_average_width_ratio": 1.25,
+    "maximum_upper_tail_width_ratio": 1.5,
+    "minimum_better_folds": 4
+  },
+  "decision": {
+    "qualifies": false,
+    "overall_coverage": 0.8873474941611967,
+    "upper_tail_coverage_absolute_improvement": 0.04343406102026792,
+    "average_width_ratio": 1.1310368346656683,
+    "upper_tail_width_ratio": 1.371424115821275,
+    "upper_tail_better_fold_count": 4,
+    "checks": {
+      "overall_coverage_passes": true,
+      "upper_tail_coverage_improvement_passes": false,
+      "average_width_ratio_passes": true,
+      "upper_tail_width_ratio_passes": true,
+      "better_fold_count_passes": true
+    },
+    "status": "INTERVAL_CHALLENGER_REJECTED",
+    "primary_artifact_changed": false,
+    "next_evidence": "Retain incumbent intervals and investigate richer scale/quantile models on development data."
+  },
+  "governance": {
+    "governed_test_used": false,
+    "primary_artifact_written": false,
+    "deployment_authority_changed": false
+  }
+}
