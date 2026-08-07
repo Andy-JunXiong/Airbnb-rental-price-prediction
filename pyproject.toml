@@ -19,6 +19,9 @@ serve = [
     "fastapi>=0.115",
     "uvicorn[standard]>=0.30",
 ]
+ui = [
+    "streamlit>=1.40",
+]
 text = [
     "sentence-transformers>=3.0",
 ]
