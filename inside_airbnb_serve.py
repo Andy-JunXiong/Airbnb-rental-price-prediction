@@ -25,6 +25,7 @@ import joblib
 try:
     from fastapi import FastAPI, HTTPException
     from fastapi.middleware.cors import CORSMiddleware
+    from fastapi.responses import HTMLResponse
     from pydantic import BaseModel, Field
 except ImportError:
     print(
@@ -100,9 +101,13 @@ class ModelInfoResponse(BaseModel):
     deployment_authority: str
     temporal_validation_status: str
     target_definition: str
+    latest_training_as_of_date: str = ""
     features: dict[str, list[str]]
     limitations: list[str]
     artifact_path: str
+    python: str = ""
+    sklearn: str = ""
+    lightgbm: str = ""
 
 
 # ---------------------------------------------------------------------------
@@ -181,6 +186,21 @@ async def health() -> HealthResponse:
 async def model_info() -> ModelInfoResponse:
     """Return metadata about the loaded model."""
     artifact = _require_artifact()
+    import platform
+
+    sklearn_ver = "unknown"
+    try:
+        import sklearn
+        sklearn_ver = sklearn.__version__
+    except Exception:
+        pass
+    lgb_ver = "not installed"
+    try:
+        import lightgbm
+        lgb_ver = lightgbm.__version__
+    except Exception:
+        pass
+
     return ModelInfoResponse(
         snapshot_label=artifact["snapshot_label"],
         deployment_authority=artifact.get("deployment_authority", "unknown"),
@@ -190,6 +210,7 @@ async def model_info() -> ModelInfoResponse:
         target_definition=artifact.get(
             "target_definition", "Public quoted price per night in AUD"
         ),
+        latest_training_as_of_date=artifact.get("latest_training_as_of_date", ""),
         features={
             "numeric": artifact.get("numeric_features", []),
             "categorical": artifact.get("categorical_features", []),
@@ -201,7 +222,10 @@ async def model_info() -> ModelInfoResponse:
             "Geographic distances are straight-line, not route distance.",
             "Sydney market only. Geographic transfer is untested.",
         ],
-        artifact_path=str(artifact.get("path", "")),
+        artifact_path=artifact.get("training_silver_sha256", ""),
+        python=platform.python_version(),
+        sklearn=sklearn_ver,
+        lightgbm=lgb_ver,
     )
 
 
@@ -241,6 +265,15 @@ async def predict(request: QuoteRequest, explain: bool = False) -> PredictionRes
         )
 
     return response
+
+
+@app.get("/dashboard", response_class=HTMLResponse)
+async def dashboard() -> HTMLResponse:
+    """Serve the interactive dark-theme dashboard."""
+    dashboard_path = Path(__file__).parent / "dashboard.html"
+    if not dashboard_path.exists():
+        raise HTTPException(status_code=404, detail="dashboard.html not found")
+    return HTMLResponse(dashboard_path.read_text(encoding="utf-8"))
 
 
 # ---------------------------------------------------------------------------
