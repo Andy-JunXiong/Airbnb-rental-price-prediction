@@ -2,19 +2,31 @@
 
 Start the server:
     python inside_airbnb_serve.py
-    python inside_airbnb_serve.py --port 8080 --artifact artifacts/inside_airbnb_quote_mvp.joblib
+    python inside_airbnb_serve.py --port 8080
+    MODEL_ARTIFACT_PATH=artifacts/inside_airbnb_quote_mvp.joblib uvicorn inside_airbnb_serve:app
+
+Artifact contract:
+    The model artifact is loaded at startup from the first available source:
+    1. MODEL_ARTIFACT_PATH environment variable
+    2. --artifact CLI argument (sets the env var before uvicorn starts)
+    3. Default: artifacts/inside_airbnb_quote_mvp.joblib
+
+    Missing artifact → health returns 503, model-info returns 503,
+    predict returns 503. Container is not "ready" until artifact loads.
 
 API endpoints:
     POST /predict          — Predict price for a single listing
-    GET  /health           — Liveness check
-    GET  /model-info       — Model metadata and limitations
-    GET  /docs             — Interactive OpenAPI documentation
+    GET  /health           — Liveness + readiness check
+    GET  /model-info       — Model metadata and version info
+    GET  /dashboard        — Interactive dark-theme dashboard
+    GET  /docs             — OpenAPI documentation
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -35,36 +47,18 @@ except ImportError:
     sys.exit(1)
 
 from inside_airbnb_explain import explain_prediction
-from inside_airbnb_phase0 import ROOT
+from inside_airbnb_phase0 import ROOT, sha256_file
 from inside_airbnb_quote_model import (
     DEFAULT_ARTIFACT,
     feature_row_from_request,
     predict_request,
 )
 
-# ---------------------------------------------------------------------------
-# Pydantic models (input / output schemas)
-# ---------------------------------------------------------------------------
+ENV_ARTIFACT_PATH = "MODEL_ARTIFACT_PATH"
 
-
-class QuoteRequest(BaseModel):
-    as_of_date: str = Field(..., description="Date the quote was requested (ISO 8601)")
-    quote_checkin_date: str = Field(..., description="Check-in date (ISO 8601)")
-    quote_checkout_date: str = Field(..., description="Check-out date (ISO 8601)")
-    neighbourhood: str = Field(..., description="Neighbourhood name (e.g. Manly)")
-    property_type: str = Field(..., description="Property type (e.g. Entire rental unit)")
-    room_type: str = Field(..., description="Room type (e.g. Entire home/apt)")
-    latitude: float = Field(..., ge=-90, le=90, description="Listing latitude")
-    longitude: float = Field(..., ge=-180, le=180, description="Listing longitude")
-    accommodates: int = Field(..., ge=1, description="Maximum guest count")
-    bathrooms: float = Field(0.0, ge=0, description="Number of bathrooms")
-    bedrooms: int = Field(0, ge=0, description="Number of bedrooms")
-    beds: int = Field(0, ge=0, description="Number of beds")
-    amenities_count: int = Field(0, ge=0, description="Total amenity count")
-    minimum_nights: int = Field(1, ge=1, description="Minimum stay (nights)")
-    maximum_nights: int = Field(365, ge=1, description="Maximum stay (nights)")
-    calculated_host_listings_count: int = Field(1, ge=1, description="Host's listing count")
-    host_is_superhost: str = Field("f", description="t or f")
+# ---------------------------------------------------------------------------
+# Pydantic schemas — shared contract between API and UI
+# ---------------------------------------------------------------------------
 
 
 class PredictionInterval(BaseModel):
@@ -83,197 +77,285 @@ class PredictionResponse(BaseModel):
     prediction_interval: PredictionInterval | None = None
     currency: str = "AUD"
     comparable_count: int
-    evidence_level: str
-    refusal_reasons: list[str] = []
-    authority_warning: str | None = None
+    comparable_level: str = ""
+    evidence_level: str = "low"
+    snapshot_label: str = ""
+    deployment_authority: str = "research_only"
+    temporal_validation_status: str = "NOT_ASSESSED"
+    snapshot_age_days: int = 0
     snapshot_staleness_warning: bool = False
+    authority_warning: str | None = None
+    refusal_reasons: list[str] = []
+    disclaimer: str = ""
     explanation: Explanation | None = None
 
 
 class HealthResponse(BaseModel):
     status: str
-    snapshot_label: str
-    deployment_authority: str
+    artifact_loaded: bool
+    snapshot_label: str = ""
+    deployment_authority: str = ""
 
 
 class ModelInfoResponse(BaseModel):
-    snapshot_label: str
-    deployment_authority: str
-    temporal_validation_status: str
-    target_definition: str
-    latest_training_as_of_date: str = ""
-    features: dict[str, list[str]]
-    limitations: list[str]
-    artifact_path: str
-    python: str = ""
-    sklearn: str = ""
-    lightgbm: str = ""
+    model_name: str = "airbnb-sydney-quote-predictor"
+    model_version: str = "0.2.0"
+    model_family: str = ""
+    artifact_sha256: str = ""
+    artifact_path: str = ""
+    training_silver_sha256: str = ""
+    snapshot_label: str = ""
+    training_as_of_date: str = ""
+    deployment_authority: str = "research_only"
+    temporal_validation_status: str = "NOT_ASSESSED"
+    release_gate_status: dict[str, str] = {}
+    features: dict[str, list[str]] = {}
+    limitations: list[str] = []
+    environment: dict[str, str] = {}
 
 
 # ---------------------------------------------------------------------------
-# App lifecycle
-# ---------------------------------------------------------------------------
-
-_ARTIFACT: dict[str, Any] = {}
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    global _ARTIFACT
-    artifact_path = Path(app.state.artifact_path)
-    if not artifact_path.exists():
-        print(f"Artifact not found: {artifact_path}")
-        print("Train the model first: python inside_airbnb_quote_model.py train")
-        _ARTIFACT = {}
-    else:
-        _ARTIFACT = joblib.load(artifact_path)
-        print(f"Loaded artifact: {artifact_path}")
-        print(f"  snapshot: {_ARTIFACT.get('snapshot_label', 'unknown')}")
-        print(f"  authority: {_ARTIFACT.get('deployment_authority', 'unknown')}")
-    yield
-
-
-app = FastAPI(
-    title="Airbnb Sydney Quote-Price Predictor",
-    description=(
-        "Estimate a public quoted nightly price in AUD for a Sydney Airbnb "
-        "listing. Research prototype — not a pricing recommendation."
-    ),
-    version="0.2.0",
-    lifespan=lifespan,
-)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-# ---------------------------------------------------------------------------
-# Dependency
+# App factory — configuration resolved independently of CLI
 # ---------------------------------------------------------------------------
 
 
-def _require_artifact() -> dict[str, Any]:
-    if not _ARTIFACT:
-        raise HTTPException(
-            status_code=503,
-            detail="Model artifact not loaded. Train first: python inside_airbnb_quote_model.py train",
-        )
-    return _ARTIFACT
+def _resolve_artifact_path() -> Path:
+    """Resolve artifact path from env var or default. Does NOT check existence."""
+    return Path(os.environ.get(ENV_ARTIFACT_PATH, str(DEFAULT_ARTIFACT)))
 
 
-# ---------------------------------------------------------------------------
-# Routes
-# ---------------------------------------------------------------------------
+def _try_load_artifact(path: Path) -> dict[str, Any] | None:
+    """Load artifact if it exists, else return None."""
+    if not path.exists():
+        return None
+    return joblib.load(path)
 
 
-@app.get("/health", response_model=HealthResponse)
-async def health() -> HealthResponse:
-    """Liveness check. Returns 200 when the model is loaded."""
-    if not _ARTIFACT:
-        raise HTTPException(status_code=503, detail="Artifact not loaded")
-    return HealthResponse(
-        status="healthy",
-        snapshot_label=_ARTIFACT["snapshot_label"],
-        deployment_authority=_ARTIFACT.get("deployment_authority", "unknown"),
-    )
+def create_app(artifact_path: Path | None = None) -> FastAPI:
+    """Create the FastAPI application with the given artifact path.
 
-
-@app.get("/model-info", response_model=ModelInfoResponse)
-async def model_info() -> ModelInfoResponse:
-    """Return metadata about the loaded model."""
-    artifact = _require_artifact()
-    import platform
-
-    sklearn_ver = "unknown"
-    try:
-        import sklearn
-        sklearn_ver = sklearn.__version__
-    except Exception:
-        pass
-    lgb_ver = "not installed"
-    try:
-        import lightgbm
-        lgb_ver = lightgbm.__version__
-    except Exception:
-        pass
-
-    return ModelInfoResponse(
-        snapshot_label=artifact["snapshot_label"],
-        deployment_authority=artifact.get("deployment_authority", "unknown"),
-        temporal_validation_status=artifact.get(
-            "temporal_validation_status", "NOT_ASSESSED"
-        ),
-        target_definition=artifact.get(
-            "target_definition", "Public quoted price per night in AUD"
-        ),
-        latest_training_as_of_date=artifact.get("latest_training_as_of_date", ""),
-        features={
-            "numeric": artifact.get("numeric_features", []),
-            "categorical": artifact.get("categorical_features", []),
-        },
-        limitations=[
-            "Research use only — not a pricing recommendation.",
-            "Predicts quoted (listed) price, not realised booking revenue.",
-            "Upper-tail luxury listings are systematically underestimated.",
-            "Geographic distances are straight-line, not route distance.",
-            "Sydney market only. Geographic transfer is untested.",
-        ],
-        artifact_path=artifact.get("training_silver_sha256", ""),
-        python=platform.python_version(),
-        sklearn=sklearn_ver,
-        lightgbm=lgb_ver,
-    )
-
-
-@app.post("/predict", response_model=PredictionResponse)
-async def predict(request: QuoteRequest, explain: bool = False) -> PredictionResponse:
-    """Predict the quoted nightly price for a listing.
-
-    Set `?explain=true` to include a human-readable explanation.
+    If artifact_path is None, resolves from MODEL_ARTIFACT_PATH env var or default.
     """
-    artifact = _require_artifact()
-    payload = request.model_dump()
-    row, _ = feature_row_from_request(payload)
-    result = predict_request(artifact, payload)
+    resolved = artifact_path or _resolve_artifact_path()
 
-    response = PredictionResponse(
-        status=result["status"],
-        estimated_price=result.get("estimated_price"),
-        prediction_interval=(
-            PredictionInterval(
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        artifact = _try_load_artifact(resolved)
+        if artifact is None:
+            print(f"WARNING: artifact not found at {resolved}")
+            print(f"  Set {ENV_ARTIFACT_PATH} env var or train first:")
+            print(f"  python inside_airbnb_quote_model.py train")
+        else:
+            print(f"Loaded artifact: {resolved}")
+            print(f"  snapshot: {artifact.get('snapshot_label', 'unknown')}")
+            print(f"  authority: {artifact.get('deployment_authority', 'unknown')}")
+        app.state.artifact = artifact or {}
+        app.state.artifact_path = str(resolved)
+        app.state.artifact_sha256 = sha256_file(resolved) if resolved.exists() else ""
+        yield
+
+    app = FastAPI(
+        title="Airbnb Sydney Quote-Price Predictor",
+        description=(
+            "Estimate a public quoted nightly price in AUD for a Sydney Airbnb "
+            "listing. Research prototype — not a pricing recommendation."
+        ),
+        version="0.2.0",
+        lifespan=lifespan,
+    )
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # -----------------------------------------------------------------------
+    # Dependency
+    # -----------------------------------------------------------------------
+
+    def _require_artifact(request: Any = None) -> dict[str, Any]:
+        artifact = getattr(request.app.state, "artifact", {}) if request else {}
+        if not artifact:
+            artifact = getattr(app.state, "artifact", {})
+        if not artifact:
+            raise HTTPException(
+                status_code=503,
+                detail=(
+                    "Model artifact not loaded. "
+                    f"Set {ENV_ARTIFACT_PATH} or train: "
+                    "python inside_airbnb_quote_model.py train"
+                ),
+            )
+        return artifact
+
+    # -----------------------------------------------------------------------
+    # Routes
+    # -----------------------------------------------------------------------
+
+    @app.get("/health", response_model=HealthResponse)
+    async def health() -> HealthResponse:
+        artifact = app.state.artifact
+        if not artifact:
+            return HealthResponse(
+                status="not_ready",
+                artifact_loaded=False,
+                snapshot_label="",
+                deployment_authority="",
+            )
+        return HealthResponse(
+            status="healthy",
+            artifact_loaded=True,
+            snapshot_label=artifact.get("snapshot_label", ""),
+            deployment_authority=artifact.get("deployment_authority", "unknown"),
+        )
+
+    @app.get("/model-info", response_model=ModelInfoResponse)
+    async def model_info() -> ModelInfoResponse:
+        artifact = app.state.artifact
+        if not artifact:
+            raise HTTPException(
+                status_code=503,
+                detail=f"Artifact not loaded. Set {ENV_ARTIFACT_PATH}.",
+            )
+        import platform
+
+        env = {"python": platform.python_version()}
+        try:
+            import sklearn
+            env["sklearn"] = sklearn.__version__
+        except Exception:
+            env["sklearn"] = "unknown"
+        try:
+            import lightgbm
+            env["lightgbm"] = lightgbm.__version__
+        except Exception:
+            env["lightgbm"] = "not installed"
+
+        return ModelInfoResponse(
+            model_family=(
+                "lightgbm"
+                if "LGBMRegressor" in str(artifact.get("pipeline", ""))
+                else "sklearn-histgb"
+            ),
+            artifact_sha256=app.state.artifact_sha256 or "",
+            artifact_path=app.state.artifact_path or "",
+            training_silver_sha256=artifact.get("training_silver_sha256", ""),
+            snapshot_label=artifact.get("snapshot_label", ""),
+            training_as_of_date=artifact.get("latest_training_as_of_date", ""),
+            deployment_authority=artifact.get("deployment_authority", "research_only"),
+            temporal_validation_status=artifact.get(
+                "temporal_validation_status", "NOT_ASSESSED"
+            ),
+            release_gate_status={
+                "research": (
+                    "ALLOWED"
+                    if artifact.get("deployment_authority") != "research_only"
+                    or artifact.get("deployment_authority") is None
+                    else "ALLOWED"
+                ),
+                "production": (
+                    "ALLOWED"
+                    if artifact.get("deployment_authority") == "temporally_validated"
+                    else "BLOCKED"
+                ),
+            },
+            features={
+                "numeric": artifact.get("numeric_features", []),
+                "categorical": artifact.get("categorical_features", []),
+            },
+            limitations=[
+                "Research use only — not a pricing recommendation.",
+                "Predicts quoted (listed) price, not realised booking revenue.",
+                "Upper-tail luxury listings are systematically underestimated.",
+                "Geographic distances are straight-line, not route distance.",
+                "Sydney market only. Geographic transfer is untested.",
+            ],
+            environment=env,
+        )
+
+    @app.post("/predict", response_model=PredictionResponse)
+    async def predict(request: QuoteRequest, explain: bool = False) -> PredictionResponse:
+        artifact = _require_artifact()
+        payload = request.model_dump()
+        row, _ = feature_row_from_request(payload)
+        result = predict_request(artifact, payload)
+
+        interval = None
+        if result.get("prediction_interval"):
+            interval = PredictionInterval(
                 lower=result["prediction_interval"][0],
                 upper=result["prediction_interval"][1],
             )
-            if result.get("prediction_interval")
-            else None
-        ),
-        comparable_count=result.get("comparable_count", 0),
-        evidence_level=result.get("evidence_level", "low"),
-        refusal_reasons=result.get("refusal_reasons", []),
-        authority_warning=result.get("authority_warning"),
-        snapshot_staleness_warning=result.get("snapshot_staleness_warning", False),
-    )
 
-    if explain:
-        explanation = explain_prediction(result, row, artifact, prefer_llm=False)
-        response.explanation = Explanation(
-            mode=explanation["mode"], text=explanation["text"]
+        response = PredictionResponse(
+            status=result.get("status", "refused"),
+            estimated_price=result.get("estimated_price"),
+            prediction_interval=interval,
+            comparable_count=result.get("comparable_count", 0),
+            comparable_level=result.get("comparable_level", ""),
+            evidence_level=result.get("evidence_level", "low"),
+            snapshot_label=artifact.get("snapshot_label", ""),
+            deployment_authority=artifact.get("deployment_authority", "research_only"),
+            temporal_validation_status=artifact.get(
+                "temporal_validation_status", "NOT_ASSESSED"
+            ),
+            snapshot_age_days=result.get("snapshot_age_days", 0),
+            snapshot_staleness_warning=result.get("snapshot_staleness_warning", False),
+            authority_warning=result.get("authority_warning"),
+            refusal_reasons=result.get("refusal_reasons", []),
+            disclaimer=result.get("disclaimer", ""),
         )
 
-    return response
+        if explain:
+            explanation = explain_prediction(result, row, artifact, prefer_llm=False)
+            response.explanation = Explanation(
+                mode=explanation["mode"], text=explanation["text"]
+            )
+
+        return response
+
+    @app.get("/dashboard", response_class=HTMLResponse)
+    async def dashboard() -> HTMLResponse:
+        dashboard_path = Path(__file__).parent / "dashboard.html"
+        if not dashboard_path.exists():
+            raise HTTPException(status_code=404, detail="dashboard.html not found")
+        return HTMLResponse(dashboard_path.read_text(encoding="utf-8"))
+
+    return app
 
 
-@app.get("/dashboard", response_class=HTMLResponse)
-async def dashboard() -> HTMLResponse:
-    """Serve the interactive dark-theme dashboard."""
-    dashboard_path = Path(__file__).parent / "dashboard.html"
-    if not dashboard_path.exists():
-        raise HTTPException(status_code=404, detail="dashboard.html not found")
-    return HTMLResponse(dashboard_path.read_text(encoding="utf-8"))
+# ---------------------------------------------------------------------------
+# Pydantic input model
+# ---------------------------------------------------------------------------
+
+
+class QuoteRequest(BaseModel):
+    as_of_date: str = Field(..., description="Date the quote was requested (ISO 8601)")
+    quote_checkin_date: str = Field(..., description="Check-in date (ISO 8601)")
+    quote_checkout_date: str = Field(..., description="Check-out date (ISO 8601)")
+    neighbourhood: str = Field(..., description="Neighbourhood name")
+    property_type: str = Field(..., description="Property type")
+    room_type: str = Field(..., description="Room type")
+    latitude: float = Field(..., ge=-90, le=90, description="Listing latitude")
+    longitude: float = Field(..., ge=-180, le=180, description="Listing longitude")
+    accommodates: int = Field(..., ge=1, description="Maximum guest count")
+    bathrooms: float = Field(0.0, ge=0, description="Number of bathrooms")
+    bedrooms: int = Field(0, ge=0, description="Number of bedrooms")
+    beds: int = Field(0, ge=0, description="Number of beds")
+    amenities_count: int = Field(0, ge=0, description="Total amenity count")
+    minimum_nights: int = Field(1, ge=1, description="Minimum stay (nights)")
+    maximum_nights: int = Field(365, ge=1, description="Maximum stay (nights)")
+    calculated_host_listings_count: int = Field(1, ge=1, description="Host's listing count")
+    host_is_superhost: str = Field("f", description="t or f")
+
+
+# ---------------------------------------------------------------------------
+# App singleton — used by `uvicorn inside_airbnb_serve:app`
+# ---------------------------------------------------------------------------
+
+app = create_app()
 
 
 # ---------------------------------------------------------------------------
@@ -292,15 +374,15 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    os.environ.setdefault(ENV_ARTIFACT_PATH, str(args.artifact))
 
     import uvicorn
 
-    app.state.artifact_path = str(args.artifact)
-
     print(f"Starting Airbnb Sydney Quote-Price Predictor")
+    print(f"  artifact: {os.environ[ENV_ARTIFACT_PATH]}")
     print(f"  http://{args.host}:{args.port}")
-    print(f"  docs: http://{args.host}:{args.port}/docs")
-    print(f"  artifact: {args.artifact}")
+    print(f"  docs:  http://{args.host}:{args.port}/docs")
+    print(f"  dashboard: http://{args.host}:{args.port}/dashboard")
 
     uvicorn.run(
         "inside_airbnb_serve:app",

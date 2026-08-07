@@ -10,6 +10,7 @@ __pycache__/
 data/
 artifacts/*.joblib
 !artifacts/.gitkeep
+!tests/fixtures/
 
 # Git
 .git/
