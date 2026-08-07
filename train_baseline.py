@@ -26,11 +26,11 @@ from sklearn.preprocessing import StandardScaler
 
 ROOT = Path(__file__).resolve().parent
 DATASETS = {
-    "compact": ROOT / "Models" / "Trees_features.csv",
-    "full": ROOT / "Exploratory Data Analysis" / "EDA_X_train.csv",
+    "compact": ROOT / "legacy" / "2019" / "Models" / "Trees_features.csv",
+    "full": ROOT / "legacy" / "2019" / "Exploratory Data Analysis" / "EDA_X_train.csv",
     "corrected": ROOT / "data" / "processed" / "train_features.csv",
 }
-LABELS = ROOT / "Models" / "Trees_labels.csv"
+LABELS = ROOT / "legacy" / "2019" / "Models" / "Trees_labels.csv"
 
 
 def read_numeric_csv(path: Path) -> tuple[list[str], np.ndarray]:

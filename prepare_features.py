@@ -28,14 +28,14 @@ def postcode_area(value: str) -> str:
 
 
 def location_index() -> dict[int, str]:
-    _, extracted = read_rows(ROOT / "Feature engineering" / "extracted_location.csv")
+    _, extracted = read_rows(ROOT / "legacy" / "2019" / "Feature engineering" / "extracted_location.csv")
     by_id = {int(row["id"]): row["postcode"] for row in extracted}
     if len(by_id) != len(extracted):
         raise ValueError("Duplicate IDs in extracted_location.csv")
 
     # These 383 rows are independently checked-in address records and are the
     # authoritative source for labeled listings.
-    _, labeled = read_rows(ROOT / "Datasets" / "train.csv")
+    _, labeled = read_rows(ROOT / "legacy" / "2019" / "Datasets" / "train.csv")
     for row in labeled:
         by_id[int(row["Id"])] = row["Post Code"]
     if set(by_id) != set(range(953)):
@@ -75,11 +75,11 @@ def main() -> None:
     postcodes = location_index()
     jobs = {
         "train": (
-            ROOT / "Exploratory Data Analysis" / "EDA_X_train.csv",
+            ROOT / "legacy" / "2019" / "Exploratory Data Analysis" / "EDA_X_train.csv",
             ROOT / "data" / "processed" / "train_features.csv",
         ),
         "test": (
-            ROOT / "Exploratory Data Analysis" / "EDA_X_test.csv",
+            ROOT / "legacy" / "2019" / "Exploratory Data Analysis" / "EDA_X_test.csv",
             ROOT / "data" / "processed" / "test_features.csv",
         ),
     }

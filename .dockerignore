@@ -35,8 +35,9 @@ docs/
 # Tests
 tests/
 
-# Legacy
-Models/
+# Legacy (historical 2019 project)
+legacy/
 "Exploratory Data Analysis/"
 "Feature engineering/"
+Models/
 Datasets/
