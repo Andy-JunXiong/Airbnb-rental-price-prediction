@@ -89,15 +89,7 @@ def compute_monitoring(artifact: dict[str, Any]) -> MonitoringReport:
             description="Staleness gate: predictions refused at >120 days",
         ),
         MonitoringSignal(
-            name="deployment_authority",
-            category="input",
-            status="warning" if authority != "temporally_validated" else "healthy",
-            observed=authority,
-            threshold="temporally_validated",
-            description="Model authority level",
-        ),
-        MonitoringSignal(
-            name="temporal_validation",
+            name="temporal_compatibility",
             category="input",
             status=(
                 "healthy"
@@ -106,7 +98,23 @@ def compute_monitoring(artifact: dict[str, Any]) -> MonitoringReport:
             ),
             observed=artifact.get("temporal_validation_status", "NOT_ASSESSED"),
             threshold="TEMPORAL_PRICE_VALIDATION_READY",
-            description="Whether forward-time validation evidence exists",
+            description="Whether older/newer snapshots share a compatible price target (schema check only)",
+        ),
+        MonitoringSignal(
+            name="temporal_evaluation",
+            category="input",
+            status="not_available",
+            observed=None,
+            threshold="requires forward-time snapshot with compatible labels",
+            description="Forward-time performance evaluation on a strictly newer compatible snapshot",
+        ),
+        MonitoringSignal(
+            name="deployment_authority",
+            category="input",
+            status="warning" if authority != "temporally_validated" else "healthy",
+            observed=authority,
+            threshold="temporally_validated",
+            description="Model authority level derived from temporal evaluation evidence",
         ),
         MonitoringSignal(
             name="feature_schema_version",

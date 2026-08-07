@@ -54,6 +54,7 @@ artifact = {
         "host_is_superhost": ["t", "f"],
     },
     "supported_price_range": [50.0, 800.0],
+    "training_price_quantiles": {"p50": 150.0, "p90": 400.0, "p95": 550.0, "p99": 700.0},
     "latest_training_as_of_date": "2026-06-29",
     "snapshot_label": "ci-fixture",
     "training_silver_sha256": "ci-fixture-sha256",

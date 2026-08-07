@@ -374,6 +374,16 @@ def supported_price_range(y: np.ndarray, indices: np.ndarray) -> list[float]:
     ]
 
 
+def training_price_quantiles(y: np.ndarray, indices: np.ndarray) -> dict[str, float]:
+    """Return key training-target quantiles for evidence assessment."""
+    return {
+        "p50": float(np.quantile(y[indices], 0.50)),
+        "p90": float(np.quantile(y[indices], 0.90)),
+        "p95": float(np.quantile(y[indices], 0.95)),
+        "p99": float(np.quantile(y[indices], 0.99)),
+    }
+
+
 def calibration_quantiles(
     records: list[dict[str, str]],
     indices: np.ndarray,
@@ -549,6 +559,7 @@ def train_mvp(
 
     category_values = category_inventory(records, train_indices)
     price_range = supported_price_range(y, train_indices)
+    price_quantiles = training_price_quantiles(y, train_indices)
     latest_as_of = max(
         date.fromisoformat(records[int(index)]["as_of_date"]) for index in train_indices
     )
@@ -779,6 +790,7 @@ def train_mvp(
         "market_baseline": baseline,
         "category_inventory": category_values,
         "supported_price_range": price_range,
+        "training_price_quantiles": price_quantiles,
         "latest_training_as_of_date": latest_as_of.isoformat(),
         "snapshot_age_days": snapshot_age_days,
         "snapshot_staleness_warning": snapshot_stale,

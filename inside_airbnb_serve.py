@@ -255,8 +255,7 @@ def create_app(artifact_path: Path | None = None) -> FastAPI:
             release_gate_status={
                 "research": (
                     "ALLOWED"
-                    if artifact.get("deployment_authority") != "research_only"
-                    or artifact.get("deployment_authority") is None
+                    if artifact.get("deployment_authority") in ("research_only", None)
                     else "ALLOWED"
                 ),
                 "production": (
@@ -306,9 +305,7 @@ def create_app(artifact_path: Path | None = None) -> FastAPI:
             snapshot_age_days=result.get("snapshot_age_days", 0),
             deployment_authority=artifact.get("deployment_authority", "research_only"),
             refusal_reasons=result.get("refusal_reasons", []),
-            training_price_quantiles={
-                "p90": artifact.get("supported_price_range", [50, 800])[1] * 0.85,
-            },
+            training_price_quantiles=artifact.get("training_price_quantiles", {}),
         )
 
         response = PredictionResponse(
