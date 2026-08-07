@@ -79,6 +79,10 @@ class PredictionResponse(BaseModel):
     comparable_count: int
     comparable_level: str = ""
     evidence_level: str = "low"
+    evidence_tier: str = ""
+    evidence_tier_label: str = ""
+    evidence_reasons: list[str] = []
+    evidence_recommendation: str = ""
     snapshot_label: str = ""
     deployment_authority: str = "research_only"
     temporal_validation_status: str = "NOT_ASSESSED"
@@ -289,6 +293,24 @@ def create_app(artifact_path: Path | None = None) -> FastAPI:
                 upper=result["prediction_interval"][1],
             )
 
+        from inside_airbnb_evidence import assess_evidence
+
+        evidence = assess_evidence(
+            estimated_price=result.get("estimated_price") or 0,
+            prediction_interval=(
+                (result["prediction_interval"][0], result["prediction_interval"][1])
+                if result.get("prediction_interval")
+                else None
+            ),
+            comparable_count=result.get("comparable_count", 0),
+            snapshot_age_days=result.get("snapshot_age_days", 0),
+            deployment_authority=artifact.get("deployment_authority", "research_only"),
+            refusal_reasons=result.get("refusal_reasons", []),
+            training_price_quantiles={
+                "p90": artifact.get("supported_price_range", [50, 800])[1] * 0.85,
+            },
+        )
+
         response = PredictionResponse(
             status=result.get("status", "refused"),
             estimated_price=result.get("estimated_price"),
@@ -296,6 +318,10 @@ def create_app(artifact_path: Path | None = None) -> FastAPI:
             comparable_count=result.get("comparable_count", 0),
             comparable_level=result.get("comparable_level", ""),
             evidence_level=result.get("evidence_level", "low"),
+            evidence_tier=evidence["tier"],
+            evidence_tier_label=evidence["tier_label"],
+            evidence_reasons=evidence["reasons"],
+            evidence_recommendation=evidence["recommendation"],
             snapshot_label=artifact.get("snapshot_label", ""),
             deployment_authority=artifact.get("deployment_authority", "research_only"),
             temporal_validation_status=artifact.get(

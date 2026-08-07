@@ -211,17 +211,18 @@ with result_col:
         else:
             price = response.get("estimated_price", 0)
             interval = response.get("prediction_interval", {})
-            snapshot = response.get("snapshot_label", "?")
+            tier = response.get("evidence_tier", "?")
+            tier_label = response.get("evidence_tier_label", "")
 
             st.success(f"### {price:,.0f} AUD / night")
+            st.metric("Evidence Tier", f"{tier} — {tier_label}")
             st.metric(
                 "90% Confidence Interval",
                 f"{interval.get('lower', 0):,.0f} — {interval.get('upper', 0):,.0f} AUD"
             )
             st.caption(
-                f"Evidence: **{response.get('evidence_level', '?')}** · "
-                f"{response.get('comparable_count', 0)} comparables · "
-                f"Snapshot: {snapshot}"
+                f"Comparables: {response.get('comparable_count', 0)} · "
+                f"Snapshot: {response.get('snapshot_label', '?')}"
             )
 
             if response.get("authority_warning"):

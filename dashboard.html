@@ -312,9 +312,11 @@
           out('pred-result').classList.add('hidden'); out('pred-refused').classList.add('hidden');
           out('pred-price').classList.remove('hidden');
           out('pred-price-value').textContent = data.estimated_price?.toLocaleString() ?? '—';
+          const tier = data.evidence_tier || '?';
+          const tierColors = {HIGH:'badge-green', MEDIUM:'badge-amber', LOW:'badge-red', REFUSE:'badge-red'};
+          out('pred-evidence').innerHTML = `<span class="badge ${tierColors[tier]||'badge-cyan'}">${tier}</span> ${data.evidence_tier_label||''} · ${data.comparable_count} comparables`;
           out('pred-interval').textContent = `${data.prediction_interval?.lower?.toLocaleString()} – ${data.prediction_interval?.upper?.toLocaleString()} AUD`;
-          out('pred-evidence').textContent = `${data.evidence_level} · ${data.comparable_count} comparables`;
-          out('pred-comparables').textContent = data.authority_warning || `Snapshot: ${data.snapshot_label || '?'}`;
+          out('pred-comparables').textContent = data.evidence_recommendation || data.authority_warning || '';
           out('pred-explanation').innerHTML = data.explanation?.text?.replace(/\n/g, '<br>') || '';
         }
       } catch(e) { out('pred-result').textContent = 'API not available. Start the server: python inside_airbnb_serve.py'; }
