@@ -5,8 +5,15 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from inside_airbnb_quote_model import CATEGORICAL_FEATURES, NUMERIC_FEATURES
+from inside_airbnb_quote_model import (
+    CATEGORICAL_FEATURES,
+    NUMERIC_FEATURES,
+    _LGBM_AVAILABLE,
+    _SKLEARN_HGB_AVAILABLE,
+)
 from inside_airbnb_temporal_validation import validate_temporally
+
+_PIPELINE_AVAILABLE = _LGBM_AVAILABLE or _SKLEARN_HGB_AVAILABLE
 
 
 class TemporalValidationIntegrationTest(unittest.TestCase):
@@ -74,6 +81,7 @@ class TemporalValidationIntegrationTest(unittest.TestCase):
                 }
                 writer.writerow(row)
 
+    @unittest.skipUnless(_PIPELINE_AVAILABLE, "Requires LightGBM or sklearn>=1.5")
     def test_end_to_end_temporal_report_stays_research_only_when_too_small(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

@@ -11,7 +11,12 @@ from typing import Any
 import numpy as np
 from sklearn.inspection import permutation_importance
 
-from inside_airbnb_phase0 import ROOT, utc_now, write_json_atomic
+from inside_airbnb_phase0 import (
+    ROOT,
+    active_snapshot_date,
+    utc_now,
+    write_json_atomic,
+)
 from inside_airbnb_quote_model import (
     DEFAULT_SILVER,
     build_pipeline,
@@ -23,11 +28,9 @@ from inside_airbnb_quote_model import (
 from sydney_geography import GEOGRAPHIC_FEATURES, reference_manifest
 
 
+_SNAPSHOT = active_snapshot_date()
 DEFAULT_REPORT = (
-    ROOT
-    / "reports"
-    / "inside_airbnb"
-    / "sydney_2026-06-16_feature_ablation.json"
+    ROOT / "reports" / "inside_airbnb" / f"sydney_{_SNAPSHOT}_feature_ablation.json"
 )
 DEFAULT_MARKDOWN = ROOT / "docs" / "inside_airbnb_feature_ablation.md"
 FOLD_SEEDS = (101, 102, 103, 104, 105)

@@ -14,7 +14,14 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from inside_airbnb_phase0 import ROOT, parse_money, utc_now, write_json_atomic
+from inside_airbnb_phase0 import (
+    ROOT,
+    active_silver_dir,
+    active_snapshot_date,
+    parse_money,
+    utc_now,
+    write_json_atomic,
+)
 from sydney_geography import (
     GEOGRAPHIC_FEATURES,
     geographic_features,
@@ -22,30 +29,21 @@ from sydney_geography import (
 )
 
 
-DEFAULT_SNAPSHOT_DATE = "2026-06-16"
 DEFAULT_SOURCE = (
     ROOT
     / "data"
     / "raw"
     / "inside_airbnb"
     / "sydney"
-    / f"snapshot_date={DEFAULT_SNAPSHOT_DATE}"
+    / f"snapshot_date={active_snapshot_date()}"
     / "listings.csv.gz"
 )
-DEFAULT_OUTPUT = (
-    ROOT
-    / "data"
-    / "silver"
-    / "inside_airbnb"
-    / "sydney"
-    / f"snapshot_date={DEFAULT_SNAPSHOT_DATE}"
-    / "listing_quotes.csv"
-)
+DEFAULT_OUTPUT = active_silver_dir() / "listing_quotes.csv"
 DEFAULT_REPORT = (
     ROOT
     / "reports"
     / "inside_airbnb"
-    / "sydney_2026-06-16_silver_quotes.json"
+    / f"sydney_{active_snapshot_date()}_silver_quotes.json"
 )
 
 SILVER_FIELDS = [
@@ -328,7 +326,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
-    parser.add_argument("--snapshot-label", default=DEFAULT_SNAPSHOT_DATE)
+    parser.add_argument("--snapshot-label", default=active_snapshot_date())
     return parser.parse_args()
 
 

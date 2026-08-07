@@ -12,7 +12,12 @@ from typing import Any
 import numpy as np
 
 from inside_airbnb_feature_ablation import FOLD_SEEDS
-from inside_airbnb_phase0 import ROOT, utc_now, write_json_atomic
+from inside_airbnb_phase0 import (
+    ROOT,
+    active_snapshot_date,
+    utc_now,
+    write_json_atomic,
+)
 from inside_airbnb_quote_model import (
     ALPHA,
     DEFAULT_SILVER,
@@ -27,11 +32,12 @@ from inside_airbnb_quote_model import (
 from inside_airbnb_upper_tail_challenger import UPPER_TAIL_QUANTILE
 
 
+_SNAPSHOT = active_snapshot_date()
 DEFAULT_REPORT = (
     ROOT
     / "reports"
     / "inside_airbnb"
-    / "sydney_2026-06-16_interval_challenger.json"
+    / f"sydney_{_SNAPSHOT}_interval_challenger.json"
 )
 DEFAULT_MARKDOWN = ROOT / "docs" / "inside_airbnb_interval_challenger.md"
 PRICE_BAND_PROBABILITIES = (0.50, 0.75, 0.90, 0.95)

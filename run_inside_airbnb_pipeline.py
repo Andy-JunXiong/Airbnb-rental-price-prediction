@@ -12,7 +12,13 @@ from typing import Any
 
 from inside_airbnb_manifest import DEFAULT_OUTPUT as DEFAULT_MANIFEST
 from inside_airbnb_manifest import build_manifest
-from inside_airbnb_phase0 import ROOT, sha256_file, utc_now, write_json_atomic
+from inside_airbnb_phase0 import (
+    ROOT,
+    active_snapshot_date,
+    sha256_file,
+    utc_now,
+    write_json_atomic,
+)
 
 
 DEFAULT_RUN_REPORT = (
@@ -85,6 +91,11 @@ def pipeline_commands(mode: str) -> list[CommandSpec]:
             preserve=True,
         ),
         python_command(
+            "multi_snapshot_training",
+            "inside_airbnb_multi_snapshot.py",
+            preserve=True,
+        ),
+        python_command(
             "example_prediction",
             "inside_airbnb_quote_model.py",
             "predict",
@@ -132,7 +143,7 @@ def pipeline_commands(mode: str) -> list[CommandSpec]:
                 "inside_airbnb_phase0.py",
                 "all",
                 "--snapshot-date",
-                "2026-06-16",
+                active_snapshot_date(),
             ),
             *research,
         ]

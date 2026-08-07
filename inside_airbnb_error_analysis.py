@@ -13,7 +13,13 @@ from typing import Any, Callable
 import joblib
 import numpy as np
 
-from inside_airbnb_phase0 import ROOT, sha256_file, utc_now, write_json_atomic
+from inside_airbnb_phase0 import (
+    ROOT,
+    active_snapshot_date,
+    sha256_file,
+    utc_now,
+    write_json_atomic,
+)
 from inside_airbnb_quote_model import (
     ALPHA,
     DEFAULT_ARTIFACT,
@@ -27,28 +33,20 @@ from inside_airbnb_quote_model import (
 )
 
 
+_SNAPSHOT = active_snapshot_date()
 DEFAULT_REPORT = (
-    ROOT / "reports" / "inside_airbnb" / "sydney_2026-06-16_error_analysis.json"
+    ROOT / "reports" / "inside_airbnb" / f"sydney_{_SNAPSHOT}_error_analysis.json"
 )
 DEFAULT_MODEL_CARD = ROOT / "docs" / "inside_airbnb_model_card.md"
 DEFAULT_ASSETS = ROOT / "reports" / "inside_airbnb" / "error_assets"
 DEFAULT_CHALLENGER_REPORT = (
-    ROOT
-    / "reports"
-    / "inside_airbnb"
-    / "sydney_2026-06-16_upper_tail_challenger.json"
+    ROOT / "reports" / "inside_airbnb" / f"sydney_{_SNAPSHOT}_upper_tail_challenger.json"
 )
 DEFAULT_PREMIUM_CHALLENGER_REPORT = (
-    ROOT
-    / "reports"
-    / "inside_airbnb"
-    / "sydney_2026-06-16_premium_challenger.json"
+    ROOT / "reports" / "inside_airbnb" / f"sydney_{_SNAPSHOT}_premium_challenger.json"
 )
 DEFAULT_INTERVAL_CHALLENGER_REPORT = (
-    ROOT
-    / "reports"
-    / "inside_airbnb"
-    / "sydney_2026-06-16_interval_challenger.json"
+    ROOT / "reports" / "inside_airbnb" / f"sydney_{_SNAPSHOT}_interval_challenger.json"
 )
 MIN_SEGMENT_ROWS = 30
 MIN_DIAGNOSTIC_ROWS = 100

@@ -10,7 +10,12 @@ from typing import Any
 import numpy as np
 
 from inside_airbnb_feature_ablation import FOLD_SEEDS
-from inside_airbnb_phase0 import ROOT, utc_now, write_json_atomic
+from inside_airbnb_phase0 import (
+    ROOT,
+    active_snapshot_date,
+    utc_now,
+    write_json_atomic,
+)
 from inside_airbnb_quote_model import (
     DEFAULT_SILVER,
     build_pipeline,
@@ -20,11 +25,12 @@ from inside_airbnb_quote_model import (
 )
 
 
+_SNAPSHOT = active_snapshot_date()
 DEFAULT_REPORT = (
     ROOT
     / "reports"
     / "inside_airbnb"
-    / "sydney_2026-06-16_upper_tail_challenger.json"
+    / f"sydney_{_SNAPSHOT}_upper_tail_challenger.json"
 )
 DEFAULT_MARKDOWN = ROOT / "docs" / "inside_airbnb_upper_tail_challenger.md"
 UPPER_TAIL_QUANTILE = 0.90

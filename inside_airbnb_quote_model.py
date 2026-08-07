@@ -15,7 +15,6 @@ from typing import Any
 import joblib
 import numpy as np
 from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import (
     mean_absolute_error,
@@ -25,9 +24,32 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import GroupShuffleSplit
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, StandardScaler
 
-from inside_airbnb_phase0 import ROOT, sha256_file, utc_now, write_json_atomic
+try:
+    from sklearn.ensemble import HistGradientBoostingRegressor
+
+    _SKLEARN_HGB_AVAILABLE = True
+except ImportError:
+    HistGradientBoostingRegressor = None  # type: ignore[assignment]
+    _SKLEARN_HGB_AVAILABLE = False
+
+try:
+    from lightgbm import LGBMRegressor
+
+    _LGBM_AVAILABLE = True
+except ImportError:
+    LGBMRegressor = None  # type: ignore[assignment]
+    _LGBM_AVAILABLE = False
+
+from inside_airbnb_phase0 import (
+    ROOT,
+    active_silver_dir,
+    active_snapshot_date,
+    sha256_file,
+    utc_now,
+    write_json_atomic,
+)
 from sydney_geography import (
     GEOGRAPHIC_FEATURES,
     geographic_features,
@@ -35,20 +57,12 @@ from sydney_geography import (
 )
 
 
-DEFAULT_SILVER = (
-    ROOT
-    / "data"
-    / "silver"
-    / "inside_airbnb"
-    / "sydney"
-    / "snapshot_date=2026-06-16"
-    / "listing_quotes.csv"
-)
+DEFAULT_SILVER = active_silver_dir() / "listing_quotes.csv"
 DEFAULT_REPORT = (
     ROOT
     / "reports"
     / "inside_airbnb"
-    / "sydney_2026-06-16_quote_mvp_evaluation.json"
+    / f"sydney_{active_snapshot_date()}_quote_mvp_evaluation.json"
 )
 DEFAULT_ARTIFACT = ROOT / "artifacts" / "inside_airbnb_quote_mvp.joblib"
 DEFAULT_TEMPORAL_COMPATIBILITY = (
@@ -101,6 +115,7 @@ MIN_SEGMENT_CALIBRATION = 50
 MIN_COMPARABLES = 20
 MAX_RELATIVE_INTERVAL_WIDTH = 2.0
 MAX_SNAPSHOT_AGE_DAYS = 120
+SNAPSHOT_STALENESS_WARN_DAYS = 90
 
 
 def finite_float(value: str | float | int | None) -> float:
@@ -145,6 +160,74 @@ def build_pipeline(
     numeric_features: list[str] | None = None,
     categorical_features: list[str] | None = None,
 ) -> Pipeline:
+    """Build the model pipeline, preferring LightGBM if available."""
+    if _LGBM_AVAILABLE:
+        return _build_pipeline_lgb(numeric_features, categorical_features)
+    return _build_pipeline_sklearn(numeric_features, categorical_features)
+
+
+def _build_pipeline_lgb(
+    numeric_features: list[str] | None = None,
+    categorical_features: list[str] | None = None,
+) -> Pipeline:
+    numeric_features = numeric_features or NUMERIC_FEATURES
+    categorical_features = categorical_features or CATEGORICAL_FEATURES
+    n_numeric = len(numeric_features)
+    n_categorical = len(categorical_features)
+    categorical_indices = list(range(n_numeric, n_numeric + n_categorical))
+
+    numeric = Pipeline(
+        [
+            ("impute", SimpleImputer(strategy="median")),
+            ("scale", StandardScaler()),
+        ]
+    )
+    categorical = Pipeline(
+        [
+            (
+                "ordinal",
+                OrdinalEncoder(
+                    handle_unknown="use_encoded_value",
+                    unknown_value=-1,
+                    encoded_missing_value=-1,
+                ),
+            ),
+        ]
+    )
+    preprocessor = ColumnTransformer(
+        [
+            ("numeric", numeric, list(range(n_numeric))),
+            ("categorical", categorical, list(range(n_numeric, n_numeric + n_categorical))),
+        ],
+        remainder="drop",
+    )
+    estimator = LGBMRegressor(
+        objective="mae",
+        learning_rate=0.05,
+        n_estimators=500,
+        num_leaves=31,
+        min_child_samples=30,
+        reg_alpha=0.0,
+        reg_lambda=5.0,
+        subsample=0.8,
+        colsample_bytree=0.8,
+        categorical_feature=categorical_indices,
+        verbosity=-1,
+        random_state=42,
+        n_jobs=-1,
+    )
+    return Pipeline([("preprocess", preprocessor), ("model", estimator)])
+
+
+def _build_pipeline_sklearn(
+    numeric_features: list[str] | None = None,
+    categorical_features: list[str] | None = None,
+) -> Pipeline:
+    if not _SKLEARN_HGB_AVAILABLE:
+        raise ImportError(
+            "scikit-learn>=1.0 is required for HistGradientBoostingRegressor. "
+            "Install it with: conda install 'scikit-learn>=1.5'"
+        )
     numeric_features = numeric_features or NUMERIC_FEATURES
     categorical_features = categorical_features or CATEGORICAL_FEATURES
     feature_count = len(numeric_features) + len(categorical_features)
@@ -470,6 +553,13 @@ def train_mvp(
         date.fromisoformat(records[int(index)]["as_of_date"]) for index in train_indices
     )
     snapshot_age_days = (date.today() - latest_as_of).days
+    snapshot_stale = snapshot_age_days > SNAPSHOT_STALENESS_WARN_DAYS
+    if snapshot_stale:
+        print(
+            f"STALENESS WARNING: training snapshot is {snapshot_age_days} days old "
+            f"(warn threshold: {SNAPSHOT_STALENESS_WARN_DAYS} days). "
+            "Consider refreshing to a newer snapshot."
+        )
     test_refusals = []
     for position, index in enumerate(test_indices):
         test_refusals.append(
@@ -602,7 +692,11 @@ def train_mvp(
             "excluded_identifiers": ["listing_id", "host_id"],
         },
         "model": {
-            "algorithm": "HistGradientBoostingRegressor on log1p target",
+            "algorithm": (
+                "LightGBM LGBMRegressor on log1p target (ordinal-encoded categoricals)"
+                if _LGBM_AVAILABLE
+                else "HistGradientBoostingRegressor on log1p target"
+            ),
             "selection": "predeclared; no test-set tuning",
             "test_metrics_all": price_metrics(y[test_indices], test_prediction),
             "test_metrics_core_market_p01_p99": price_metrics(
@@ -657,6 +751,7 @@ def train_mvp(
                 "supported_prediction_price_range": price_range,
             },
             "snapshot_age_days_at_evaluation": snapshot_age_days,
+            "snapshot_staleness_warning": snapshot_stale,
             "accepted_rows": int(np.sum(accepted)),
             "refused_rows": int(np.sum(~accepted)),
             "refusal_rate": float(np.mean(~accepted)),
@@ -685,6 +780,8 @@ def train_mvp(
         "category_inventory": category_values,
         "supported_price_range": price_range,
         "latest_training_as_of_date": latest_as_of.isoformat(),
+        "snapshot_age_days": snapshot_age_days,
+        "snapshot_staleness_warning": snapshot_stale,
         "snapshot_label": records[0]["snapshot_label"],
         "training_silver_sha256": sha256_file(silver_path),
         "target_definition": report["target"]["definition"],
@@ -778,6 +875,12 @@ def predict_request(artifact: dict[str, Any], payload: dict[str, Any]) -> dict[s
     snapshot_age_days = (
         date.today() - date.fromisoformat(artifact["latest_training_as_of_date"])
     ).days
+    snapshot_stale = snapshot_age_days > SNAPSHOT_STALENESS_WARN_DAYS
+    if snapshot_stale:
+        print(
+            f"STALENESS WARNING: artifact snapshot is {snapshot_age_days} days old "
+            f"(warn threshold: {SNAPSHOT_STALENESS_WARN_DAYS} days)."
+        )
     reasons = refusal_reasons(
         row,
         predicted,
@@ -806,6 +909,8 @@ def predict_request(artifact: dict[str, Any], payload: dict[str, Any]) -> dict[s
         ),
         "snapshot_label": artifact["snapshot_label"],
         "latest_training_as_of_date": artifact["latest_training_as_of_date"],
+        "snapshot_age_days": snapshot_age_days,
+        "snapshot_staleness_warning": snapshot_stale,
         "comparable_count": comparable_count,
         "comparable_level": comparable_level,
         "evidence_level": evidence_level,
@@ -850,6 +955,16 @@ def parse_args() -> argparse.Namespace:
     predict.add_argument("--artifact", type=Path, default=DEFAULT_ARTIFACT)
     predict.add_argument("--input", type=Path, required=True)
     predict.add_argument("--output", type=Path)
+    predict.add_argument(
+        "--explain",
+        action="store_true",
+        help="Append a human-readable explanation to the output.",
+    )
+    predict.add_argument(
+        "--explain-llm",
+        action="store_true",
+        help="Use LLM for explanation (requires ollama or openai).",
+    )
     return parser.parse_args()
 
 
@@ -860,7 +975,23 @@ def main() -> None:
         return
     artifact = joblib.load(args.artifact)
     payload = json.loads(args.input.read_text(encoding="utf-8"))
+    row, _ = feature_row_from_request(payload)
     result = predict_request(artifact, payload)
+
+    if getattr(args, "explain", False) or getattr(args, "explain_llm", False):
+        from inside_airbnb_explain import explain_prediction
+
+        explanation = explain_prediction(
+            result,
+            row,
+            artifact,
+            prefer_llm=getattr(args, "explain_llm", False),
+        )
+        result["explanation"] = {
+            "mode": explanation["mode"],
+            "text": explanation["text"],
+        }
+
     rendered = json.dumps(result, indent=2, ensure_ascii=False) + "\n"
     if args.output:
         args.output.write_text(rendered, encoding="utf-8")

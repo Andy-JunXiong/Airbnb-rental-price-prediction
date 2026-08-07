@@ -8,10 +8,19 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from sklearn.ensemble import HistGradientBoostingClassifier
+
+try:
+    from sklearn.ensemble import HistGradientBoostingClassifier
+except ImportError:
+    HistGradientBoostingClassifier = None  # type: ignore[assignment]
 
 from inside_airbnb_feature_ablation import FOLD_SEEDS
-from inside_airbnb_phase0 import ROOT, utc_now, write_json_atomic
+from inside_airbnb_phase0 import (
+    ROOT,
+    active_snapshot_date,
+    utc_now,
+    write_json_atomic,
+)
 from inside_airbnb_quote_model import (
     CATEGORICAL_FEATURES,
     NUMERIC_FEATURES,
@@ -37,11 +46,12 @@ from premium_listing_features import (
 from prepare_inside_airbnb_premium_features import DEFAULT_OUTPUT as DEFAULT_SILVER
 
 
+_SNAPSHOT = active_snapshot_date()
 DEFAULT_REPORT = (
     ROOT
     / "reports"
     / "inside_airbnb"
-    / "sydney_2026-06-16_premium_challenger.json"
+    / f"sydney_{_SNAPSHOT}_premium_challenger.json"
 )
 DEFAULT_MARKDOWN = ROOT / "docs" / "inside_airbnb_premium_challenger.md"
 TAIL_EXPERT_TRAINING_QUANTILE = 0.75
@@ -82,6 +92,11 @@ def hard_mixture(
 
 
 def classifier_pipeline() -> Any:
+    if HistGradientBoostingClassifier is None:
+        raise ImportError(
+            "scikit-learn>=1.0 required for premium challenger. "
+            "Install: conda install 'scikit-learn>=1.5'"
+        )
     pipeline = build_pipeline(EXTENDED_NUMERIC, EXTENDED_CATEGORICAL)
     pipeline.set_params(
         model=HistGradientBoostingClassifier(

@@ -14,7 +14,12 @@ from typing import Any, Iterable
 
 import numpy as np
 
-from inside_airbnb_phase0 import ROOT, utc_now, write_json_atomic
+from inside_airbnb_phase0 import (
+    ROOT,
+    active_snapshot_date,
+    utc_now,
+    write_json_atomic,
+)
 from inside_airbnb_quote_model import (
     CATEGORICAL_FEATURES,
     DEFAULT_SILVER,
@@ -25,7 +30,10 @@ from inside_airbnb_quote_model import (
 
 
 DEFAULT_JSON = (
-    ROOT / "reports" / "inside_airbnb" / "sydney_2026-06-16_modern_eda.json"
+    ROOT
+    / "reports"
+    / "inside_airbnb"
+    / f"sydney_{active_snapshot_date()}_modern_eda.json"
 )
 DEFAULT_MARKDOWN = ROOT / "docs" / "inside_airbnb_modern_eda.md"
 DEFAULT_ASSET_DIR = ROOT / "reports" / "inside_airbnb" / "eda_assets"

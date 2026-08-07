@@ -51,6 +51,24 @@ def load_registry(
     return registry["provider"], matches[0]
 
 
+def active_snapshot_date(registry_path: Path = DEFAULT_REGISTRY) -> str:
+    """Return the active snapshot date from the snapshot registry."""
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    return registry["active_snapshot"]["date"]
+
+
+def active_silver_dir() -> Path:
+    """Return the active Silver data directory for the current snapshot."""
+    return (
+        ROOT
+        / "data"
+        / "silver"
+        / "inside_airbnb"
+        / "sydney"
+        / f"snapshot_date={active_snapshot_date()}"
+    )
+
+
 def snapshot_directory(data_root: Path, snapshot: dict[str, Any]) -> Path:
     return data_root / snapshot["city"] / f"snapshot_date={snapshot['snapshot_date']}"
 
@@ -970,7 +988,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("command", choices=("download", "audit", "all"))
     parser.add_argument("--city", default="sydney")
-    parser.add_argument("--snapshot-date", default="2026-06-16")
+    parser.add_argument("--snapshot-date", default=active_snapshot_date())
     parser.add_argument("--registry", type=Path, default=DEFAULT_REGISTRY)
     parser.add_argument("--data-root", type=Path, default=DEFAULT_DATA_ROOT)
     parser.add_argument("--report", type=Path)

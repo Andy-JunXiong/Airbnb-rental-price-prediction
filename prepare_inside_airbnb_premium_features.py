@@ -9,7 +9,13 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from inside_airbnb_phase0 import ROOT, sha256_file, utc_now, write_json_atomic
+from inside_airbnb_phase0 import (
+    ROOT,
+    active_snapshot_date,
+    sha256_file,
+    utc_now,
+    write_json_atomic,
+)
 from inside_airbnb_quote_model import DEFAULT_SILVER
 from premium_listing_features import PREMIUM_FIELDS, premium_features
 from prepare_inside_airbnb_quotes import DEFAULT_SOURCE
@@ -20,7 +26,7 @@ DEFAULT_REPORT = (
     ROOT
     / "reports"
     / "inside_airbnb"
-    / "sydney_2026-06-16_premium_features.json"
+    / f"sydney_{active_snapshot_date()}_premium_features.json"
 )
 
 
