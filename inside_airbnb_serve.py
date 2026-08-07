@@ -349,6 +349,18 @@ def create_app(artifact_path: Path | None = None) -> FastAPI:
             raise HTTPException(status_code=404, detail="dashboard.html not found")
         return HTMLResponse(dashboard_path.read_text(encoding="utf-8"))
 
+    @app.get("/monitoring")
+    async def monitoring() -> dict[str, Any]:
+        """Return the current runtime monitoring report."""
+        artifact = app.state.artifact
+        if not artifact:
+            raise HTTPException(
+                status_code=503,
+                detail=f"Artifact not loaded. Set {ENV_ARTIFACT_PATH}.",
+            )
+        from inside_airbnb_monitoring import compute_monitoring, monitoring_to_dict
+        return monitoring_to_dict(compute_monitoring(artifact))
+
     return app
 
 
