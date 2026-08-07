@@ -1,196 +1,256 @@
-# Airbnb Sydney Rental Price Prediction
+# Airbnb Sydney Pricing Intelligence
 
-Predict nightly Airbnb quote prices in Sydney using governed ML pipelines with
-conformal prediction intervals. Built on [Inside Airbnb](https://insideairbnb.com/)
-public data snapshots.
+> **Estimate a Sydney Airbnb market quote — with uncertainty you can actually see.**
+
+A governed ML system that predicts public quoted nightly prices for Sydney Airbnb
+listings. Built on [Inside Airbnb](https://insideairbnb.com/) public data, with
+conformal prediction intervals, evidence-tier assessment, and containerised serving.
+
+[![CI](https://github.com/Andy-JunXiong/Airbnb-rental-price-prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/Andy-JunXiong/Airbnb-rental-price-prediction/actions/workflows/ci.yml)
+
+---
+
+## Why This Project Matters
+
+Most ML price-prediction projects return a single number. This one returns:
+
+| Output | Example |
+|--------|---------|
+| **Market estimate** | AUD 284 / night |
+| **Prediction interval** | AUD 215–368 (90% confidence) |
+| **Evidence tier** | MEDIUM — Use as a reference point |
+| **Comparable support** | 47 similar listings in Manly |
+| **Market position** | 16% above neighbourhood median |
+| **Explanation** | Human-readable markdown (template or LLM) |
+| **Deployment authority** | research_only (temporal validation pending) |
+
+The core principle: **a model returning a prediction is not the same as having enough evidence to trust that prediction operationally.**
+
+---
 
 ## Quickstart
 
 ```powershell
-# Create environment and install dependencies
+# Install
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 
-# Optional: install LightGBM for faster training (falls back to sklearn otherwise)
-.\.venv\Scripts\python.exe -m pip install lightgbm>=4.0
+# For serving (API + UI + Docker):
+.\.venv\Scripts\python.exe -m pip install fastapi uvicorn[standard] streamlit
 
-# Optional: install sentence-transformers for text features
-.\.venv\Scripts\python.exe -m pip install sentence-transformers
-
-# Run the full test suite (56 tests)
+# Run tests (78 tests)
 python -m unittest discover -s tests -v
 ```
 
-## Primary Pipeline: Inside Airbnb Quote Model
-
-The active research pipeline trains on **quoted listing prices** (not realised
-bookings) from the 2026-06-16 Sydney snapshot. All evaluation is host-disjoint.
+### One-command demo
 
 ```powershell
-# Download and audit raw data
-python inside_airbnb_phase0.py all
+# Terminal 1: API server
+python inside_airbnb_serve.py
+# → http://localhost:8000/dashboard
+# → http://localhost:8000/docs
 
-# Build privacy-minimised Silver table
-python prepare_inside_airbnb_quotes.py
-
-# Train the governed model with conformal intervals
-python inside_airbnb_quote_model.py train
-
-# Run error analysis and model card
-python inside_airbnb_error_analysis.py
-
-# Predict with explanation
-python inside_airbnb_quote_model.py predict \
-  --input examples/inside_airbnb_quote_request.json \
-  --explain
+# Terminal 2: Interactive UI
+streamlit run inside_airbnb_ui.py
+# → http://localhost:8501
 ```
 
-**Current held-out performance** (2026-06-16 snapshot):
+### Docker
 
-| Metric | Model | Market Baseline |
-|--------|------:|----------------:|
-| MAE | 138.14 AUD | 222.90 AUD |
-| Improvement | 38.0% | — |
-| 90% interval coverage | ~89.5% | — |
+```bash
+docker build -t airbnb-predictor .
+docker run -d -p 8000:8000 \
+  -v $(pwd)/tests/fixtures:/models \
+  -e MODEL_ARTIFACT_PATH=/models/minimal_artifact.joblib \
+  airbnb-predictor
+curl http://localhost:8000/health
+```
 
-## Key Features
+---
 
-### LightGBM (auto-selected)
+## System Overview
 
-The pipeline automatically uses LightGBM when installed, falling back to
-sklearn's HistGradientBoostingRegressor. LightGBM provides native categorical
-encoding, missing-value handling, and typically better performance.
+```
+Inside Airbnb snapshots
+        ↓
+Phase 0 source audit (integrity + schema check)
+        ↓
+Privacy-minimised Silver table (no raw text stored)
+        ↓
+Feature pipeline (geography + NLP embeddings)
+        ↓
+LightGBM + split conformal calibration
+        ↓
+Host-disjoint evaluation + challenger benchmarks
+        ↓
+Model card + reproducibility manifest
+        ↓
+Research / Production release gates
+        ↓
+Versioned artifact (joblib)
+        ↓
+Containerised FastAPI
+        ↓
+Evidence-tier policy (HIGH / MEDIUM / LOW / REFUSE)
+        ↓
+Runtime monitoring (13 signals, 3 categories)
+        ↓
+Future compatible snapshot → forward-time validation → human release decision
+```
+
+---
+
+## API Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/predict?explain=true` | Predict price with evidence tier + explanation |
+| `GET` | `/health` | Liveness + artifact readiness |
+| `GET` | `/model-info` | Model metadata, versions, release gates |
+| `GET` | `/monitoring` | Runtime monitoring report (13 signals) |
+| `GET` | `/dashboard` | Dark-theme interactive dashboard |
+| `GET` | `/docs` | OpenAPI Swagger UI |
+
+---
+
+## Key Capabilities
+
+### Uncertainty-Aware Predictions
+
+Every prediction returns an **evidence tier** computed from verifiable signals —
+not a black-box confidence score:
+
+| Tier | Condition |
+|------|-----------|
+| **HIGH** | ≥100 comparables, narrow interval, fresh snapshot, production authority |
+| **MEDIUM** | ≥20 comparables, moderate interval, or research-only authority |
+| **LOW** | <20 comparables, wide interval, old snapshot, or upper-tail listing |
+| **REFUSE** | Missing critical features, unseen categories, snapshot >120 days |
+
+### NLP Text Features
+
+Sentence-transformer embeddings (384-dim) from listing descriptions,
+neighbourhood overviews, and host profiles. Falls back to TF-IDF (100-dim).
+Raw text never enters the Silver table.
 
 ### Multi-Snapshot Training
 
-When multiple compatible Silver tables are available, the model can train
-across time with strict forward-time, host-disjoint splits:
+Six June 2026 Sydney snapshots registered. Temporal training with
+host-disjoint forward-time splits when multiple compatible Silver tables exist.
+
+### Scenario Comparison
 
 ```powershell
-python inside_airbnb_multi_snapshot.py
+python inside_airbnb_scenarios.py --input examples/request.json
+# Base: 314 AUD (MEDIUM)
+#   +1 bedroom: 342 AUD (+28)
+#   Manly location: 290 AUD (-24)
+#   Superhost: 330 AUD (+16)
 ```
 
-Six June 2026 Sydney snapshots are registered in `config/inside_airbnb_snapshots.json`.
+Model-based sensitivity — explicitly NOT causal uplift.
 
-### Text Features (NLP)
-
-Text embeddings from listing descriptions, neighbourhood overviews, and host
-profiles can be joined onto the Silver table:
-
-```powershell
-python prepare_inside_airbnb_text_features.py
-python inside_airbnb_text_challenger.py
-```
-
-Uses `sentence-transformers` (all-MiniLM-L6-v2, 384-dim) when available, with
-a TF-IDF fallback (100 components). Raw text is never stored in the Silver table.
-
-### Prediction Explanations
-
-Every prediction can include a human-readable markdown explanation:
-
-```powershell
-python inside_airbnb_quote_model.py predict --input request.json --explain
-```
-
-Template mode is always available. LLM mode (via Ollama) produces more natural
-language:
+### LLM Explanations
 
 ```powershell
 python inside_airbnb_quote_model.py predict --input request.json --explain-llm
 ```
 
-### Snapshot Staleness Warning
+Template mode always available. LLM mode via local Ollama for natural language.
 
-Training and prediction both warn when the snapshot exceeds 90 days old
-(configurable via `SNAPSHOT_STALENESS_WARN_DAYS`).
+### Post-Deployment Monitoring
 
-### Release Governance
+`GET /monitoring` returns 13 signals across input, prediction, and quality
+categories. Signals requiring live traffic or outcome labels are explicitly
+marked `not_available`.
 
-```powershell
-python run_inside_airbnb_pipeline.py research   # full offline pipeline
-python inside_airbnb_release_gate.py --target research --enforce
-python inside_airbnb_release_gate.py --target production --enforce
+### Temporal Validation Gates
+
+```
+temporal_compatibility  → schema-level: do snapshots share a price target?
+temporal_evaluation     → forward-time performance (requires newer snapshot)
+deployment_authority    → research_only until gates pass
 ```
 
-Research release: **ALLOWED**. Production release: **BLOCKED** — requires a
-compatible forward-time snapshot passing all temporal validation gates.
+Production release remains BLOCKED until compatible forward-time evidence exists.
 
-## Snapshot Management
-
-To rotate to a different snapshot, edit one field in
-`config/inside_airbnb_snapshots.json`:
-
-```json
-"active_snapshot": { "date": "2026-06-28", "role": "current_training_source" }
-```
-
-All modules (`inside_airbnb_quote_model.py`, `prepare_inside_airbnb_quotes.py`,
-etc.) read this centrally. No more hunting through six files for hardcoded dates.
+---
 
 ## Project Structure
 
 ```
-├── inside_airbnb_phase0.py        # Download + audit raw snapshots
-├── prepare_inside_airbnb_quotes.py # Raw → privacy-minimised Silver CSV
-├── inside_airbnb_quote_model.py   # Train/predict with conformal intervals
-├── inside_airbnb_multi_snapshot.py # Multi-snapshot temporal training
-├── inside_airbnb_eda.py           # Modern EDA with SVG charts
-├── inside_airbnb_feature_ablation.py  # Leakage-safe feature ablation
-├── inside_airbnb_error_analysis.py    # Held-out error audit + model card
-├── inside_airbnb_explain.py       # Template + LLM prediction explanations
-├── inside_airbnb_text_features.py # Text embeddings from listing descriptions
-├── inside_airbnb_text_challenger.py    # Text-feature development benchmark
-├── inside_airbnb_upper_tail_challenger.py   # Upper-tail loss benchmark
-├── inside_airbnb_premium_challenger.py      # Premium semantic features
-├── inside_airbnb_interval_challenger.py     # Asymmetric conformal intervals
-├── inside_airbnb_release_gate.py    # Research/production release enforcement
-├── inside_airbnb_temporal_validation.py  # Forward-time evaluation
-├── inside_airbnb_snapshot_discovery.py   # Read-only new-snapshot check
-├── compare_inside_airbnb_snapshots.py    # Target compatibility assessment
-├── inside_airbnb_manifest.py       # Reproducibility manifest
-├── run_inside_airbnb_pipeline.py   # One-command orchestrator
-├── sydney_geography.py            # Haversine distances (offline, auditable)
-├── premium_listing_features.py    # Amenity semantics
-├── config/                        # Snapshot registry + config
-├── docs/                          # Markdown documentation
-├── tests/                         # 56 tests (unittest)
-├── reports/                       # JSON evidence artifacts
-├── examples/                      # Sample prediction requests
-└── predictions/                   # Prediction outputs
+├── inside_airbnb_phase0.py          # Download + audit raw snapshots
+├── prepare_inside_airbnb_quotes.py  # Raw → privacy-minimised Silver
+├── inside_airbnb_quote_model.py     # Train/predict (LightGBM + conformal)
+├── inside_airbnb_evidence.py        # Evidence-tier policy (HIGH/MEDIUM/LOW/REFUSE)
+├── inside_airbnb_explain.py         # Template + LLM explanations
+├── inside_airbnb_scenarios.py       # What-if scenario comparison
+├── inside_airbnb_monitoring.py      # Runtime monitoring contract (13 signals)
+├── inside_airbnb_serve.py           # FastAPI (5 endpoints)
+├── inside_airbnb_ui.py              # Streamlit interactive demo
+├── dashboard.html                   # Dark-theme dashboard (Tailwind CSS)
+├── Dockerfile                       # Containerised serving
+│
+├── inside_airbnb_multi_snapshot.py  # Multi-snapshot temporal training
+├── inside_airbnb_text_features.py   # NLP embeddings (sentence-transformers)
+│
+├── inside_airbnb_eda.py             # Modern EDA (SVG charts)
+├── inside_airbnb_feature_ablation.py
+├── inside_airbnb_error_analysis.py  # Model card + diagnostic flags
+│
+├── inside_airbnb_release_gate.py    # Research/production gate enforcement
+├── inside_airbnb_temporal_validation.py
+├── compare_inside_airbnb_snapshots.py
+├── inside_airbnb_snapshot_discovery.py
+├── inside_airbnb_manifest.py        # Reproducibility manifest
+├── run_inside_airbnb_pipeline.py    # CI/research/refresh orchestrator
+│
+├── sydney_geography.py              # Haversine distances (offline)
+├── premium_listing_features.py      # Amenity semantics
+│
+├── config/                          # Snapshot registry
+├── tests/                           # 78 tests (unittest)
+│   └── fixtures/                    # CI test artifact (39KB)
+├── legacy/2019/                     # Historical 2019 baseline (preserved)
+├── src/airbnb_pricing/              # Package skeleton
+├── docs/                            # Markdown documentation
+├── reports/                         # JSON evidence artifacts
+└── .github/workflows/               # CI + Docker smoke test
 ```
 
-## Historical Baseline (Legacy)
-
-The repository also contains a reproducible baseline on 383 labelled Northern
-Beaches listings. This is preserved for historical comparison but is **not**
-the active pipeline:
-
-```powershell
-python prepare_features.py
-python train_baseline.py --dataset corrected --output reports/baseline_corrected.json
-python predict.py
-```
-
-Extra Trees: RMSE 68.03, MAE 53.10, R² 0.540 (corrected 35-feature matrix).
+---
 
 ## Test Status
 
 ```
-Ran 56 tests in 0.196s — OK (skipped=1)
+Ran 78 tests — OK (64 pass, 14 skipped locally)
+CI: 64+14 pass (fastapi/httpx installed → serving tests execute)
 ```
 
-The single skipped test requires LightGBM or scikit-learn ≥1.5 for an
-end-to-end temporal validation integration test.
+14 skipped locally: fastapi not installed. In CI, all 78 execute.
+
+---
+
+## Current Performance
+
+| Metric | Value |
+|--------|-------|
+| Held-out MAE | 138.14 AUD |
+| Market baseline MAE | 222.90 AUD |
+| Improvement | 38.0% |
+| 90% interval coverage | ~89.5% |
+| Evidence gate refusal rate | ~2.0% |
+
+---
 
 ## Limitations
 
-- **Research-only**: temporal price validation is blocked by incompatible
-  historical snapshot labels.
-- **Upper-tail underprediction**: the model systematically underestimates
-  luxury listings.
-- **Single city**: Sydney only. Geographic transfer is untested.
-- **No daily calendar prices**: the 2026 snapshots lack the calendar price
-  column needed for date-level dynamic pricing.
-- **Approximate coordinates**: reference distances are straight-line, not
-  route distance or travel time.
+- **Research authority**: temporal price validation is blocked by incompatible
+  historical snapshot labels. Production release requires forward-time evidence.
+- **Upper-tail weakness**: luxury listings are systematically underestimated.
+  Evidence tier auto-downgrades premium predictions.
+- **Sydney only**: geographic transfer is untested.
+- **No daily calendar prices**: the 2026 snapshots lack the calendar price column.
+- **Observational model**: scenario comparison is model sensitivity, not causal uplift.
+- **Not a pricing recommendation**: predicts quoted (listed) price, not realised
+  booking revenue, optimal price, or occupancy.
