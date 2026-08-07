@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Data (downloaded at runtime or mounted as volumes)
+data/
+artifacts/*.joblib
+!artifacts/.gitkeep
+
+# Git
+.git/
+.gitignore
+.github/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reports and predictions (generated at runtime)
+reports/
+predictions/
+
+# Docs
+docs/
+
+# Tests
+tests/
+
+# Legacy
+Models/
+"Exploratory Data Analysis/"
+"Feature engineering/"
+Datasets/
